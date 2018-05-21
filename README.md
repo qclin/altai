@@ -1,4 +1,37 @@
 
+##How to start
+
+**1. Install dependencies**
+`npm install` *run once*
+
+**2. Build bundle script**
+`npm run build` *run whenever you pull code*
+
+**3. Run Server**
+`npm run start`
+
+
+## How to load model (for Daria)
+
+**Locally, add to assets**
+
+add obj to `assets/OBJ/` directory
+change the url of the model in the .js file to the project path
+`ctrl+shift+F` to look for either MTLLoader, OBJLoader or "// ** CHANGE Parameter HERE"  
+
+
+## How to add Three JS Sketches (for Paul)
+**1. Import**
+ - Download sketch in the same directory as Main.js
+ - Add `import * as THREE from 'three';` on the top of the file
+ - Download sketch dependencies inside `public/` where all the Three utilities are, see Control/, Effects/, Loaders/
+ - ALSO Add `import * as THREE from 'three';` on the top of the dependency files
+
+
+
+#Resources
+
+
 Webpack DOC
 
 https://stackoverflow.com/questions/42104697/how-to-set-up-web-pack-for-pug-react-and-es6

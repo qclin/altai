@@ -60,11 +60,9 @@ var havePointerLock = 'pointerLockElement' in document || 'mozPointerLockElement
 
 if ( havePointerLock ) {
 				var element = container;
-				console.log(' are you ever here?   ??', container,  document.pointerLockElement )
 				var pointerlockchange = function ( event ) {
 					if ( document.pointerLockElement === element || document.mozPointerLockElement === element || document.webkitPointerLockElement === element ) {
 						controlsEnabled = true;
-						console.log('something here ?? ', controlsEnabled)
 						controls.enabled = true;
 						blocker.style.display = 'none';
 					} else {
@@ -203,14 +201,14 @@ function loadModel(){
 	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
 	new THREE.MTLLoader()
-	.setPath( 'OBJ/Altai_skp_model_1/' )
+	.setPath( 'OBJ/Altai_skp_model_1/' ) // ** CHANGE Parameter HERE
 	.load( 'Altai_skp_model_1.mtl', function ( materials ) {
 
 		materials.preload();
 
 		new THREE.OBJLoader()
 			.setMaterials( materials )
-			.setPath( 'OBJ/Altai_skp_model_1/' )
+			.setPath( 'OBJ/Altai_skp_model_1/' ) // ** CHANGE Parameter HERE
 			.load( 'Altai_skp_model_1.obj', function ( object ) {
 				object.position.y = - 95;
 				scene.add( object );
