@@ -1,0 +1,6 @@
+{"position":
+  {"latitude": "-50.8121", "timestamp": 1526842891, "longitude": "-84.7973"},
+  "appearance": {"colour3": "#341931", "colour2": "#9D2053", "colour1": "#571B3C"},
+  "catastrophe": {"magnitude": 0.58, "place": "8km S of Volcano, Hawaii", "time": 1526842027160},
+  "iterm": {"project": "Frenchelon", "temporality": "day", "codename": "ENTOURAGE", "region": "United States"}
+}

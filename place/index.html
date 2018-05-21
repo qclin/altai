@@ -1,0 +1,176 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+
+    <!-- <style type="text/css" src="style.css"></style>
+    <style type="text/css" src="main.css"></style> -->
+    <style>
+
+      html, body {
+        width: 100%;
+        height: 100%;
+      }
+      body {
+        background-color: #ffffff;
+        margin: 0;
+        overflow: hidden;
+        font-family: arial;
+      }
+      #blocker {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0,0,0,0.5);
+      }
+      #instructions {
+        width: 100%;
+        height: 100%;
+        display: -webkit-box;
+        display: -moz-box;
+        display: box;
+        -webkit-box-orient: horizontal;
+        -moz-box-orient: horizontal;
+        box-orient: horizontal;
+        -webkit-box-pack: center;
+        -moz-box-pack: center;
+        box-pack: center;
+        -webkit-box-align: center;
+        -moz-box-align: center;
+        box-align: center;
+        color: #ffffff;
+        text-align: center;
+        cursor: pointer;
+      }
+      h1{
+        color:red;
+      }
+      p{
+        max-width: 800px;
+        margin: auto;
+
+      }
+
+      .animate-reveal {
+          text-align: right;
+          letter-spacing: 2px;
+          opacity: 0;
+          -webkit-animation: reveal 1s cubic-bezier(0, 1, 0.5, 1) 1 normal forwards;
+             -moz-animation: reveal 1s ease-in 1 normal forwards;
+               -o-animation: reveal 1s cubic-bezier(0, 1, 0.5, 1) 1 normal forwards;
+                  animation: reveal 1s cubic-bezier(0, 1, 0.5, 1) 1 normal forwards;
+        }
+
+
+        @-webkit-keyframes reveal {
+            0% {
+              opacity: 0;
+              -webkit-transform: translateY(100%);
+                 -moz-transform: translateY(100%);
+                   -o-transform: translateY(100%);
+                      transform: translateY(100%);
+            }
+            100% {
+              opacity: 1;
+              -webkit-transform: translateY(0);
+                 -moz-transform: translateY(0);
+                   -o-transform: translateY(0);
+                      transform: translateY(0);
+            }
+          }
+
+          @-moz-keyframes reveal {
+            0% {
+              opacity: 0;
+              -webkit-transform: translateY(100%);
+                 -moz-transform: translateY(100%);
+                   -o-transform: translateY(100%);
+                      transform: translateY(100%);
+            }
+            100% {
+              opacity: 1;
+              -webkit-transform: translateY(0);
+                 -moz-transform: translateY(0);
+                   -o-transform: translateY(0);
+                      transform: translateY(0);
+            }
+          }
+
+          @-o-keyframes reveal {
+            0% {
+              opacity: 0;
+              -webkit-transform: translateY(100%);
+                 -moz-transform: translateY(100%);
+                   -o-transform: translateY(100%);
+                      transform: translateY(100%);
+            }
+            100% {
+              opacity: 1;
+              -webkit-transform: translateY(0);
+                 -moz-transform: translateY(0);
+                   -o-transform: translateY(0);
+                      transform: translateY(0);
+            }
+          }
+
+          @keyframes reveal {
+            0% {
+              opacity: 0;
+              -webkit-transform: translateY(100%);
+                 -moz-transform: translateY(100%);
+                   -o-transform: translateY(100%);
+                      transform: translateY(100%);
+            }
+            100% {
+              opacity: 1;
+              -webkit-transform: translateY(0);
+                 -moz-transform: translateY(0);
+                   -o-transform: translateY(0);
+                      transform: translateY(0);
+            }
+          }
+
+
+    </style>
+</head>
+<body>
+<div id="blocker">
+		<div id="instructions">
+			<span style="font-size:40px">Click to play</span>
+			<br />
+			(W, A, S, D = Move, SPACE = Jump, MOUSE = Look around)
+
+      TODO:// Dynamically load in text bitssss
+      <ul class="animate-reveal" >
+        <li> our close dome is to see the hearth of nameless and grim sword in red tree <li />
+        <li> the spring will give spins <li />
+        <li> i danced the early color of legend <li />
+        <li> our local epos makes to disappoint the land in holy and local time of turkic sky <li />
+        <li> young, big, special <li />
+        <li> the dawn can protect preparations <li />
+        <li> these beauty will bury legends <li />
+        <li> i fell the natural mind into rioting <li />
+        <li> i considered a indian sky in land <li />
+        <li> powerful, frozen, consonant <li />
+        <li> our haired mountain does to frighten the river of possible and prehistoric everything that nameless sky <li />
+        <li> our ancient way is to leave a tengri in dry haze with ancient man <li />
+        <li> the way can visit lawyers <li />
+        <li> their ancient sky is to be the ground of green air to natural horse<li />
+        <li> same, red, ripple <li />
+        <li> the basis will participate years <li />
+        <li> the ground should notice mountains <li />
+        <li> the tundra could lean blossoms <li />
+        <li> the praise can remember letters <li />
+        <li> a science could cross media <li />
+        <li> the world can lean new places <li />
+    </ul>
+		</div>
+	</div>
+  <!-- autoplay -->
+  <video id="video" autoplay loop crossOrigin="anonymous" webkit-playsinline style="display:none">
+		<source src="footages/flyover_clip.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>
+	</video>
+  <!-- <canvas id="place"></canvas> -->
+  <script type="text/javascript" src="place_bundle.js"></script>
+</body>
+</html>
