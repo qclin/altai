@@ -12,8 +12,6 @@ import * as THREE from 'three';
 
 import sample from './sample.json'
 import json from '../public/json/20180520-220131_rec_story.json'
-console.log("loaded ~~~", sample, json )
-
 
 var container, stats;
 var camera, scene, renderer, controls;
@@ -137,8 +135,6 @@ function init(){
 	container.appendChild( renderer.domElement );
 
 
-
-
 	// add listener
 	// document.addEventListener( 'mousemove', onDocumentMouseMove, false);
 	document.addEventListener( 'keydown', onKeyDown, false );
@@ -188,6 +184,7 @@ function setupVideo(){
 
 }
 
+
 function loadModel(){
 	// handler
 	var onProgress = function(xhr){
@@ -224,6 +221,8 @@ function loadModel(){
 	// 	}, onProgress, onError );
 
 }
+
+
 
 function createBirds(){
 
@@ -406,16 +405,15 @@ function enableMovement(){
 
 function renderVideo(){
 
-				if ( video.readyState === video.HAVE_ENOUGH_DATA ) {
-					imageContext.drawImage( video, 0, 0 );
-					if ( texture ) texture.needsUpdate = true;
-					if ( textureReflection ) textureReflection.needsUpdate = true;
-				}
-				imageReflectionContext.drawImage( image, 0, 0 );
-				imageReflectionContext.fillStyle = imageReflectionGradient;
-				imageReflectionContext.fillRect( 0, 0, 256, 128 );
+	if ( video.readyState === video.HAVE_ENOUGH_DATA ) {
+		imageContext.drawImage( video, 0, 0 );
+		if ( texture ) texture.needsUpdate = true;
+		if ( textureReflection ) textureReflection.needsUpdate = true;
+	}
+	imageReflectionContext.drawImage( image, 0, 0 );
+	imageReflectionContext.fillStyle = imageReflectionGradient;
+	imageReflectionContext.fillRect( 0, 0, 256, 128 );
 }
-
 
 function renderBirds(){
 	for ( var i = 0, il = birds.length; i < il; i++ ) {

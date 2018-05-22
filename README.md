@@ -31,6 +31,8 @@ change the url of the model in the .js file to the project path
 
 #Resources
 
+python shell
+https://github.com/extrabacon/python-shell
 
 Webpack DOC
 
@@ -39,10 +41,11 @@ https://javascriptplayground.com/moving-to-webpack-2/
 
 webpack4 rules
 https://stackoverflow.com/questions/49203841/webpack-4-1-1-configuration-module-has-an-unknown-property-loaders
-
-
 https://github.com/webpack/webpack/issues/3027
 
+
+REACT with THREE 
+https://www.sitepoint.com/building-a-game-reactjs-and-webgl/
 
 for 360
 
@@ -52,3 +55,7 @@ https://github.com/mrdoob/three.js/blob/master/examples/webgl_panorama_equirecta
 for 360 with fish eye
 panorama / dualfisheye
 https://github.com/mrdoob/three.js/blob/master/examples/textures/ricoh_theta_s.jpg
+
+Webgl Shader
+
+https://github.com/mrdoob/three.js/blob/master/examples/webgl_shader.html

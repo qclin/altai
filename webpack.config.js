@@ -8,8 +8,9 @@ module.exports = {
   // Include the hot middleware with each entry point
   entry: {
 		place_bundle: ['./place/main.js', hotMiddlewareScript],
-    realm_bundle: ['./realm/main.js', hotMiddlewareScript]
-
+    realm_bundle: ['./realm/main.js', hotMiddlewareScript],
+    flat_bundle: ['./flat/main.js', hotMiddlewareScript],
+    glacier_bundle: ['./glacier/main.js', hotMiddlewareScript]
 	},
   output: {
     path: __dirname,
@@ -42,6 +43,16 @@ module.exports = {
       },{
         test: /\.mp4$/,
         loader: 'url?limit=10000&mimetype=video/mp4'
+      },{
+          test: /\.ttf$/,
+          use: [
+            {
+              loader: 'ttf-loader',
+              options: {
+                name: './font/[hash].[ext]',
+              },
+            },
+          ]
       }]
   },
   resolve: {

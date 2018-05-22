@@ -1,16 +1,13 @@
-<!DOCTYPE html>
 <html lang="en">
 	<head>
-		<title>three.js webgl - effects - anaglyph</title>
+		<title>three.js webgl - equirectangular panorama</title>
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
 			body {
-				background:#777;
-				padding:0;
-				margin:0;
-				font-weight: bold;
-				overflow:hidden;
+				background-color: #000000;
+				margin: 0px;
+				overflow: hidden;
 			}
 			#info {
 				position: absolute;
@@ -19,17 +16,17 @@
 				padding: 5px;
 				font-family:Monospace;
 				font-size:13px;
+				font-weight: bold;
 				text-align:center;
-				z-index:1000;
 			}
 			a {
 				color: #ffffff;
 			}
-			#oldie a { color:#da0 }
 		</style>
 	</head>
-
 	<body>
+
+		<div id="container"></div>
 
     <script type="text/javascript" src="realm_bundle.js"></script>
 
