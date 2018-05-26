@@ -10,7 +10,10 @@ module.exports = {
 		place_bundle: ['./place/main.js', hotMiddlewareScript],
     realm_bundle: ['./realm/main.js', hotMiddlewareScript],
     flat_bundle: ['./flat/main.js', hotMiddlewareScript],
-    glacier_bundle: ['./glacier/main.js', hotMiddlewareScript]
+    glacier_bundle: ['./glacier/main.js', hotMiddlewareScript],
+    check_model_bundle: ['./check_model/main.js', hotMiddlewareScript],
+    highland_prairie_bundle: ['./highland_prairie/main.js', hotMiddlewareScript]
+
 	},
   output: {
     path: __dirname,

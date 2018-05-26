@@ -42,14 +42,6 @@
         text-align: center;
         cursor: pointer;
       }
-      h1{
-        color:red;
-      }
-      p{
-        max-width: 800px;
-        margin: auto;
-
-      }
 
       .animate-reveal {
           text-align: right;
@@ -129,7 +121,54 @@
                       transform: translateY(0);
             }
           }
+          .typewriter{
+            display: flex;
+            justify-content: center;
+          }
+          .typewriter h1 {
+            font-family: serif;
+            overflow: hidden; /* Ensures the content is not revealed until the animation */
+            border-right: .15em solid white; /* The typwriter cursor */
+            white-space: nowrap; /* Keeps the content on a single line */
+            margin: 0 auto; /* Gives that scrolling effect as the typing happens */
+            letter-spacing: .15em; /* Adjust as needed */
+            animation:
+              typing 3.5s steps(40, end),
+              blink-caret .75s step-end infinite;
+            max-width: 1200px;
+            margin: auto;
 
+          }
+
+          /* The typing effect */
+          @keyframes typing {
+            from { width: 0 }
+            to { width: 100% }
+          }
+
+          /* The typewriter cursor effect */
+          @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: white; }
+          }
+
+
+          #subtitle1{
+            font-size: 48px;
+            position: absolute;
+            color: yellow;
+            left: .5em;
+            bottom: .5em;
+            font-family: serif;
+          }
+          #subtitle2{
+            font-size: 24px;
+            font-family: monospace;
+            position: absolute;
+            color: blue;
+            right: .5em;
+            top:.5em;
+          }
 
     </style>
 </head>
@@ -137,13 +176,20 @@
 
 <body>
 <div id="blocker">
-		<div id="instructions">
-			<span style="font-size:40px">Click to play</span>
-			<br />
-			(W, A, S, D = Move, SPACE = Jump, MOUSE = Look around)
 
-      TODO:// Dynamically load in text bitssss
-      <ul class="animate-reveal" >
+		<div id="instructions">
+
+      <div class="typewriter">
+        <h1 >There was mountain floating somewhere on horizon.
+          When newt came across the siren, the earth was crumbling.
+          The scene brought to mind ritual dance.
+          The newt was feeding the siren.
+          It took a month.
+          Then a moonlight came,
+          and newt with siren resolved to return to Chinese. </h1>
+      </div>
+      <!-- <ul class="animate-reveal" >
+
         <li> our close dome is to see the hearth of nameless and grim sword in red tree <li />
         <li> the spring will give spins <li />
         <li> i danced the early color of legend <li />
@@ -165,9 +211,11 @@
         <li> the praise can remember letters <li />
         <li> a science could cross media <li />
         <li> the world can lean new places <li />
-    </ul>
+    </ul> -->
 		</div>
 	</div>
+  <div id="subtitle1"> </div>
+  <div id="subtitle2"> </div>
   <!-- autoplay -->
   <video id="video" autoplay loop crossOrigin="anonymous" webkit-playsinline style="display:none">
 		<source src="footages/flyover_clip.mp4" type='video/mp4; codecs="avc1.42E01E, mp4a.40.2"'>

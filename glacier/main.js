@@ -2,11 +2,11 @@ import $ from 'jquery';
 import { OBJLoader } from '../public/Loaders/OBJLoader';
 import { MTLLoader } from '../public/Loaders/MTLLoader';
 import { DDSLoader } from '../public/Loaders/DDSLoader';
+import { BokehShader } from '../public/shaders/BokehShader2'
+import { CinematicCamera } from '../public/cameras/CinematicCamera.js';
+
 import * as THREE from 'three';
 import '../public/CurveExtras';
-
-import './overlay';
-import './subtitle';
 
 
 var container, stats;
@@ -15,91 +15,74 @@ var mouseX = 0, mouseY = 0;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
 
-// for flamingo
-var mixers = [];
-var clock = new THREE.Clock();
-var mesh;
-
-// for log camera zoom
-var NEAR = 1e-6, FAR = 1e27;
-var zoompos = -100, minzoomspeed = .015;
-var zoomspeed = minzoomspeed;
+// TRANS CRYSTALS
+var colors = [0x05A8AA, 0xB8D5B8, 0xD7B49E, 0xDC602E, 0xBC412B, 0xF19C79, 0xCBDFBD, 0xF6F4D2, 0xD4E09B, 0xFFA8A9, 0xF786AA, 0xA14A76, 0xBC412B, 0x63A375, 0xD57A66, 0x731A33, 0xCBD2DC, 0xDBD48E, 0x5E5E5E, 0xDE89BE];
+var geometry, mesh;
+var verticePositions = [];
+var angle = 0;
+var radius = 100, theta = 0;
 
 
-// fly thru camera
-var splineCamera, tubeGeometry;
-var binormal = new THREE.Vector3();
-var normal = new THREE.Vector3();
+function initScene() {
+  scene = new THREE.Scene();
 
-var params = {
-	spline: 'GrannyKnot',
-	scale: 4,
-	extrusionSegments: 150,
-	radiusSegments: 3,
-	closed: true,
-	animationView: false,
-	lookAhead: true,
-	cameraHelper: false,
+
+  //// FAILED cinematic camera failed
+  // camera = new THREE.CinematicCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
+	// camera.setLens( 5 );
+	// camera.position.set( 2, 1, 500 );
+  // setCameraParam();
+
+  var aspect = window.innerWidth / window.innerHeight;
+  camera = new THREE.OrthographicCamera( frustumSize * aspect / - 2, frustumSize * aspect / 2, frustumSize / 2, frustumSize / - 2, 1, 2000 );
+  camera.position.y = 400;
+
+  renderer = new THREE.WebGLRenderer({alpha: true});
+  renderer.setSize( window.innerWidth, window.innerHeight );
+
+  document.body.appendChild( renderer.domElement );
+  camera.position.z = 0;
+  loadTerrain();
 };
 
-var hemiLight;
 
-
-init();
-animate();
-
-function init() {
-	container = document.createElement( 'div' );
-	document.body.appendChild( container );
-	camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
-	camera.position.z = 250;
-
-  // scene
-	scene = new THREE.Scene();
-  scene.background = new THREE.Color().setHSL( 0.6, 0, 1 );
-	scene.fog = new THREE.Fog( scene.background, 1, 5000 );
-
-  var ambientLight = new THREE.AmbientLight( 0xcccccc, 0.4 );
-	scene.add( ambientLight );
-
-
-  // fly thru camera
-  splineCamera = new THREE.PerspectiveCamera( 84, window.innerWidth / window.innerHeight, 0.01, 1000 );
-  scene.add(splineCamera);
-
-  // addLight();
-
-	var pointLight = new THREE.PointLight( 0xffffff, 0.8 );
-	camera.add( pointLight );
-	scene.add( camera );
-
-  loadTerrain();
-  loadFlamingo();
-  addTube();
-	//
-	renderer = new THREE.WebGLRenderer();
-	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( window.innerWidth, window.innerHeight );
-	container.appendChild( renderer.domElement );
-	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
-	//
-	window.addEventListener( 'resize', onWindowResize, false );
-}
-function addLight(){
-  hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 0.3 );
-	hemiLight.color.setHSL( 0.6, 1, 0.6 );
-	hemiLight.groundColor.setHSL( 0.095, 1, 0.75 );
-	hemiLight.position.set( 0, 50, 0 );
-	scene.add( hemiLight );
-	// hemiLightHelper = new THREE.HemisphereLightHelper( hemiLight, 10 );
-	// scene.add( hemiLightHelper );
-}
-
-function addTube(){
-
-  var path = new THREE.Curves.GrannyKnot();
-  tubeGeometry = new THREE.TubeBufferGeometry( path, params.extrusionSegments, 2, params.radiusSegments, params.closed );
-
+function setCameraParam(){
+  var effectController  = {
+    	focalLength: 15,
+    	// jsDepthCalculation: true,
+    	// shaderFocus: false,
+    	//
+    	fstop: 2.8,
+    	// maxblur: 1.0,
+    	//
+    	showFocus: false,
+    	focalDepth: 3,
+    	// manualdof: false,
+    	// vignetting: false,
+    	// depthblur: false,
+    	//
+    	// threshold: 0.5,
+    	// gain: 2.0,
+    	// bias: 0.5,
+    	// fringe: 0.7,
+    	//
+    	// focalLength: 35,
+    	// noise: true,
+    	// pentagon: false,
+    	//
+    	// dithering: 0.0001
+    };
+    var matChanger = function( ) {
+    	for ( var e in effectController ) {
+    		if ( e in camera.postprocessing.bokeh_uniforms ) {
+    			camera.postprocessing.bokeh_uniforms[ e ].value = effectController[ e ];
+    		}
+    	}
+    	camera.postprocessing.bokeh_uniforms[ 'znear' ].value = camera.near;
+    	camera.postprocessing.bokeh_uniforms[ 'zfar' ].value = camera.far;
+    	camera.setLens( effectController.focalLength, camera.frameHeight, effectController.fstop, camera.coc );
+    	effectController[ 'focalDepth' ] = camera.postprocessing.bokeh_uniforms[ 'focalDepth' ].value;
+    };
 
 }
 function loadTerrain(){
@@ -127,111 +110,109 @@ function loadTerrain(){
 }
 
 
-function loadFlamingo(){
-  var loader = new THREE.JSONLoader();
-	loader.load( 'OBJ/temp_agents/flamingo.js', function( geometry ) {
-		var material = new THREE.MeshPhongMaterial( { color: 0xFFFD54, specular: 0xFFFD54, shininess: 10, morphTargets: true, vertexColors: THREE.FaceColors, flatShading: true } );
-		mesh = new THREE.Mesh( geometry, material );
-		var s = 0.35;
-		mesh.scale.set( s, s, s );
-		// mesh.position.y = 15;
-		mesh.rotation.y = -1;
-		mesh.castShadow = true;
-		mesh.receiveShadow = true;
+function initLighting() {
+  // so many lights
+  var light = new THREE.DirectionalLight( 0xffffff, 1 );
+  light.position.set( 0, 1, 0 );
+  scene.add( light );
 
-    // 1. mesh appears
-		// camera.add( mesh ); // this makes the position of the flamingo relative to Cam
-    // mesh.position.set(50, 100, -100);
+  var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+  light.position.set( 0, -1, 0 );
+  scene.add( light );
 
-    splineCamera.add(mesh);
+  var light = new THREE.DirectionalLight( 0xffffff, 1 );
+  light.position.set( 1, 0, 0 );
+  scene.add( light );
 
-		var mixer = new THREE.AnimationMixer( mesh );
-		mixer.clipAction( geometry.animations[ 0 ] ).setDuration( 1 ).play();
-		mixers.push( mixer );
-  });
+  var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
+  light.position.set( 0, 0, 1 );
+  scene.add( light );
 }
 
-function onWindowResize() {
-	windowHalfX = window.innerWidth / 2;
-	windowHalfY = window.innerHeight / 2;
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
-	renderer.setSize( window.innerWidth, window.innerHeight );
-}
-function onDocumentMouseMove( event ) {
-	mouseX = ( event.clientX - windowHalfX ) / 2;
-	mouseY = ( event.clientY - windowHalfY ) / 2;
-}
-//
-function animate() {
-	requestAnimationFrame( animate );
-	render();
-}
-function render() {
-
-  // animate flamingo wings
-  var delta = clock.getDelta();
-  for ( var i = 0; i < mixers.length; i ++ ) {
-    mixers[ i ].update( delta );
+function initGeometry() {
+  // add icosahedron
+  geometry = new THREE.IcosahedronGeometry( 20 );
+  for ( var i = 0; i < geometry.faces.length; i ++ ) {
+      var face = geometry.faces[ i ];
+      face.color.setHex(colors[i]);
   }
-  // mesh.position.y += ( mouseX - camera.position.x ) * .05;
 
-  // 1. mesh appears
-	// camera.position.x += ( mouseX - camera.position.x ) * .05;
-	// camera.position.y += ( - mouseY - camera.position.y ) * .05;
-  //
+  mesh = new THREE.Mesh( geometry, new THREE.MeshLambertMaterial( { vertexColors: THREE.FaceColors } ));
+  scene.add( mesh );
+}
 
+function render(time) {
+  requestAnimationFrame( render );
 
+  theta += 0.1;
+	camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
+	camera.position.y = radius * Math.sin( THREE.Math.degToRad( theta ) );
+	camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );
 	camera.lookAt( scene.position );
-	// renderer.render( scene, camera );
-  animateAlong();
+	camera.updateMatrixWorld();
 
-  renderer.render(scene, splineCamera);
 
+
+  renderer.render(scene, camera);
+  geometry.verticesNeedUpdate = true;
+  updateCamPosition();
+};
+
+function getOriginalVerticePositions() {
+  for (var i = 0, l = geometry.vertices.length; i<l; i++) {
+    verticePositions.push({x: geometry.vertices[i].x, y: geometry.vertices[i].y});
+  }
 }
 
-// function animate camera along spline
-
-function animateAlong(){
-  var time = Date.now();
-	var looptime = 200 * 1000;
-	var t = ( time % looptime ) / looptime;
-
-  var pos = tubeGeometry.parameters.path.getPointAt( t );
-  pos.multiplyScalar( params.scale );
-
-
-  // interpolation
-	var segments = tubeGeometry.tangents.length;
-	var pickt = t * segments;
-	var pick = Math.floor( pickt );
-	var pickNext = ( pick + 1 ) % segments;
-	binormal.subVectors( tubeGeometry.binormals[ pickNext ], tubeGeometry.binormals[ pick ] );
-	binormal.multiplyScalar( pickt - pick ).add( tubeGeometry.binormals[ pick ] );
-	var dir = tubeGeometry.parameters.path.getTangentAt( t );
-	var offset = 15;
-	normal.copy( binormal ).cross( dir );
-	// we move on a offset on its binormal
-	pos.add( normal.clone().multiplyScalar( offset ) );
-	splineCamera.position.copy( pos );
-  mesh.position.copy(pos);
-
-  mesh.position.x += 100;
-  mesh.position.z += -100;
-
-  // cameraEye.position.copy( pos );
-
-  // using arclength for stablization in look ahead
-	var lookAt = tubeGeometry.parameters.path.getPointAt( ( t + 30 / tubeGeometry.parameters.path.getLength() ) % 1 ).multiplyScalar( params.scale );
-	// camera orientation 2 - up orientation via normal
-	if ( ! params.lookAhead ) lookAt.copy( pos ).add( dir );
-	splineCamera.matrix.lookAt( splineCamera.position, lookAt, normal );
-	splineCamera.rotation.setFromRotationMatrix( splineCamera.matrix, splineCamera.rotation.order );
-
-
-	// renderer.render( scene, params.animationView === true ? splineCamera : camera );
-
-
-
-
+function getNewVertices() {
+  var newVertices = [];
+  for (var i = 0, l = geometry.vertices.length; i<l; i++) {
+    newVertices[i] = {
+      x: verticePositions[i].x -5 + Math.random()*10,
+      y: verticePositions[i].y -5 + Math.random()*10
+    }
+  }
+  return newVertices;
 }
+
+function tweenIcosohedron() {
+  var rotation = {x: Math.random()*3, y: Math.random()*3, z: Math.random()*3};
+  TweenLite.to(mesh.rotation, 1, {x: rotation.x, y: rotation.y, z: rotation.z,
+    ease: Back.easeInOut, onComplete: tweenIcosohedron});
+  var newVerticePositions = getNewVertices();
+  for (var i = 0; i < geometry.vertices.length; i++) {
+    tweenVertice(i, newVerticePositions);
+  }
+}
+
+function tweenVertice(i, newVerticePositions) {
+  TweenLite.to(geometry.vertices[i], 1, {x: newVerticePositions[i].x, y: newVerticePositions[i].y, ease: Back.easeInOut});
+}
+
+function resize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize( window.innerWidth, window.innerHeight );
+}
+
+function updateCamPosition() {
+	 angle = 0
+  //angle -= 0.0005;
+  var z = 250 * Math.cos(angle);
+  var y = 100 * Math.sin(angle);
+
+  camera.position.z = z;
+  camera.position.y = y;
+  camera.rotation.x = y*0.001;
+}
+
+
+initScene();
+initLighting();
+initGeometry();
+resize();
+getOriginalVerticePositions();
+render();
+window.addEventListener("resize", resize);
+
+tweenIcosohedron();

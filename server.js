@@ -43,6 +43,14 @@ app.get('/glacier', function(req, res){
     res.sendFile(__dirname + '/glacier/index.html');
 });
 
+app.get('/check_model', function(req, res){
+    res.sendFile(__dirname + '/check_model/index.html');
+});
+
+app.get('/highland_prairie', function(req, res){
+    res.sendFile(__dirname + '/highland_prairie/index.html');
+});
+
 app.get('/flat', function(req, res){
     var agentType = "isolation";
     var pamphlet = utterances.generateText(agentType);
