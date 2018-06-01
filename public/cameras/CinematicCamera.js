@@ -4,7 +4,7 @@
  * @author zz85 / http://www.lab4games.net/zz85/blog
  * @author kaypiKun
  */
- import * as THREE from 'three';
+import * as THREE from 'three';
 
 THREE.CinematicCamera = function( fov, aspect, near, far ) {
 
@@ -133,7 +133,7 @@ THREE.CinematicCamera.prototype.initPostProcessing = function () {
 
 		this.postprocessing.bokeh_uniforms[ "fstop" ].value = 2.8;
 
-		this.postprocessing.bokeh_uniforms[ "showFocus" ].value = 1;
+		// this.postprocessing.bokeh_uniforms[ "showFocus" ].value = 1;
 
 		this.postprocessing.bokeh_uniforms[ "focalDepth" ].value = 0.1;
 

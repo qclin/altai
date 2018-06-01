@@ -9,6 +9,10 @@ import { DDSLoader } from '../public/Loaders/DDSLoader';
 
 // if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 var camera, controls, scene, renderer;
+var mouseX = 0, mouseY = 0;
+var windowHalfX = window.innerWidth / 2;
+var windowHalfY = window.innerHeight / 2;
+
 init();
 //render(); // remove when using next line for animation loop (requestAnimationFrame)
 animate();
@@ -22,13 +26,15 @@ function init() {
 	renderer.setSize( window.innerWidth, window.innerHeight );
 	document.body.appendChild( renderer.domElement );
 	camera = new THREE.PerspectiveCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
-	camera.position.set( 400, 200, 0 );
+	camera.position.set( 0, 0, 0 );
 
   loadControl();
   loadLights();
   loadTerrain();
 
 	window.addEventListener( 'resize', onWindowResize, false );
+	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
+
 }
 
 function loadControl(){
@@ -42,6 +48,7 @@ function loadControl(){
   controls.maxDistance = 1000
   controls.maxPolarAngle = Math.PI / 2;
 }
+
 function loadLights(){
   // lights
   var light = new THREE.DirectionalLight( 0xffffff );
@@ -66,13 +73,13 @@ function loadTerrain(){
   var onError = function ( xhr ) { };
   THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
   new THREE.MTLLoader()
-  .setPath('/OBJ/Rhino_Glacier/')
-  .load('Glacier_2.mtl', function ( materials ) {
+  .setPath('/OBJ/Tundra/')
+  .load('Tundra_5.mtl', function ( materials ) {
     materials.preload();
     new THREE.OBJLoader()
       .setMaterials( materials )
-      .setPath('/OBJ/Rhino_Glacier/')
-      .load('Glacier_2.obj', function ( object ) {
+      .setPath('/OBJ/Tundra/')
+      .load('Tundra_5.obj', function ( object ) {
         object.position.y = - 95;
         scene.add( object );
       }, onProgress, onError );
@@ -83,6 +90,11 @@ function onWindowResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;
 	camera.updateProjectionMatrix();
 	renderer.setSize( window.innerWidth, window.innerHeight );
+}
+
+function onDocumentMouseMove( event ) {
+	mouseX = event.clientX - windowHalfX;
+	mouseY = event.clientY - windowHalfY;
 }
 function animate() {
 	requestAnimationFrame( animate );

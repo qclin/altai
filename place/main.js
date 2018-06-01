@@ -236,16 +236,17 @@ function loadModel(){
 	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
 	new THREE.MTLLoader()
-	.setPath( 'OBJ/Altai_skp_model_1/' ) // ** CHANGE Parameter HERE
-	.load( 'Altai_skp_model_1.mtl', function ( materials ) {
+	.setPath( 'OBJ/Tundra/' ) // ** CHANGE Parameter HERE
+	.load( 'Tundra_5.mtl', function ( materials ) {
 
 		materials.preload();
 
 		new THREE.OBJLoader()
 			.setMaterials( materials )
-			.setPath( 'OBJ/Altai_skp_model_1/' ) // ** CHANGE Parameter HERE
-			.load( 'Altai_skp_model_1.obj', function ( object ) {
+			.setPath( 'OBJ/Tundra/' ) // ** CHANGE Parameter HERE
+			.load( 'Tundra_5.obj', function ( object ) {
 				object.position.y = - 95;
+				object.rotation.z = 90; 
 				scene.add( object );
 			}, onProgress, onError );
 	} );

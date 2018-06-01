@@ -51,6 +51,15 @@ app.get('/highland_prairie', function(req, res){
     res.sendFile(__dirname + '/highland_prairie/index.html');
 });
 
+
+app.get('/predator_highland_forest', function(req, res){
+    res.sendFile(__dirname + '/predator_highland_forest/index.html');
+});
+
+app.get('/couple_recognition_tundra', function(req, res){
+    res.sendFile(__dirname + '/couple_recognition_tundra/index.html');
+});
+
 app.get('/flat', function(req, res){
     var agentType = "isolation";
     var pamphlet = utterances.generateText(agentType);

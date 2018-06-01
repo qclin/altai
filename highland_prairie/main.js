@@ -19,6 +19,10 @@ var mixers = [];
 var clock = new THREE.Clock();
 var mesh;
 
+// tetra agent
+var tetraAgent;
+var testAgent;
+
 // for log camera zoom
 var NEAR = 1e-6, FAR = 1e27;
 var zoompos = -100, minzoomspeed = .015;
@@ -53,6 +57,7 @@ function init() {
 	camera = new THREE.PerspectiveCamera( 45, window.innerWidth / window.innerHeight, 1, 2000 );
 	camera.position.z = 250;
 
+
   // scene
 	scene = new THREE.Scene();
   scene.background = new THREE.Color().setHSL( 0.6, 0, 1 );
@@ -73,7 +78,9 @@ function init() {
 	scene.add( camera );
 
   loadTerrain();
-  loadFlamingo();
+	// addTetrahedron();
+	loadAgent();
+
   addTube();
 	//
 	renderer = new THREE.WebGLRenderer();
@@ -101,6 +108,21 @@ function addTube(){
 
 
 }
+function addTetrahedron(){
+	var texture = new THREE.TextureLoader().load( '/textures/hp_text.png' );
+
+	tetraAgent = new THREE.Mesh( new THREE.TetrahedronBufferGeometry( 75, 0 ), texture );
+
+	var s = 0.35;
+	tetraAgent.scale.set( s, s, s );
+	// tetraAgent.position.y = 15;
+	tetraAgent.rotation.y = -1;
+	tetraAgent.castShadow = true;
+	tetraAgent.receiveShadow = true;
+
+	splineCamera.add( tetraAgent );
+}
+
 function loadTerrain(){
 
   var onProgress = function ( xhr ) {
@@ -125,28 +147,37 @@ function loadTerrain(){
   });
 }
 
+function loadAgent(){
 
-function loadFlamingo(){
-  var loader = new THREE.JSONLoader();
-	loader.load( 'OBJ/temp_agents/flamingo.js', function( geometry ) {
-		var material = new THREE.MeshPhongMaterial( { color: 0xFFFD54, specular: 0xFFFD54, shininess: 10, morphTargets: true, vertexColors: THREE.FaceColors, flatShading: true } );
-		mesh = new THREE.Mesh( geometry, material );
-		var s = 0.35;
-		mesh.scale.set( s, s, s );
-		// mesh.position.y = 15;
-		mesh.rotation.y = -1;
-		mesh.castShadow = true;
-		mesh.receiveShadow = true;
+  var onProgress = function ( xhr ) {
+    if ( xhr.lengthComputable ) {
+      var percentComplete = xhr.loaded / xhr.total * 100;
+      console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+    }
+  };
+  var onError = function ( xhr ) { };
+  THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
-    // 1. mesh appears
-		// camera.add( mesh ); // this makes the position of the flamingo relative to Cam
-    // mesh.position.set(50, 100, -100);
+  new THREE.MTLLoader()
+  .setPath('/OBJ/Agents/flamingo/')
+  .load('3_material.mtl', function ( materials ) {
+    materials.preload();
+    new THREE.OBJLoader()
+      .setMaterials( materials )
+      .setPath('/OBJ/Agents/flamingo/')
+      .load('3_material.obj', function ( object ) {
 
-    splineCamera.add(mesh);
+				testAgent = object
+				// var s = 0.35;
+				// testAgent.scale.set( s, s, s );
+				// testAgent.position.y = 15;
+				// testAgent.rotation.y = -1;
+				testAgent.castShadow = true;
+				testAgent.receiveShadow = true;
 
-		var mixer = new THREE.AnimationMixer( mesh );
-		mixer.clipAction( geometry.animations[ 0 ] ).setDuration( 1 ).play();
-		mixers.push( mixer );
+        scene.add( testAgent );
+
+      }, onProgress, onError );
   });
 }
 
@@ -207,10 +238,14 @@ function animateAlong(){
 	// we move on a offset on its binormal
 	pos.add( normal.clone().multiplyScalar( offset ) );
 	splineCamera.position.copy( pos );
-  mesh.position.copy(pos);
 
-  mesh.position.x += 100;
-  mesh.position.z += -100;
+  // mesh.position.copy(pos);
+  // mesh.position.x += 100;
+  // mesh.position.z += -100;
+	console.log("999999999999:::::: ",testAgent)
+	testAgent.position.copy(pos);
+  testAgent.position.x += 100;
+  testAgent.position.z += -100;
 
   // cameraEye.position.copy( pos );
 

@@ -5,6 +5,7 @@
  * - based on Nvidia example
  * http://developer.download.nvidia.com/shaderlibrary/webpages/shader_library.html#post_bleach_bypass
  */
+import * as THREE from 'three';
 
 THREE.BleachBypassShader = {
 
