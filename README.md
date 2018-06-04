@@ -27,35 +27,12 @@ change the url of the model in the .js file to the project path
  - Download sketch dependencies inside `public/` where all the Three utilities are, see Control/, Effects/, Loaders/
  - ALSO Add `import * as THREE from 'three';` on the top of the dependency files
 
+#NOTES FOR DEPLOYMENT
+
+### NLP SETTING
+`export LC_ALL=en_US.UTF-8`
+`export LANG=en_US.UTF-8`
 
 
-#Resources
-
-python shell
-https://github.com/extrabacon/python-shell
-
-Webpack DOC
-
-https://stackoverflow.com/questions/42104697/how-to-set-up-web-pack-for-pug-react-and-es6
-https://javascriptplayground.com/moving-to-webpack-2/
-
-webpack4 rules
-https://stackoverflow.com/questions/49203841/webpack-4-1-1-configuration-module-has-an-unknown-property-loaders
-https://github.com/webpack/webpack/issues/3027
-
-
-REACT with THREE 
-https://www.sitepoint.com/building-a-game-reactjs-and-webgl/
-
-for 360
-
-panorama / equirectangular
-https://github.com/mrdoob/three.js/blob/master/examples/webgl_panorama_equirectangular.html
-
-for 360 with fish eye
-panorama / dualfisheye
-https://github.com/mrdoob/three.js/blob/master/examples/textures/ricoh_theta_s.jpg
-
-Webgl Shader
-
-https://github.com/mrdoob/three.js/blob/master/examples/webgl_shader.html
+## MAKE SURE ALL OBJ MATERIAL IS LINKED
+`assets/OBJ/Prairie_Rhino/HIGH~HZ5.JPGZ`

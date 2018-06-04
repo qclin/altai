@@ -44,9 +44,10 @@ var effectController;
 
 
 function initScene() {
-  scene = new THREE.Scene();
-  scene.background = new THREE.Color( 0xefd1b5 );
-	scene.fog = new THREE.FogExp2( 0xefd1b5, 0.0025 );
+  scene = new THREE.Scene({alpha:true});
+
+  // scene.background = new THREE.Color( 0xefd1b5 );
+	scene.fog = new THREE.FogExp2( 0xffffff, 0.002 );
 
   camera = new THREE.CinematicCamera( 60, window.innerWidth / window.innerHeight, 1, 1000 );
 	camera.setLens( 5 );
@@ -140,9 +141,9 @@ function generateSprite() {
   canvas.height = 4;
   var context = canvas.getContext( '2d' );
   var gradient = context.createRadialGradient( canvas.width / 2, canvas.height / 2, 0, canvas.width / 2, canvas.height / 2, canvas.width / 2 );
-  gradient.addColorStop( 0, 'rgba(255,255,255, .8)' );
-  gradient.addColorStop( 0.2, 'rgba(0,255,255,1)' );
-  gradient.addColorStop( 0.4, 'rgba(253,199,255,1)' );
+  gradient.addColorStop( 0, 'rgba(255,255,255, .3)' );
+  gradient.addColorStop( 0.2, 'rgba(0,255,255,.8)' );
+  gradient.addColorStop( 0.4, 'rgba(253,199,255,.8)' );
   gradient.addColorStop( 1, 'rgba(0,0,0,0)' );
   context.fillStyle = gradient;
   context.fillRect( 0, 0, canvas.width, canvas.height );
@@ -216,21 +217,13 @@ function loadTerrain(){
 
 function initLighting() {
   // so many lights
-  var light = new THREE.DirectionalLight( 0xffffff, 1 );
+  var light = new THREE.DirectionalLight( 0xffffff, 0.8 );
   light.position.set( 0, 1, 0 );
   scene.add( light );
 
   var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
   light.position.set( 0, -1, 0 );
   scene.add( light );
-
-  // var light = new THREE.DirectionalLight( 0xffffff, 1 );
-  // light.position.set( 1, 0, 0 );
-  // scene.add( light );
-  //
-  // var light = new THREE.DirectionalLight( 0xffffff, 0.5 );
-  // light.position.set( 0, 0, 1 );
-  // scene.add( light );
 }
 
 
@@ -259,19 +252,11 @@ function render(time) {
 	camera.updateMatrixWorld();
 
   renderGons();
-
-  // renderGPUParticles();
   TWEEN.update();
 
   renderer.render( scene, camera );
 
 };
-
-function renderGPUParticles(){
-	gpuCompute.compute();
-	particleUniforms.texturePosition.value = gpuCompute.getCurrentRenderTarget( positionVariable ).texture;
-	particleUniforms.textureVelocity.value = gpuCompute.getCurrentRenderTarget( velocityVariable ).texture;
-}
 
 var t = 0;
 function renderGons(){

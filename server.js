@@ -47,10 +47,15 @@ app.get('/check_model', function(req, res){
     res.sendFile(__dirname + '/check_model/index.html');
 });
 
-app.get('/highland_prairie', function(req, res){
-    res.sendFile(__dirname + '/highland_prairie/index.html');
-});
+// app.get('/:agents/:environment', function(req, res){
+//   var path = [req.params.agents, req.params.environment].join('_');
+//   console.log(" test test test", req.params, path);
+//   res.sendFile(__dirname + `/${path}/index.html`);
+// });
 
+app.get('/isolation_highland_prairie', function(req, res){
+    res.sendFile(__dirname + '/isolation_highland_prairie/index.html');
+});
 
 app.get('/predator_highland_forest', function(req, res){
     res.sendFile(__dirname + '/predator_highland_forest/index.html');
@@ -60,7 +65,11 @@ app.get('/couple_recognition_tundra', function(req, res){
     res.sendFile(__dirname + '/couple_recognition_tundra/index.html');
 });
 
-app.get('/flat', function(req, res){
+app.get('/text', function(req, res){
+    var agent = req.query.agent
+    var environment = req.query.env
+    console.log( "---------- agent, env --------- ", agent, environment);
+
     var agentType = "isolation";
     var pamphlet = utterances.generateText(agentType);
     pamphlet.then(function(data){
@@ -68,10 +77,9 @@ app.get('/flat', function(req, res){
       database.addNewEntry(data)
 
       var predictedText = data.toString();
-      console.log("00000  post promisesss : ", predictedText);
+      res.json(predictedText);
+
     });
-    console.log("flat page: log: pamphlet --- ", pamphlet)
-    res.sendFile(__dirname + '/flat/index.html');
 });
 
 

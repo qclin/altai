@@ -6,7 +6,7 @@ module.exports = {
   generateText : function (agentType){
       let runPy = new Promise(function(resolve, reject){
       console.log("", agentType)
-        PythonShell.run('./nlpSlam/queer_story.py', function (err, results) {
+        PythonShell.run('./nlpSlam/gen_queer.py', function (err, results) {
           if (err) reject(err);
           console.log('results: %j', results);
           resolve(results);

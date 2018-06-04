@@ -1,0 +1,26 @@
+{
+	"description" : "A list of words that naturally complete the phrase 'They were feeling...'.",
+	"fillers" :
+	[
+		"Ahaaaaaa",
+		"Mmmmmmmmm",
+		"Mhmmmm",
+		"Ohhhh",
+		"Eeeeeeee",
+		"Oh yes",
+		"Oh no",
+		"Fine",
+		"Something",
+		"Somewhere",
+		"Somehow",
+		"So...",
+		"Oi oi oi",
+		"Pssssssssssst",
+		"Sssssssssssss",
+		"Hahahahahaha",
+		"Weeeeeeeeeez",
+		"Skrrrrrrr",
+		"Sometimes",
+		"Maybe"
+	]
+}

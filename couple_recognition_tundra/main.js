@@ -21,6 +21,26 @@ import '../public/lights/RectAreaLightUniformsLib.js'
 import Vector from './vector'
 
 
+if (process.env.NODE_ENV == 'production') {
+	var texture = {
+		smoke: 'https://firebasestorage.googleapis.com/v0/b/altai-demo-42092.appspot.com/o/textures%2FSmoke-Element.png?alt=media&token=eff0ec12-c3ff-4aac-ae9c-4edb64fd30ec'
+	}
+	var assetPath = {
+		agent: 'https://firebasestorage.googleapis.com/v0/b/altai-demo-42092.appspot.com/o/agents%2Fpineapple%2F'
+	}
+
+}else{
+
+	var texture = {
+		smoke: '/textures/Smoke-Element.png'
+	}
+	var assetPath = {
+		agent: '/OBJ/Agents/'
+	}
+}
+
+
+
 var camera, scene, renderer, composer;
 var object, light, controls;
 
@@ -96,9 +116,6 @@ function init() {
 
 	document.body.appendChild( renderer.domElement );
 
-
-
-
 	//camera
 	camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
   // camera.position.x = -332.9952324747626
@@ -167,11 +184,11 @@ function init() {
 var smokeParticles;
 
 function addSmoke(){
-	THREE.ImageUtils.crossOrigin = ''; //Need this to pull in crossdomain images from AWS
 
-	var loader = new THREE.TextureLoader();
-	loader.crossOrigin = true;
-	var smokeTexture = loader.load('./textures/Smoke-Element.png');
+	// var loader = new THREE.TextureLoader();
+	// loader.crossOrigin = true;
+	THREE.ImageUtils.crossOrigin = ''; //Need this to pull in crossdomain images from AWS
+	var smokeTexture = THREE.ImageUtils.loadTexture(texture.smoke);
 	var smokeMaterial = new THREE.MeshLambertMaterial({color: 0xF5e3e6, map: smokeTexture, transparent: true, opacity: 0.5});
 	smokeMaterial.side = THREE.DoubleSide;
 
@@ -271,9 +288,9 @@ function loadAgent(){
   var onError = function ( xhr ) { };
   THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 	depMat = new THREE.MeshPhongMaterial( { ambient: 0xee0011, color: 0x708090} );
-	new THREE.MTLLoader().setPath('/OBJ/Agents/').load('pineapple_grey.mtl', function ( materials ) {
+	new THREE.MTLLoader().setPath(assetPath.agent).load('pineapple_grey.mtl', function ( materials ) {
 	    materials.preload();
-  new THREE.OBJLoader().setPath('/OBJ/Agents/').setMaterials( materials )
+  new THREE.OBJLoader().setPath(assetPath.agent).setMaterials( materials )
     .load('pineapple_grey.obj', function ( object ) {
 
 			object.traverse( function ( node ) {
@@ -300,9 +317,9 @@ function loadAgent2(){
   var onError = function ( xhr ) { };
 	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 	depMat = new THREE.MeshPhongMaterial( { ambient: 0xee0011, color: 0x708090} );
-	new THREE.MTLLoader().setPath('/OBJ/Agents/').load('pineapple_grey.mtl', function ( materials ) {
+	new THREE.MTLLoader().setPath(assetPath.agent).load('pineapple_grey.mtl', function ( materials ) {
 	    materials.preload();
-  new THREE.OBJLoader().setPath('/OBJ/Agents/').setMaterials( materials )
+  new THREE.OBJLoader().setPath(assetPath.agent).setMaterials( materials )
     .load('pineapple_grey.obj', function ( object ) {
 
 			object.traverse( function ( node ) {
@@ -415,7 +432,7 @@ function addEffects(){
 
   composer.addPass( new THREE.RenderPass( scene, camera ) );
 
-	composer.addPass(effectFilmBW); /// NEEDS TIMING 
+	composer.addPass(effectFilmBW); /// NEEDS TIMING
 
   var effect = new THREE.ShaderPass( THREE.BleachBypassShader );
   effect.uniforms[ "opacity" ].value = 0.1;

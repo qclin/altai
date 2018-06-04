@@ -12,7 +12,7 @@ module.exports = {
     flat_bundle: ['./flat/main.js', hotMiddlewareScript],
     glacier_bundle: ['./glacier/main.js', hotMiddlewareScript],
     check_model_bundle: ['./check_model/main.js', hotMiddlewareScript],
-    highland_prairie_bundle: ['./highland_prairie/main.js', hotMiddlewareScript],
+    isolation_highland_prairie_bundle: ['./isolation_highland_prairie/main.js', hotMiddlewareScript],
     predator_highland_forest_bundle: ['./predator_highland_forest/main.js', hotMiddlewareScript],
     couple_recognition_tundra_bundle: ['./couple_recognition_tundra/main.js', hotMiddlewareScript]
 	},

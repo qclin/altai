@@ -1,0 +1,71 @@
+<html lang="en">
+	<head>
+		<title> </title>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+
+		<style>
+      @font-face {
+        font-family: "Value Bold";
+        src: url("/fonts/Value/value-bold.ttf") format("truetype");
+      }
+
+      #chart{
+        background: transparent;
+        position: absolute;
+      }
+      #subtitle{
+        font-family: "Value Bold" serif;
+        color: #ff0000;
+        position: absolute;
+        bottom: .5em;
+        margin: auto;
+        display: block;
+        width: 100%;
+        text-align: center;
+        font-size: 3em;
+      }
+			#hypotitle{
+				font-family: "Value Bold" serif;
+				color: #ffff00;
+				position: absolute;
+				top: .5em;
+				margin: auto;
+				display: block;
+				width: 100%;
+				text-align: center;
+				font-size: 1.5em;
+			}
+      .transition{
+        -webkit-transition: opacity 2s ease-in;
+        -moz-transition: opacity 2s ease-in;
+        -ms-transition: opacity 2s ease-in;
+        -o-transition: opacity 2s ease-in;
+          transition: opacity 2s ease-in;
+      }
+
+			html {
+					width: 100%;
+					height: 100%;
+					background: #A83315; /* Old browsers */ #DAD2F3
+
+					/* A83315 to 000000 or 0 opacity */
+					background: -moz-linear-gradient(top,  #A83315 0%, #DED2BA 100%); /* FF3.6-15 */
+					background: -webkit-linear-gradient(top,  #A83315 0%,#DED2BA 100%); /* Chrome10-25,Safari5.1-6 */
+					background: linear-gradient(to bottom,  #A83315 0%,#DED2BA 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#A83315', endColorstr='#DED2BA',GradientType=0 ); /* IE6-9 */
+				}
+		</style>
+	</head>
+	<body>
+
+    <div id="container"></div>
+		<div id="chart"></div>
+
+		<p id="hypotitle"> </p>
+    <p id="subtitle"> </p>
+
+    <script type="text/javascript" src="isolation_highland_prairie_bundle.js"></script>
+
+  </body>
+</html>
