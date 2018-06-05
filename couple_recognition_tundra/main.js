@@ -21,32 +21,19 @@ import '../public/lights/RectAreaLightUniformsLib.js'
 import Vector from './vector'
 import config from '../public/config/aws-s3-assets.json'
 
-// if (process.env.NODE_ENV == 'production') {
-	var texture = {
-		smoke: 'https://s3.eu-central-1.amazonaws.com/altai-demo/textures/Smoke-Element.png'
-	}
-	var assetPath = {
-		agent: 'https://firebasestorage.googleapis.com/v0/b/altai-demo-42092.appspot.com/o/agents%2Fpineapple%2F'
-	}
-	var OBJPath = {
-		terrain: 'https://s3.eu-central-1.amazonaws.com/altai-demo/OBJ/Tundra/'
-	}
-
+if (process.env.NODE_ENV == 'production') {
 	var assets = {
 		smoke: config.bucket + config.texture.smoke,
 		agent: config.bucket + config.agent.pineapple,
 		terrain: config.bucket + config.terrain.tundra
 	}
-// }else{
-//
-// 	var texture = {
-// 		smoke: '/textures/Smoke-Element.png'
-// 	}
-// 	var assetPath = {
-// 		agent: '/OBJ/Agents/'
-// 	}
-// }
-
+}else{
+	var assets = {
+		smoke: '/textures/Smoke-Element.png',
+		agent: '/OBJ/Agents/pineapple/',
+		terrain: '/OBJ/Tundra/'
+	}
+}
 
 
 var camera, scene, renderer, composer;

@@ -6,7 +6,19 @@ import * as THREE from 'three';
 import '../public/CurveExtras';
 import './overlay';
 import './subtitle';
+import config from '../public/config/aws-s3-assets.json'
 
+if (process.env.NODE_ENV == 'production') {
+	var assets = {
+		agent: config.bucket + config.agent.fluffball,
+		terrain: config.bucket + config.terrain.prairie
+	}
+}else{
+	var assets = {
+		agent: '/OBJ/Agents/Isolation/',
+		terrain: '/OBJ/Prairie_Rhino/'
+	}
+}
 
 var container, stats;
 var camera, scene, renderer;
@@ -112,19 +124,13 @@ function loadTerrain(){
   };
   var onError = function ( xhr ) { };
   THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
-  new THREE.MTLLoader()
-  .setPath('/OBJ/Prairie_Rhino/')
+  new THREE.MTLLoader().setPath(assets.terrain).setCrossOrigin(true)
   .load('Prairie_Colour.mtl', function ( materials ) {
     materials.preload();
     new THREE.OBJLoader()
       .setMaterials( materials )
-      .setPath('/OBJ/Prairie_Rhino/')
+      .setPath(assets.terrain)
       .load('Prairie_Colour.obj', function ( object ) {
-        // object.traverse( function( node ) {
-        //     if( node.material ) {
-        //         node.material.side = THREE.DoubleSide;
-        //     }
-        // });
         object.position.y = - 95;
         scene.add( object );
       }, onProgress, onError );
@@ -143,12 +149,12 @@ function loadAgent(){
   THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 
   new THREE.MTLLoader()
-  .setPath('/OBJ/Agents/Isolation/')
+  .setPath(assets.agent).setCrossOrigin(true)
   .load('Isolation_3.mtl', function ( materials ) {
     materials.preload();
     new THREE.OBJLoader()
       .setMaterials( materials )
-      .setPath('/OBJ/Agents/Isolation/')
+      .setPath(assets.agent)
       .load('Isolation_3.obj', function ( object ) {
 				testAgent = object
 				// var s = 0.35;

@@ -9,6 +9,18 @@ import GPUComputationRenderer from '../public/GPUComputationRenderer';
 import TWEEN from '../public/libs/Tween';
 import * as THREE from 'three';
 import '../public/CurveExtras';
+import config from '../public/config/aws-s3-assets.json'
+
+
+if (process.env.NODE_ENV == 'production') {
+	var assets = {
+		terrain: config.bucket + config.terrain.glacier
+	}
+}else{
+	var assets = {
+		terrain: '/OBJ/Altai_skp_model_2/'
+	}
+}
 
 
 var container, stats;
@@ -22,24 +34,6 @@ var clock = new THREE.Clock();
 
 var isoGons = [];
 var particle;
-
-
-
-/// NEw PARTICLE CHUNK
-var isIE = /Trident/i.test( navigator.userAgent );
-var isEdge = /Edge/i.test( navigator.userAgent );
-var hash = document.location.hash.substr( 1 );
-if ( hash ) hash = parseInt( hash, 0 );
-// Texture width for simulation (each texel is a debris particle)
-var WIDTH = hash || ( ( isIE || isEdge ) ? 4 : 64 );
-var PARTICLES = WIDTH * WIDTH;
-
-var gpuCompute;
-var velocityVariable;
-var positionVariable;
-var positionUniforms;
-var velocityUniforms;
-var particleUniforms;
 var effectController;
 
 
@@ -201,12 +195,12 @@ function loadTerrain(){
   var onError = function ( xhr ) { };
   THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
   new THREE.MTLLoader()
-  .setPath('/OBJ/Altai_skp_model_2/')
+  .setPath(assets.terrain).setCrossOrigin(true)
   .load('v1.mtl', function ( materials ) {
     materials.preload();
     new THREE.OBJLoader()
       .setMaterials( materials )
-      .setPath('/OBJ/Altai_skp_model_2/')
+      .setPath(assets.terrain)
       .load('v1.obj', function ( object ) {
         object.position.y = - 95;
         scene.add( object );

@@ -12,6 +12,19 @@ import { EffectComposer } from '../public/postprocessing/EffectComposer';
 import { RenderPass } from '../public/postprocessing/RenderPass';
 import { ShaderPass } from '../public/postprocessing/ShaderPass';
 import { MaskPass } from '../public/postprocessing/MaskPass';
+import config from '../public/config/aws-s3-assets.json'
+
+if (process.env.NODE_ENV == 'production') {
+	var assets = {
+		agent: config.bucket + config.agent.turtle,
+		terrain: config.bucket + config.terrain.forest
+	}
+}else{
+	var assets = {
+		agent: '/OBJ/Agents/mascot.tjs.sea',
+		terrain: '/OBJ/Highland_Forest/'
+	}
+}
 
 
 var camera, scene, renderer;
@@ -53,7 +66,7 @@ function loadTurtle(){
 
 	};
 
-	turtleLoader.load('/OBJ/Agents/mascot.tjs.sea');
+	turtleLoader.load(assets.agent);
 }
 
 
@@ -96,6 +109,7 @@ function init() {
 	initLevy();
 }
 
+/// TODO : MAKE STEAK RAIN
 function loadSteak(){
 	// loading manager
 	var onProgress = function ( xhr ) {
@@ -174,12 +188,12 @@ function loadTree(){
   var onError = function ( xhr ) { };
   THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
   new THREE.MTLLoader()
-  .setPath('/OBJ/Highland_Forest/')
+  .setPath(assets.terrain).setCrossOrigin(true)
   .load('Tree.mtl', function ( materials ) {
     materials.preload();
     new THREE.OBJLoader()
       .setMaterials( materials )
-      .setPath('/OBJ/Highland_Forest/')
+      .setPath(assets.terrain)
       .load('Tree.obj', function ( object ) {
 				object.scale.set(20, 20, 20);
 				for ( var i = 0; i < 500; i ++ ) {

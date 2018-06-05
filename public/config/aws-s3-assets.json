@@ -4,10 +4,15 @@
     "smoke": "textures/Smoke-Element.png"
   },
   "agent" : {
-    "pineapple": "OBJ/Agents/pineapple/"
+    "pineapple": "OBJ/Agents/pineapple/",
+    "fluffball": "OBJ/Agents/Isolation/",
+    "turtle" : "OBJ/Agents/mascot.tjs.sea"
   },
   "terrain" : {
-    "tundra": "OBJ/Tundra/"
+    "tundra": "OBJ/Tundra/",
+    "prairie": "OBJ/Prairie_Rhino/",
+    "glacier": "OBJ/Altai_skp_model_2/",
+    "forest" : "OBJ/Highland_Forest/"
   }
 
 }
