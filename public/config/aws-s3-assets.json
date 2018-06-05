@@ -1,0 +1,13 @@
+{
+  "bucket": "https://s3.eu-central-1.amazonaws.com/altai-demo/",
+  "texture" : {
+    "smoke": "textures/Smoke-Element.png"
+  },
+  "agent" : {
+    "pineapple": "OBJ/Agents/pineapple/"
+  },
+  "terrain" : {
+    "tundra": "OBJ/Tundra/"
+  }
+
+}

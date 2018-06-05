@@ -64,7 +64,10 @@ module.exports = {
     modules: ['node_modules']
   },
   devServer: {
-    historyApiFallback: true
+    historyApiFallback: true,
+    headers: {
+         'Access-Control-Allow-Origin': '*'
+     }
   },
 	plugins: [
 		 new webpack.HotModuleReplacementPlugin(),

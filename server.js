@@ -19,6 +19,12 @@ app.use(cors());
 app.use(express.static('assets'));
 app.use(bodyParser.json({extended: false}));
 
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
@@ -61,7 +67,7 @@ app.get('/predator_highland_forest', function(req, res){
     res.sendFile(__dirname + '/predator_highland_forest/index.html');
 });
 
-app.get('/couple_recognition_tundra', function(req, res){
+app.get('/couple_recognition_tundra', function(req, res, next){
     res.sendFile(__dirname + '/couple_recognition_tundra/index.html');
 });
 
@@ -84,6 +90,6 @@ app.get('/text', function(req, res){
 
 
 
-var listerner = app.listen(process.env.PORT || 3333, function() {
+var listerner = app.listen(process.env.PORT || 3000, function() {
 	console.log("Listening on port %d", listerner.address().port);
 });

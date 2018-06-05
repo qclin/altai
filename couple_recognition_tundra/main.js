@@ -19,25 +19,33 @@ import { BleachBypassShader } from '../public/shaders/BleachBypassShader';
 
 import '../public/lights/RectAreaLightUniformsLib.js'
 import Vector from './vector'
+import config from '../public/config/aws-s3-assets.json'
 
-
-if (process.env.NODE_ENV == 'production') {
+// if (process.env.NODE_ENV == 'production') {
 	var texture = {
-		smoke: 'https://firebasestorage.googleapis.com/v0/b/altai-demo-42092.appspot.com/o/textures%2FSmoke-Element.png?alt=media&token=eff0ec12-c3ff-4aac-ae9c-4edb64fd30ec'
+		smoke: 'https://s3.eu-central-1.amazonaws.com/altai-demo/textures/Smoke-Element.png'
 	}
 	var assetPath = {
 		agent: 'https://firebasestorage.googleapis.com/v0/b/altai-demo-42092.appspot.com/o/agents%2Fpineapple%2F'
 	}
-
-}else{
-
-	var texture = {
-		smoke: '/textures/Smoke-Element.png'
+	var OBJPath = {
+		terrain: 'https://s3.eu-central-1.amazonaws.com/altai-demo/OBJ/Tundra/'
 	}
-	var assetPath = {
-		agent: '/OBJ/Agents/'
+
+	var assets = {
+		smoke: config.bucket + config.texture.smoke,
+		agent: config.bucket + config.agent.pineapple,
+		terrain: config.bucket + config.terrain.tundra
 	}
-}
+// }else{
+//
+// 	var texture = {
+// 		smoke: '/textures/Smoke-Element.png'
+// 	}
+// 	var assetPath = {
+// 		agent: '/OBJ/Agents/'
+// 	}
+// }
 
 
 
@@ -162,7 +170,6 @@ function init() {
   loadRectLight();
   // loadHelperLight();
   loadTerrain();
-  loadTerrain2();
   addEffects();
 	addSmoke();
 
@@ -170,25 +177,23 @@ function init() {
 	loadPointLight();
   loadControl();
 
-
   loadAgent();
-	loadAgent2();
-	//
+
 	window.addEventListener( 'resize', onWindowResize, false );
   // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
   // document.addEventListener( 'click', onDocumentMouseClick, false );
 
 }
 
-
 var smokeParticles;
 
 function addSmoke(){
 
-	// var loader = new THREE.TextureLoader();
-	// loader.crossOrigin = true;
-	THREE.ImageUtils.crossOrigin = ''; //Need this to pull in crossdomain images from AWS
-	var smokeTexture = THREE.ImageUtils.loadTexture(texture.smoke);
+	var loader = new THREE.TextureLoader();
+	loader.crossOrigin = '';
+	THREE.ImageUtils.crossOrigin = 'anonymous'; //Need this to pull in crossdomain images from AWS
+	// var smokeTexture = THREE.ImageUtils.loadTexture(texture.smoke);
+	var smokeTexture = loader.load(assets.smoke);
 	var smokeMaterial = new THREE.MeshLambertMaterial({color: 0xF5e3e6, map: smokeTexture, transparent: true, opacity: 0.5});
 	smokeMaterial.side = THREE.DoubleSide;
 
@@ -278,6 +283,7 @@ function generateTexture() {
 	context.fillRect( 0, 1, 2, 1 );
 	return canvas;
 }
+
 function loadAgent(){
   var onProgress = function ( xhr ) {
     if ( xhr.lengthComputable ) {
@@ -288,52 +294,57 @@ function loadAgent(){
   var onError = function ( xhr ) { };
   THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
 	depMat = new THREE.MeshPhongMaterial( { ambient: 0xee0011, color: 0x708090} );
-	new THREE.MTLLoader().setPath(assetPath.agent).load('pineapple_grey.mtl', function ( materials ) {
+	new THREE.MTLLoader().setPath(assets.agent).load('pineapple_grey.mtl', function ( materials ) {
 	    materials.preload();
-  new THREE.OBJLoader().setPath(assetPath.agent).setMaterials( materials )
+  new THREE.OBJLoader().setPath(assets.agent).setMaterials( materials )
     .load('pineapple_grey.obj', function ( object ) {
 
 			object.traverse( function ( node ) {
 		    if ( node.isMesh ) node.material = depMat;
 		  });
-			pineapple = object
 			var s =  (Math.random() * 5) + 2;
-			pineapple.scale.set( s, s, s );
-			pineapple.castShadow = true;
-			pineapple.receiveShadow = true;
+			object.scale.set( s, s, s );
+			object.castShadow = true;
+			object.receiveShadow = true;
+
+			pineapple = object.clone();
       scene.add( pineapple );
-    }, onProgress, onError ); });
 
-}
-
-function loadAgent2(){
-
-  var onProgress = function ( xhr ) {
-    if ( xhr.lengthComputable ) {
-      var percentComplete = xhr.loaded / xhr.total * 100;
-      console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
-    }
-  };
-  var onError = function ( xhr ) { };
-	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
-	depMat = new THREE.MeshPhongMaterial( { ambient: 0xee0011, color: 0x708090} );
-	new THREE.MTLLoader().setPath(assetPath.agent).load('pineapple_grey.mtl', function ( materials ) {
-	    materials.preload();
-  new THREE.OBJLoader().setPath(assetPath.agent).setMaterials( materials )
-    .load('pineapple_grey.obj', function ( object ) {
-
-			object.traverse( function ( node ) {
-		    if ( node.isMesh ) node.material = depMat;
-		  });
-			pineapple2 = object
-			var s =  (Math.random() * 5) + 2;
-			pineapple2.scale.set( s, s, s );
-			pineapple2.castShadow = true;
-			pineapple2.receiveShadow = true;
+			pineapple2 = object.clone();
       scene.add( pineapple2 );
+
     }, onProgress, onError ); });
 
 }
+
+// function loadAgent2(){
+//
+//   var onProgress = function ( xhr ) {
+//     if ( xhr.lengthComputable ) {
+//       var percentComplete = xhr.loaded / xhr.total * 100;
+//       console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+//     }
+//   };
+//   var onError = function ( xhr ) { };
+// 	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+// 	depMat = new THREE.MeshPhongMaterial( { ambient: 0xee0011, color: 0x708090} );
+// 	new THREE.MTLLoader().setPath(assets.agent).load('pineapple_grey.mtl', function ( materials ) {
+// 	    materials.preload();
+//   new THREE.OBJLoader().setPath(assets.agent).setMaterials( materials )
+//     .load('pineapple_grey.obj', function ( object ) {
+//
+// 			object.traverse( function ( node ) {
+// 		    if ( node.isMesh ) node.material = depMat;
+// 		  });
+// 			pineapple2 = object
+// 			var s =  (Math.random() * 5) + 2;
+// 			pineapple2.scale.set( s, s, s );
+// 			pineapple2.castShadow = true;
+// 			pineapple2.receiveShadow = true;
+//       scene.add( pineapple2 );
+//     }, onProgress, onError ); });
+//
+// }
 
 function loadRectLight(){
 
@@ -368,13 +379,12 @@ function loadTerrain(){
   };
   var onError = function ( xhr ) { };
   THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
-  new THREE.MTLLoader()
-  .setPath('/OBJ/Tundra/')
+  new THREE.MTLLoader().setPath(assets.terrain).setCrossOrigin(true)
   .load('Tundra_9.mtl', function ( materials ) {
     materials.preload();
     new THREE.OBJLoader()
       .setMaterials( materials )
-      .setPath('/OBJ/Tundra/')
+      .setPath(assets.terrain)
       .load('Tundra_9.obj', function ( object ) {
 				// initial camera view
         camera.rotation.x = -3.141592653589793
@@ -384,29 +394,19 @@ function loadTerrain(){
         scene.add( object );
       }, onProgress, onError );
   });
-}
-function loadTerrain2(){
 
-  var onProgress = function ( xhr ) {
-    if ( xhr.lengthComputable ) {
-      var percentComplete = xhr.loaded / xhr.total * 100;
-      console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
-    }
-  };
-  var onError = function ( xhr ) { };
-  THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
-  new THREE.MTLLoader()
-  .setPath('/OBJ/Tundra/')
+	new THREE.MTLLoader().setPath(assets.terrain).setCrossOrigin(true)
   .load('Tundra_10.mtl', function ( materials ) {
     materials.preload();
     new THREE.OBJLoader()
       .setMaterials( materials )
-      .setPath('/OBJ/Tundra/')
+      .setPath(assets.terrain)
       .load('Tundra_10.obj', function ( object ) {
         scene.add( object );
       }, onProgress, onError );
   });
 }
+
 function loadControl(){
   // controls
   controls = new THREE.OrbitControls( camera, renderer.domElement );
