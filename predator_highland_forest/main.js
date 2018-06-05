@@ -14,17 +14,17 @@ import { ShaderPass } from '../public/postprocessing/ShaderPass';
 import { MaskPass } from '../public/postprocessing/MaskPass';
 import config from '../public/config/aws-s3-assets.json'
 
-if (process.env.NODE_ENV == 'production') {
+// if (process.env.NODE_ENV == 'production') {
 	var assets = {
 		agent: config.bucket + config.agent.turtle,
 		terrain: config.bucket + config.terrain.forest
 	}
-}else{
-	var assets = {
-		agent: '/OBJ/Agents/mascot.tjs.sea',
-		terrain: '/OBJ/Highland_Forest/'
-	}
-}
+// }else{
+// 	var assets = {
+// 		agent: '/OBJ/Agents/mascot.tjs.sea',
+// 		terrain: '/OBJ/Highland_Forest/'
+// 	}
+// }
 
 
 var camera, scene, renderer;

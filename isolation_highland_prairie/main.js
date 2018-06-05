@@ -8,17 +8,17 @@ import './overlay';
 import './subtitle';
 import config from '../public/config/aws-s3-assets.json'
 
-if (process.env.NODE_ENV == 'production') {
+// if (process.env.NODE_ENV == 'production') {
 	var assets = {
 		agent: config.bucket + config.agent.fluffball,
 		terrain: config.bucket + config.terrain.prairie
 	}
-}else{
-	var assets = {
-		agent: '/OBJ/Agents/Isolation/',
-		terrain: '/OBJ/Prairie_Rhino/'
-	}
-}
+// }else{
+// 	var assets = {
+// 		agent: '/OBJ/Agents/Isolation/',
+// 		terrain: '/OBJ/Prairie_Rhino/'
+// 	}
+// }
 
 var container, stats;
 var camera, scene, renderer;

@@ -11,16 +11,16 @@ import * as THREE from 'three';
 import '../public/CurveExtras';
 import config from '../public/config/aws-s3-assets.json'
 
-
-if (process.env.NODE_ENV == 'production') {
+ // webpack doesn't work with process.env
+// if (process.env.NODE_ENV == 'production') {
 	var assets = {
 		terrain: config.bucket + config.terrain.glacier
 	}
-}else{
-	var assets = {
-		terrain: '/OBJ/Altai_skp_model_2/'
-	}
-}
+// }else{
+// 	var assets = {
+// 		terrain: '/OBJ/Altai_skp_model_2/'
+// 	}
+// }
 
 
 var container, stats;

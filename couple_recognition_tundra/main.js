@@ -21,19 +21,20 @@ import '../public/lights/RectAreaLightUniformsLib.js'
 import Vector from './vector'
 import config from '../public/config/aws-s3-assets.json'
 
-if (process.env.NODE_ENV == 'production') {
+// webpack doesn't work with process.env
+// if (process.env.NODE_ENV == 'production') {
 	var assets = {
 		smoke: config.bucket + config.texture.smoke,
 		agent: config.bucket + config.agent.pineapple,
 		terrain: config.bucket + config.terrain.tundra
 	}
-}else{
-	var assets = {
-		smoke: '/textures/Smoke-Element.png',
-		agent: '/OBJ/Agents/pineapple/',
-		terrain: '/OBJ/Tundra/'
-	}
-}
+// }else{
+// 	var assets = {
+// 		smoke: '/textures/Smoke-Element.png',
+// 		agent: '/OBJ/Agents/pineapple/',
+// 		terrain: '/OBJ/Tundra/'
+// 	}
+// }
 
 
 var camera, scene, renderer, composer;
