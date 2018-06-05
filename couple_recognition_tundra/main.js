@@ -420,7 +420,7 @@ function addEffects(){
 
   composer.addPass( new THREE.RenderPass( scene, camera ) );
 
-	composer.addPass(effectFilmBW); /// NEEDS TIMING
+	// composer.addPass(effectFilmBW); /// NEEDS TIMING
 
   var effect = new THREE.ShaderPass( THREE.BleachBypassShader );
   effect.uniforms[ "opacity" ].value = 0.1;
