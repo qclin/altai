@@ -22,5 +22,11 @@
 		"Skrrrrrrr",
 		"Sometimes",
 		"Maybe"
-	]
+	],
+
+	"verbs" : ["To perform", "To comply", "To fulfill", "To perform", "To protect"],
+	"propositions" : ["for the legitimate", "in the public interest" , "interests of", "with a data subject", "at the request of", "is in the process of", "the vital interests of", "entering into"],
+	"noun_chunks" : ["a data controller ", "a third party", "a task", "controller's legal obligations", "contractual obligations", "official authority", "a data subject", "or another person"]
+
+
 }

@@ -3,25 +3,34 @@ var spawn = require("child_process").spawn;
 var PythonShell = require('python-shell');
 
 module.exports = {
-  generateText : function (agentType){
+  // couple_recognition_tundra
+  // trans influencer glacier
+  // predator_highland_forest
+  // isolation highland prairie
+  generateCaption : function (env){
       let runPy = new Promise(function(resolve, reject){
-      console.log("", agentType)
-        PythonShell.run('./nlpSlam/gen_queer.py', function (err, results) {
+      console.log("utterances --js--- ", env);
+
+      PythonShell.run(`./nlpSlam/environment_story/gen_${env}.py`, function (err, results) {
           if (err) reject(err);
-          console.log('results: %j', results);
+          console.log('environment_story results: %j', results);
           resolve(results);
         });
       });
       return runPy;
+  },
 
-    // pythonProcess.stdout.on('data', function (data){
-    // // Do something with the data returned from python script
-    //   // console.log('pythonProcess:::', data);
-    //   var interpreted = decodeURIComponent(data);
-    //   console.log('interpreted :::', interpreted, typeof interpreted);
-    //   return interpreted
-    //
-    // });
-    // return sentence
+  generateSubtitle : function (agent){
+      let runPy = new Promise(function(resolve, reject){
+      console.log("utterances --js--- ", agent);
+
+      PythonShell.run(`./nlpSlam/agent_story/gen_${agent}.py`, function (err, results) {
+          if (err) reject(err);
+          console.log('agent_story results: %j', results);
+          resolve(results);
+        });
+      });
+      return runPy;
   }
+
 }

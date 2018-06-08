@@ -25,7 +25,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 app.use(webpackDevMiddleware(compiler, {
   noInfo: true,
   publicPath: webpackConfig.output.publicPath,
@@ -71,16 +70,28 @@ app.get('/couple_recognition_tundra', function(req, res, next){
     res.sendFile(__dirname + '/couple_recognition_tundra/index.html');
 });
 
-app.get('/text', function(req, res){
-    var agent = req.query.agent
-    var environment = req.query.env
-    console.log( "---------- agent, env --------- ", agent, environment);
-
-    var agentType = "isolation";
-    var pamphlet = utterances.generateText(agentType);
+app.get('/text_caption', function(req, res){
+    var env = req.query.env
+    console.log( "-----Server side---text_caption--  env --------- ", env);
+    var pamphlet = utterances.generateCaption(env);
     pamphlet.then(function(data){
-      console.log("00000, returned pamphlets ::: ", data, typeof data);
-      database.addNewEntry(data)
+      console.log("00000 text_caption, returned pamphlets ::: ", data, typeof data);
+      // database.addNewEntry(data) // TODO: // update Firebase structure
+
+      var predictedText = data.toString();
+      res.json(predictedText);
+
+    });
+});
+
+
+app.get('/text_subtitle', function(req, res){
+    var agent = req.query.agent
+    console.log( "-----Server side---text_subtitle-- agent --------- ", agent);
+    var pamphlet = utterances.generateSubtitle(agent);
+    pamphlet.then(function(data){
+      console.log("00000 text_subtitle, returned pamphlets ::: ", data, typeof data);
+      // database.addNewEntry(data) // TODO: // update Firebase structure
 
       var predictedText = data.toString();
       res.json(predictedText);

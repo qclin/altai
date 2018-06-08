@@ -1,56 +1,72 @@
 import $ from 'jquery';
 
-// var lines = ["guilty", "Away", "giddy", "supported", "Peace", "Sea shell... She sells"]
-var lines;
-var inst;
-testAjax();
+var subLines;
+var subInterval;
 
-function testAjax() {
+var captionInterval;
+var subtitleInterval;
+
+var capLine;
+
+getCaption();
+getSubtitle();
+
+function getCaption(){
   $.ajax({
-    url: "http://localhost:3333/text",
-    data: {agent: "isolation", environment: "highland_pairie" },
+    url: "http://localhost:3000/text_caption", // TODO: REPLACE HOST
+    data: {env: "highland_pairie"},
     success: function(data) {
-      lines = data.split(',');
-      change(); /// call on both sub &
-      inst = setInterval(change, 5000);
+      capLine = data.split(',');
+      rollCaption(); /// call on both sub &
+      captionInterval = setInterval(rollCaption, 5000);
       return data;
     }
   });
 }
 
+
+function getSubtitle(){
+  $.ajax({
+    url: "http://localhost:3000/text_subtitle", // TODO: REPLACE HOST
+    data: {agent: "isolation"},
+    success: function(data) {
+      subLines = data.split(',');
+      rollSubtitle(); /// call on both sub &
+      subInterval = setInterval(rollSubtitle, 5000);
+      return data;
+    }
+  });
+}
+
+
 var subCount = 0;
 var subtitle = document.getElementById("subtitle");
 
-// var inst = setInterval(change, 5000);
-
-
-function change() {
-  subtitle.innerHTML = lines[subCount];
-  setTimeout(remove, 2000);
+function rollSubtitle() {
+  subtitle.innerHTML = subLine[subCount];
+  setTimeout(clearSub, 2000);
 
   subCount++;
   if (subCount >= lines.length) {
     subCount = 0;
-    clearInterval(inst); // uncomment this if you want to stop refreshing after one cycle
+    clearInterval(inst); // stop refreshing after one cycle
   }
 }
 
-function remove(){
+function clearSub(){
   subtitle.innerHTML = ""
 }
 
-var instEnv = setInterval(changeEnvLine, 3000);
 
-var hypCount = 0;
-
-var envLine = ["the planet can win peasants","the maid can dig images","a sky should soar months","the planet can climb oriental religions", "cold, ninth, lovely"]
+var capCount = 0;
 var hypotitle = document.getElementById("hypotitle");
 
-function changeEnvLine() {
-  hypotitle.innerHTML = envLine[hypCount];
-  hypCount++;
-  if (hypCount >= envLine.length) {
-    hypCount = 0;
-    clearInterval(instEnv); // uncomment this if you want to stop refreshing after one cycle
+
+function rollCaption() {
+  hypotitle.innerHTML = capLine[capCount];
+  capCount++;
+  if (capCount >= capLine.length) {
+    capCount = 0;
+    clearInterval(instEnv); // stop refreshing after one cycle
   }
 }
