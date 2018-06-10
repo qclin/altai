@@ -14,7 +14,7 @@ getCaption();
 
 function getCaption(){
   $.ajax({
-    url: "http://34.200.52.167:3000/isolation_highland_prairie/text_caption", // TODO: REPLACE HOST
+    url: "http://34.200.52.167:3000/text_caption", // TODO: REPLACE HOST
     data: {env: "highland_pairie"},
     success: function(data) {
       console.log( "highland_pairie --- ", data)
