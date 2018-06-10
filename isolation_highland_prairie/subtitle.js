@@ -28,7 +28,7 @@ function getCaption(){
 
 function getSubtitle(){
   $.ajax({
-    url: "http://34.200.52.167:3000/isolation_highland_prairie/text_subtitle", // TODO: REPLACE HOST
+    url: "http://34.200.52.167:3000/text_subtitle", // TODO: REPLACE HOST
     data: {agent: "isolation"},
     success: function(data) {
       console.log("subtitle ----- ", data)
