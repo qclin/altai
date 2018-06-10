@@ -96,8 +96,8 @@ function init() {
 	// renderer
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
-	// renderer.setSize( window.innerWidth, window.innerHeight );
-	renderer.setSize( 1920, 1080);
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	// renderer.setSize( 1920, 1080);
 
 	document.body.appendChild( renderer.domElement );
 	window.addEventListener( 'resize', onWindowResize, false );
@@ -151,7 +151,7 @@ function onWindowResize() {
 
 	camera.rotation.y = Math.PI;
 	camera.updateProjectionMatrix();
-	// renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setSize( window.innerWidth, window.innerHeight );
 
 	render();
 }

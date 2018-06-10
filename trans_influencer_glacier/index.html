@@ -23,8 +23,8 @@
 			filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#B8C6DB', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 		}
 		body{
-			width: 1920px;
-			height: 1080px;
+			/* width: 1920px;
+			height: 1080px; */
 			position: relative;
 		}
 		.expression{
@@ -59,11 +59,27 @@
 			width: 25%;
 			min-width: 400px;
 		}
-
+		#icon-back{
+			z-index: 1000;
+			width:100px;
+			height: 100px;
+			position: absolute;
+			right: 1em;
+			bottom: 1em;
+			background: radial-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0), transparent);
+		}
+		a object{
+			pointer-events: none;
+		}
 
 		</style>
 	</head>
 	<body>
+		<a id="icon-back" href="/">
+			<object data="/cosmoSVG/cosmo_1.svg" type="image/svg+xml">
+				<img src="/cosmo_icon/agent_recognition.png" />
+			</object>
+		</a>
 		<!-- Fragment shader for protoplanet's position -->
 		<script id="computeShaderPosition" type="x-shader/x-fragment">
 			#define delta ( 1.0 / 60.0 )
@@ -211,10 +227,13 @@
 		<p id="hypotitle" class="expression"> </p>
 		<p id="subtitle" class="expression"> </p>
 		<p id="subtitle2" class="expression"> </p>
-
+		<audio loop autoplay>
+			<source src="https://s3.eu-central-1.amazonaws.com/altai-demo/tracks/tracks/ritual-3-1.wav" type="audio/ogg">
+		</audio>
     <script src="https://s3-us-west-2.amazonaws.com/s.cdpn.io/53148/TweenLite.min.js"></script>
 		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.18.4/easing/EasePack.min.js"></script>
     <script type="text/javascript" src="trans_influencer_glacier_bundle.js"></script>
+
 
   </body>
 </html>

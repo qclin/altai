@@ -52,12 +52,12 @@ function init() {
 	camera.position.set( 2, 1, 500 );
 
   renderer = new THREE.WebGLRenderer({alpha: true});
-  // renderer.setSize( window.innerWidth, window.innerHeight );
-	renderer.setSize( 1920, 1080 );
+  renderer.setSize( window.innerWidth, window.innerHeight );
+	// renderer.setSize( 1920, 1080 );
 
 
   document.body.appendChild( renderer.domElement );
-  // window.addEventListener("resize", resize);
+  window.addEventListener("resize", resize);
 
   camera.position.z = 0;
 
@@ -308,11 +308,11 @@ function renderGons(){
   }
 }
 
-// function resize() {
-//   camera.aspect = window.innerWidth / window.innerHeight;
-//   camera.updateProjectionMatrix();
-//   renderer.setSize( window.innerWidth, window.innerHeight );
-// }
+function resize() {
+  camera.aspect = window.innerWidth / window.innerHeight;
+  camera.updateProjectionMatrix();
+  renderer.setSize( window.innerWidth, window.innerHeight );
+}
 
 
 init();

@@ -35,6 +35,12 @@ app.use(webpackHotMiddleware(compiler, {
 }));
 
 
+app.get('/', function(req, res){
+  var dummy ="dummy dummy "
+    res.sendFile(__dirname + '/index.html');
+});
+
+
 app.get('/place', function(req, res){
   var dummy ="dummy dummy "
     res.sendFile(__dirname + '/place/index.html');
@@ -55,19 +61,19 @@ app.get('/check_model', function(req, res){
 //   res.sendFile(__dirname + `/${path}/index.html`);
 // });
 
-app.get('/isolation_highland_prairie', function(req, res){
+app.get('/dwelling', function(req, res){
     res.sendFile(__dirname + '/isolation_highland_prairie/index.html');
 });
 
-app.get('/predator_highland_forest', function(req, res){
+app.get('/pleasure-hunting', function(req, res){
     res.sendFile(__dirname + '/predator_highland_forest/index.html');
 });
 
-app.get('/couple_recognition_tundra', function(req, res, next){
+app.get('/sensing', function(req, res, next){
     res.sendFile(__dirname + '/couple_recognition_tundra/index.html');
 });
 
-app.get('/trans_influencer_glacier', function(req, res){
+app.get('/baptism', function(req, res){
     res.sendFile(__dirname + '/trans_influencer_glacier/index.html');
 });
 

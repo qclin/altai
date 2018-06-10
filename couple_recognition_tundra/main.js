@@ -126,7 +126,8 @@ function init() {
 
 	renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
 	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( 1920, 1080 );
+	renderer.setSize(window.innerWidth , window.innerHeight);
+	// renderer.setSize( 1920, 1080 );
   // here for lights
   renderer.shadowMap.enabled = true;
 	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -195,7 +196,7 @@ function init() {
 	loadFlower();
   loadAgent2();
 
-	// window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'resize', onWindowResize, false );
   // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
   // document.addEventListener( 'click', onDocumentMouseClick, false );
 	// loadFbxAgnet();
@@ -500,12 +501,12 @@ function addEffects(){
   effect.renderToScreen = true;
   composer.addPass( effect );
 }
-// function onWindowResize() {
-// 	camera.aspect = window.innerWidth / window.innerHeight;
-// 	camera.updateProjectionMatrix();
-// 	renderer.setSize( window.innerWidth, window.innerHeight );
-// 	composer.setSize( window.innerWidth, window.innerHeight );
-// }
+function onWindowResize() {
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize( window.innerWidth, window.innerHeight );
+	composer.setSize( window.innerWidth, window.innerHeight );
+}
 // function onDocumentMouseMove( event ) {
 //   console.log(':::: CAMERA POSITON:::: ', camera.rotation, camera);
 // }

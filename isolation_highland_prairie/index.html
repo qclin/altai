@@ -7,13 +7,12 @@
 		<style>
 			@font-face {
 			  font-family: 'Value-Serif';
-			  src: url('/fonts/Value-Serif/Value-Serif.eot?#iefix') format('embedded-opentype'),  url('Value-Serif.woff') format('woff'), url('Value-Serif.ttf')  format('truetype'), url('Value-Serif.svg#Value-Serif') format('svg');
-			  font-weight: normal;
+			  src: url('/fonts/Value-Serif/Value-Serif.eot?#iefix') format('embedded-opentype');
 			  font-style: normal;
 			}
 			body{
-				width: 1920px;
-				height: 1080px;
+				/* width: 1920px;
+				height: 1080px; */
 				position: relative;
 			}
       #chart{
@@ -64,16 +63,34 @@
 					background: linear-gradient(to bottom,  #A83315 0%,#DED2BA 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 					filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#A83315', endColorstr='#DED2BA',GradientType=0 ); /* IE6-9 */
 				}
+			#icon-back{
+				z-index: 1000;
+				width:100px;
+				height: 100px;
+				position: absolute;
+				right: 1em;
+				bottom: 1em;
+				background: radial-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0), transparent);
+			}
+			a object{
+				pointer-events: none;
+			}
 		</style>
 	</head>
 	<body>
-
+		<a id="icon-back" href="/">
+			<object data="/cosmoSVG/cosmo_3.svg" type="image/svg+xml">
+				<img src="/cosmo_icon/agent_recognition.png" />
+			</object>
+		</a>
     <div id="container"></div>
 		<div id="chart"></div>
 
 		<p id="hypotitle" class="expression"> </p>
     <p id="subtitle" class="expression"> </p>
-
+		<audio loop autoplay>
+		  <source src="https://s3.eu-central-1.amazonaws.com/altai-demo/tracks/tracks/ritual-4.mp3" type="audio/ogg">
+		</audio>
     <script type="text/javascript" src="isolation_highland_prairie_bundle.js"></script>
 
   </body>

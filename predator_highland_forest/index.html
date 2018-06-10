@@ -23,8 +23,8 @@
 				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#B8C6DB', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
 			}
 			body{
-				width: 1920px;
-				height: 1080px;
+				/* width: 1920px;
+				height: 1080px; */
 				position: relative;
 			}
 			.expression{
@@ -49,12 +49,30 @@
 				width: 100%;
 				min-width: 400px;
 			}
+			#icon-back{
+				z-index: 1000;
+				width:100px;
+				height: 100px;
+				position: absolute;
+				right: 1em;
+				bottom: 1em;
+				background: radial-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0), transparent);
+			}
+			a object{
+				pointer-events: none;
+			}
 		</style>
 	</head>
-
 	<body>
+		<a id="icon-back" href="/">
+			<object data="/cosmoSVG/cosmo_2.svg" type="image/svg+xml">
+				<img src="/cosmo_icon/agent_recognition.png" />
+			</object>
+		</a>
 		<p id="hypotitle" class="expression"> </p>
 		<p id="subtitle" class="expression"> </p>
-
+		<audio loop autoplay>
+			<source src="https://s3.eu-central-1.amazonaws.com/altai-demo/tracks/tracks/ritual-2-1.wav" type="audio/ogg">
+		</audio>
     <script type="text/javascript" src="predator_highland_forest_bundle.js"></script>
   </body>

@@ -92,12 +92,12 @@ function init() {
 	//
 	renderer = new THREE.WebGLRenderer({alpha: true});
 	renderer.setPixelRatio( window.devicePixelRatio );
-	// renderer.setSize( window.innerWidth, window.innerHeight );
-  renderer.setSize(1920, 1080 );
+	renderer.setSize( window.innerWidth, window.innerHeight );
+  // renderer.setSize(1920, 1080 );
 
 	container.appendChild( renderer.domElement );
 	//
-	// window.addEventListener( 'resize', onWindowResize, false );
+	window.addEventListener( 'resize', onWindowResize, false );
 }
 function addLight(){
   // hemiLight = new THREE.HemisphereLight( 0xffffff, 0xffffff, 1 );
@@ -170,13 +170,13 @@ function loadAgent(){
   });
 }
 
-// function onWindowResize() {
-// 	windowHalfX = window.innerWidth / 2;
-// 	windowHalfY = window.innerHeight / 2;
-// 	camera.aspect = window.innerWidth / window.innerHeight;
-// 	camera.updateProjectionMatrix();
-// 	renderer.setSize( window.innerWidth, window.innerHeight );
-// }
+function onWindowResize() {
+	windowHalfX = window.innerWidth / 2;
+	windowHalfY = window.innerHeight / 2;
+	camera.aspect = window.innerWidth / window.innerHeight;
+	camera.updateProjectionMatrix();
+	renderer.setSize( window.innerWidth, window.innerHeight );
+}
 
 function animate() {
 	requestAnimationFrame( animate );
