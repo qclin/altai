@@ -17,7 +17,7 @@ getCaption();
 
 function getCaption(){
   $.ajax({
-    url: "http://localhost:3000/text_caption", // TODO: REPLACE HOST
+    url: "http://34.200.52.167:3000/text_caption", // TODO: REPLACE HOST
     data: {env: "glacier"},
     success: function(data) {
       console.log( "glacier --- ", data)
@@ -32,7 +32,7 @@ function getCaption(){
 
 function getSubtitle(){
   $.ajax({
-    url: "http://localhost:3000/text_subtitle", // TODO: REPLACE HOST
+    url: "http://34.200.52.167:3000/text_subtitle", // TODO: REPLACE HOST
     data: {agent: "trans"},
     success: function(data) {
       console.log("subtitle ----- ", data)
@@ -67,7 +67,7 @@ function clearSub(){
 /// dialog scene;
 function getSubtitle2(){
   $.ajax({
-    url: "http://localhost:3000/text_subtitle", // TODO: REPLACE HOST
+    url: "http://34.200.52.167:3000/text_subtitle", // TODO: REPLACE HOST
     data: {agent: "influencer"},
     success: function(data) {
       console.log("subtitle 22222----- ", data)

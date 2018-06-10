@@ -56,3 +56,6 @@ pip install -U numpy
 
 download Wordnet for nltk
 http://www.nltk.org/data.html
+
+
+update AJAX from localhost to Amazon

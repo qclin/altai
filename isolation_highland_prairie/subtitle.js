@@ -14,7 +14,7 @@ getCaption();
 
 function getCaption(){
   $.ajax({
-    url: "http://localhost:3000/text_caption", // TODO: REPLACE HOST
+    url: "http://34.200.52.167:3000/isolation_highland_prairie/text_caption", // TODO: REPLACE HOST
     data: {env: "highland_pairie"},
     success: function(data) {
       console.log( "highland_pairie --- ", data)
@@ -28,7 +28,7 @@ function getCaption(){
 
 function getSubtitle(){
   $.ajax({
-    url: "http://localhost:3000/text_subtitle", // TODO: REPLACE HOST
+    url: "http://34.200.52.167:3000/isolation_highland_prairie/text_subtitle", // TODO: REPLACE HOST
     data: {agent: "isolation"},
     success: function(data) {
       console.log("subtitle ----- ", data)
@@ -70,6 +70,6 @@ function rollCaption() {
   if (capCount >= capLine.length) {
     capCount = 0;
     clearInterval(captionInterval); // stop refreshing after one cycle
-    getSubtitle(); 
+    getSubtitle();
   }
 }

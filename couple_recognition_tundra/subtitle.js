@@ -16,7 +16,7 @@ getSubtitle(); /// call this inside model loader, after terrain is loaded
 
 function getCaption(){
   $.ajax({
-    url: "http://localhost:3000/text_caption", // TODO: REPLACE HOST
+    url: "http://34.200.52.167:3000/text_caption", // TODO: REPLACE HOST
     data: {env: "tundra"},
     success: function(data) {
       console.log( "tundra --- ", data)
@@ -30,7 +30,7 @@ function getCaption(){
 
 function getSubtitle(){
   $.ajax({
-    url: "http://localhost:3000/text_subtitle", // TODO: REPLACE HOST
+    url: "http://34.200.52.167:3000/text_subtitle", // TODO: REPLACE HOST
     data: {agent: "recognition"},
     success: function(data) {
       subLines = data.split(',');
@@ -62,7 +62,7 @@ function clearSub(){
 /// dialog scene;
 function getSubtitle2(){
   $.ajax({
-    url: "http://localhost:3000/text_subtitle", // TODO: REPLACE HOST
+    url: "http://34.200.52.167:3000/text_subtitle", // TODO: REPLACE HOST
     data: {agent: "couple"},
     success: function(data) {
       console.log("subtitle ----- ", data)

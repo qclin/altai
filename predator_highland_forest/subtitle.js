@@ -14,7 +14,7 @@ getSubtitle();
 
 function getCaption(){
   $.ajax({
-    url: "http://localhost:3000/text_caption", // TODO: REPLACE HOST
+    url: "http://34.200.52.167:3000/text_caption", // TODO: REPLACE HOST
     data: {env: "highland_forest"},
     success: function(data) {
       console.log( "highland_forest --- ", data)
@@ -28,7 +28,7 @@ function getCaption(){
 
 function getSubtitle(){
   $.ajax({
-    url: "http://localhost:3000/text_subtitle", // TODO: REPLACE HOST
+    url: "http://34.200.52.167:3000/text_subtitle", // TODO: REPLACE HOST
     data: {agent: "predator"},
     success: function(data) {
       console.log("subtitle ----- ", data)
