@@ -109,6 +109,6 @@ app.get('/text_subtitle', function(req, res){
 
 
 
-var listerner = app.listen(process.env.PORT || 3000, function() {
+var listerner = app.listen(process.env.PORT || 80, function() {
 	console.log("Listening on port %d", listerner.address().port);
 });
