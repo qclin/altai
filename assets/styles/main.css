@@ -38,21 +38,26 @@ body{
 	background: #FFF; */
 	background: radial-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0), transparent);
 }
+
+.whitepaper_icon{
+  width: 300px;
+}
 .title-container{
 	position: relative;
 	height: 100%;
+	text-align: center;
+}
+.whitepaper-container{
+  text-align: center;
 }
 #title{
 	font-size: 15em;
-	width: 100%;
-	text-align: center;
+	width: 400px;
 	top: 33%;
-  position: relative;
-	/* position: absolute;
-	left: 0;
+  position: absolute;
 	right: 0;
-	top:0;
-	bottom: 0; */
+  left: 0;
+  margin: auto;
 }
 .section{
 	height: 100vh;
@@ -72,4 +77,8 @@ body{
 	line-height: 1.5em;
 	width: 100%;
 	margin-top: 2em;
+}
+
+.cosmos-container{
+	margin-top: 15em;
 }
