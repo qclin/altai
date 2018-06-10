@@ -8,10 +8,10 @@ import os.path
 iss_data = requests.get("http://api.open-notify.org/iss-now.json").json()
 earthquake_data = requests.get("https://earthquake.usgs.gov/earthquakes/feed/v1.0/summary/all_hour.geojson").json()
 
-time_data = json.loads(open("units_of_time.json").read())
-nsa_data = json.loads(open("nsa_projects.json").read())
-chemicals_data = json.loads(open("PeriodicTableJSON.json").read())
-surveillance_data = json.loads(open("mass-surveillance-project-names.json").read())
+time_data = json.loads(open("./nlpSlam/agent_story/units_of_time.json").read())
+nsa_data = json.loads(open("./nlpSlam/agent_story/nsa_projects.json").read())
+chemicals_data = json.loads(open("./nlpSlam/agent_story/PeriodicTableJSON.json").read())
+surveillance_data = json.loads(open("./nlpSlam/agent_story/mass-surveillance-project-names.json").read())
 
 iss_position = iss_data['iss_position']
 iss_timestamp = iss_data['timestamp']
@@ -49,6 +49,7 @@ surveillance_region_value = choice(surveillance_region)
 
 
 save_path = "./output_recognition_story"
+
 
 dict = {"position": {"latitude": iss_latitude, "longitude": iss_longitude, "timestamp": iss_timestamp},
          "substance": {"name": substance_name, "appearance": substance_appearance, "element": substance_mass},

@@ -5,9 +5,9 @@ import json
 import os.path
 
 
-sentences_data = json.loads(open("20180521-164056_sentences_parsed.json").read())
-quotes_data = json.loads(open("us_president_quotes.json").read())
-instructions_data = json.loads(open("laundry_care.json").read())
+sentences_data = json.loads(open("./nlpSlam/agent_story/20180521-164056_sentences_parsed.json").read())
+quotes_data = json.loads(open("./nlpSlam/agent_story/us_president_quotes.json").read())
+instructions_data = json.loads(open("./nlpSlam/agent_story/laundry_care.json").read())
 
 sentences = sentences_data['sentences']
 q_data = quotes_data['data']

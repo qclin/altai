@@ -14,9 +14,9 @@ from numpy.linalg import norm
 import ast
 
 
-animal_data = json.loads(open("animals.json").read())
-activities_data = json.loads(open("atus_activities.json").read())
-pairs_data = json.loads(open("closed_pairs.json").read())
+animal_data = json.loads(open("./nlpSlam/environment_story/animals.json").read())
+activities_data = json.loads(open("./nlpSlam/environment_story/atus_activities.json").read())
+pairs_data = json.loads(open("./nlpSlam/environment_story/closed_pairs.json").read())
 
 activities_categories = activities_data['categories']
 pairs = pairs_data['pairs']

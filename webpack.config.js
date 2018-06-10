@@ -10,11 +10,11 @@ module.exports = {
 		place_bundle: ['./place/main.js', hotMiddlewareScript],
     realm_bundle: ['./realm/main.js', hotMiddlewareScript],
     flat_bundle: ['./flat/main.js', hotMiddlewareScript],
-    glacier_bundle: ['./glacier/main.js', hotMiddlewareScript],
     check_model_bundle: ['./check_model/main.js', hotMiddlewareScript],
-    isolation_highland_prairie_bundle: ['./isolation_highland_prairie/main.js', hotMiddlewareScript],
+    couple_recognition_tundra_bundle: ['./couple_recognition_tundra/main.js', hotMiddlewareScript],
     predator_highland_forest_bundle: ['./predator_highland_forest/main.js', hotMiddlewareScript],
-    couple_recognition_tundra_bundle: ['./couple_recognition_tundra/main.js', hotMiddlewareScript]
+    trans_influencer_glacier_bundle: ['./trans_influencer_glacier/main.js', hotMiddlewareScript],
+    isolation_highland_prairie_bundle: ['./isolation_highland_prairie/main.js', hotMiddlewareScript]
 	},
   output: {
     path: __dirname,
@@ -73,6 +73,11 @@ module.exports = {
 		 new webpack.HotModuleReplacementPlugin(),
      new webpack.NoEmitOnErrorsPlugin()
 	],
-  mode: 'development'
-
+  mode: 'development',
+  node: {
+    console: true,
+    fs: 'empty',
+    net: 'empty',
+    // tls: 'empty'
+  }
 };

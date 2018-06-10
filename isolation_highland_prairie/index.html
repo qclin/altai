@@ -5,36 +5,46 @@
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 
 		<style>
-      @font-face {
-        font-family: "Value Bold";
-        src: url("/fonts/Value/value-bold.ttf") format("truetype");
-      }
-
+			@font-face {
+			  font-family: 'Value-Serif';
+			  src: url('/fonts/Value-Serif/Value-Serif.eot?#iefix') format('embedded-opentype'),  url('Value-Serif.woff') format('woff'), url('Value-Serif.ttf')  format('truetype'), url('Value-Serif.svg#Value-Serif') format('svg');
+			  font-weight: normal;
+			  font-style: normal;
+			}
+			body{
+				width: 1920px;
+				height: 1080px;
+				position: relative;
+			}
       #chart{
         background: transparent;
         position: absolute;
       }
-      #subtitle{
-        font-family: "Value Bold" serif;
-        color: #ff0000;
-        position: absolute;
-        bottom: .5em;
-        margin: auto;
-        display: block;
-        width: 100%;
-        text-align: center;
-        font-size: 3em;
-      }
-			#hypotitle{
-				font-family: "Value Bold" serif;
-				color: #ffff00;
+
+			.expression{
+				font-family: 'Value-Serif' !important;
 				position: absolute;
-				top: .5em;
 				margin: auto;
 				display: block;
 				width: 100%;
 				text-align: center;
+			}
+
+			#subtitle{
+				color: #ff0000;
+				top: 50%;
 				font-size: 1.5em;
+				left: 1em;
+				text-align: left;
+				width: 25%;
+				min-width: 400px;
+			}
+			#hypotitle{
+				color: #ffff00;
+				/* top: .5em; */
+				bottom: 1em;
+				font-size: 2em;
+				text-align: center;
 			}
       .transition{
         -webkit-transition: opacity 2s ease-in;
@@ -62,8 +72,8 @@
     <div id="container"></div>
 		<div id="chart"></div>
 
-		<p id="hypotitle"> </p>
-    <p id="subtitle"> </p>
+		<p id="hypotitle" class="expression"> </p>
+    <p id="subtitle" class="expression"> </p>
 
     <script type="text/javascript" src="isolation_highland_prairie_bundle.js"></script>
 

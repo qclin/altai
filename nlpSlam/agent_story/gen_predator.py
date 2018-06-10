@@ -5,7 +5,7 @@ import datetime
 import os.path
 
 
-with open('./parsed_altai_stories_brodsky/data.txt') as json_file:
+with open('./nlpSlam/agent_story/parsed_altai_stories_brodsky/data.txt') as json_file:
     data = json.load(json_file)
 
 noun_chunk = data['noun_chunk']

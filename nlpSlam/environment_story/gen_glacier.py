@@ -4,9 +4,9 @@ import os.path
 import datetime
 
 
-exoplanets_data = json.loads(open("exoplanets.json").read())
-lovecraft_names_data = json.loads(open("lovecraft.json").read())
-lovecraft_words_data = json.loads(open("lovecraft_words.json").read())
+exoplanets_data = json.loads(open("./nlpSlam/environment_story/exoplanets.json").read())
+lovecraft_names_data = json.loads(open("./nlpSlam/environment_story/lovecraft.json").read())
+lovecraft_words_data = json.loads(open("./nlpSlam/environment_story/lovecraft_words.json").read())
 
 exoplanet = random.choice([item for item in exoplanets_data])
 deities = lovecraft_names_data['deities']

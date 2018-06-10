@@ -10,11 +10,14 @@ import TWEEN from '../public/libs/Tween';
 import * as THREE from 'three';
 import '../public/CurveExtras';
 import config from '../public/config/aws-s3-assets.json'
+import './subtitle';
+
 
  // webpack doesn't work with process.env
 // if (process.env.NODE_ENV == 'production') {
 	var assets = {
-		terrain: config.bucket + config.terrain.glacier
+		terrain: config.bucket + config.terrain.glacier,
+		agent: config.bucket + config.agent.trans,
 	}
 // }else{
 // 	var assets = {
@@ -35,9 +38,10 @@ var clock = new THREE.Clock();
 var isoGons = [];
 var particle;
 var effectController;
+var trans;
 
 
-function initScene() {
+function init() {
   scene = new THREE.Scene({alpha:true});
 
   // scene.background = new THREE.Color( 0xefd1b5 );
@@ -48,15 +52,18 @@ function initScene() {
 	camera.position.set( 2, 1, 500 );
 
   renderer = new THREE.WebGLRenderer({alpha: true});
-  renderer.setSize( window.innerWidth, window.innerHeight );
+  // renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setSize( 1920, 1080 );
+
 
   document.body.appendChild( renderer.domElement );
-  window.addEventListener("resize", resize);
+  // window.addEventListener("resize", resize);
 
   camera.position.z = 0;
 
   loadTerrain();
   setCameraParam();
+	loadAgent();
 
   // PROTO PLANET SECTION
   effectController = {
@@ -154,10 +161,10 @@ function setCameraParam(){
     	// maxblur: 1.0,
     	//
     	showFocus: false,
-    	focalDepth: 3,
+    	focalDepth: 7, //3,
     	// manualdof: false,
-    	// vignetting: false,
-    	// depthblur: false,
+    	vignetting: true,
+    	depthblur: true,
     	//
     	// threshold: 0.5,
     	// gain: 2.0,
@@ -208,6 +215,31 @@ function loadTerrain(){
   });
 }
 
+function loadAgent(){
+
+  var onProgress = function ( xhr ) {
+    if ( xhr.lengthComputable ) {
+      var percentComplete = xhr.loaded / xhr.total * 100;
+      console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+    }
+  };
+  var onError = function ( xhr ) { };
+  THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+  new THREE.MTLLoader()
+  .setPath(assets.agent).setCrossOrigin(true)
+  .load('trans.mtl', function ( materials ) {
+    materials.preload();
+    new THREE.OBJLoader()
+      .setMaterials( materials )
+      .setPath(assets.agent)
+      .load('trans.obj', function ( object ) {
+        object.position.y = - 95;
+
+				trans = object.clone();
+        scene.add( trans );
+      }, onProgress, onError );
+  });
+}
 
 function initLighting() {
   // so many lights
@@ -241,9 +273,12 @@ function render(time) {
   theta += 0.1;
 	camera.position.x = radius * Math.sin( THREE.Math.degToRad( theta ) );
 	camera.position.y = radius * Math.sin( THREE.Math.degToRad( theta ) );
-	camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) );
+	camera.position.z = radius * Math.cos( THREE.Math.degToRad( theta ) ) - 30 ;
 	camera.lookAt( scene.position );
 	camera.updateMatrixWorld();
+
+	trans.position.x += Math.cos(theta) * 0.03;
+	trans.position.z += Math.sin(theta) * 0.03;
 
   renderGons();
   TWEEN.update();
@@ -273,14 +308,14 @@ function renderGons(){
   }
 }
 
-function resize() {
-  camera.aspect = window.innerWidth / window.innerHeight;
-  camera.updateProjectionMatrix();
-  renderer.setSize( window.innerWidth, window.innerHeight );
-}
+// function resize() {
+//   camera.aspect = window.innerWidth / window.innerHeight;
+//   camera.updateProjectionMatrix();
+//   renderer.setSize( window.innerWidth, window.innerHeight );
+// }
 
 
-initScene();
+init();
 initLighting();
 
 

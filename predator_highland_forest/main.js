@@ -13,6 +13,7 @@ import { RenderPass } from '../public/postprocessing/RenderPass';
 import { ShaderPass } from '../public/postprocessing/ShaderPass';
 import { MaskPass } from '../public/postprocessing/MaskPass';
 import config from '../public/config/aws-s3-assets.json'
+import './subtitle';
 
 // if (process.env.NODE_ENV == 'production') {
 	var assets = {
@@ -62,8 +63,6 @@ function loadTurtle(){
 		myTurtle = turtleLoader.getMesh( 'Mascot' );
 		myTurtle.scale.set(.15, .15, .15); // TURTLE was too big :(
 		myTurtle.position.z = 0;
-
-
 	};
 
 	turtleLoader.load(assets.agent);
@@ -98,7 +97,7 @@ function init() {
 	renderer = new THREE.WebGLRenderer( { antialias: true } );
 	renderer.setPixelRatio( window.devicePixelRatio );
 	// renderer.setSize( window.innerWidth, window.innerHeight );
-	renderer.setSize( 1920, 1080 );
+	renderer.setSize( 1920, 1080);
 
 	document.body.appendChild( renderer.domElement );
 	window.addEventListener( 'resize', onWindowResize, false );

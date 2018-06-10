@@ -7,7 +7,7 @@ import json
 import os.path
 from nltk.corpus import wordnet as wn
 
-with open('./parsed_altai_stories_brodsky/data.txt') as json_file:
+with open('./nlpSlam/agent_story/parsed_altai_stories_brodsky/data.txt') as json_file:
     data = json.load(json_file)
 
 pronoun_possessive = data['pronoun_possessive']
@@ -61,10 +61,12 @@ story = (determiner1 + " " + object1 + ". " + possesive_pronoun1 + " " + propert
 
 save_path = "./output_elemental_story"
 
-dict = {"story": 
+dict = {"story":
         [story]
         }
 
-complete_name_json = os.path.join(save_path, datetime.datetime.now().strftime("%Y%m%d-%H%M%S") + "_elemental_story" + ".json")
-with open(complete_name_json, "w") as f:
-    f.write(json.dumps(dict))
+# complete_name_json = os.path.join(save_path, datetime.datetime.now().strftime("%Y%m%d-%H%M%S") + "_elemental_story" + ".json")
+# with open(complete_name_json, "w") as f:
+#     f.write(json.dumps(dict))
+
+print(story)

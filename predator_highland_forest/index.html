@@ -5,9 +5,56 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
+			@font-face {
+				font-family: 'Value-Serif';
+				src: url('/fonts/Value-Serif/Value-Serif.eot?#iefix') format('embedded-opentype'),  url('Value-Serif.woff') format('woff'), url('Value-Serif.ttf')  format('truetype'), url('Value-Serif.svg#Value-Serif') format('svg');
+				font-weight: normal;
+				font-style: normal;
+			}
+			html {
+				width: 100%;
+				height: 100%;
+				background: #B8C6DB; /* Old browsers */ #DAD2F3
+
+				/* B8C6DB to 000000 or 0 opacity */
+				background: -moz-linear-gradient(top,  #B8C6DB 0%, #000000 100%); /* FF3.6-15 */
+				background: -webkit-linear-gradient(top,  #B8C6DB 0%,#000000 100%); /* Chrome10-25,Safari5.1-6 */
+				background: linear-gradient(to bottom,  #B8C6DB 0%,#000000 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#B8C6DB', endColorstr='#000000',GradientType=0 ); /* IE6-9 */
+			}
+			body{
+				width: 1920px;
+				height: 1080px;
+				position: relative;
+			}
+			.expression{
+				font-family: 'Value-Serif' !important;
+				position: absolute;
+				margin: auto;
+				display: block;
+				width: 100%;
+			}
+			#hypotitle{
+				color: #ffff00;
+				/* top: .5em; */
+				bottom: 1em;
+				font-size: 2em;
+				text-align: center;
+			}
+			#subtitle{
+				color: #ff0000;
+				top: 1em;
+				font-size: 1.5em;
+				text-align: center;
+				width: 100%;
+				min-width: 400px;
+			}
 		</style>
 	</head>
 
 	<body>
+		<p id="hypotitle" class="expression"> </p>
+		<p id="subtitle" class="expression"> </p>
+
     <script type="text/javascript" src="predator_highland_forest_bundle.js"></script>
   </body>

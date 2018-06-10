@@ -3,10 +3,10 @@ import json
 import os.path
 import datetime
 
-animal_data = json.loads(open("animals.json").read())
-mood_data = json.loads(open("moods.json").read())
-time_data = json.loads(open("units_of_time.json").read())
-monster_data = json.loads(open("monsters.json").read())
+animal_data = json.loads(open("./nlpSlam/environment_story/animals.json").read())
+mood_data = json.loads(open("./nlpSlam/environment_story/moods.json").read())
+time_data = json.loads(open("./nlpSlam/environment_story/units_of_time.json").read())
+monster_data = json.loads(open("./nlpSlam/environment_story/monsters.json").read())
 
 animals = animal_data['animals']
 moods = mood_data['moods']

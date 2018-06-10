@@ -3,10 +3,10 @@ import json
 import os.path
 import datetime
 
-with open('./parsed_altai_stories_brodsky/data.txt') as json_file:
+with open('./nlpSlam/environment_story/parsed_altai_stories_brodsky/data.txt') as json_file:
     data = json.load(json_file)
 
-occupations_data = json.loads(open("occupations.json").read())
+occupations_data = json.loads(open("./nlpSlam/environment_story/occupations.json").read())
 
 occupations = occupations_data['occupations']
 occupation = [item for item in occupations]

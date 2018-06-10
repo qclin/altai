@@ -1,9 +1,14 @@
+# coding: utf-8
+#if doesn't work in terminal, type following commands
+#export LC_ALL=en_US.UTF-8
+#export LANG=en_US.UTF-8
+
 import json
 from random import choice, shuffle
 import os.path
 import datetime
 
-with open('./parsed_trans_story/data.txt') as json_file:
+with open('./nlpSlam/agent_story/parsed_trans_story/data.txt') as json_file:
     data = json.load(json_file)
 
 adverbs = data['adverbs']
@@ -111,13 +116,13 @@ poem = choice(poems)
 
 save_path = "./output_trans_story"
 
-dict = {"story":
-        [poem]
-        }
-
-complete_name_json = os.path.join(save_path, datetime.datetime.now().strftime("%Y%m%d-%H%M%S") + "_trans_story" + ".json")
-with open(complete_name_json, "w") as f:
-    f.write(json.dumps(dict))
+# dict = {"story":
+#         [poem]
+#         }
+#
+# complete_name_json = os.path.join(save_path, datetime.datetime.now().strftime("%Y%m%d-%H%M%S") + "_trans_story" + ".json")
+# with open(complete_name_json, "w") as f:
+#     f.write(json.dumps(dict))
 
 
 print("\n\n\n".join(poems))

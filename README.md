@@ -36,3 +36,23 @@ change the url of the model in the .js file to the project path
 
 ## MAKE SURE ALL OBJ MATERIAL IS LINKED
 `assets/OBJ/Prairie_Rhino/HIGH~HZ5.JPGZ`
+
+
+
+##### DEPLOYMENT SETTINGS
+
+Python need NTKL
+Spacy, export utc etc.
+
+# coding: utf-8
+#if doesn't work in terminal, type following commands
+#export LC_ALL=en_US.UTF-8
+#export LANG=en_US.UTF-8
+
+
+pip install pattern
+pip install -U nltk
+pip install -U numpy
+
+download Wordnet for nltk
+http://www.nltk.org/data.html

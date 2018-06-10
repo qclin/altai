@@ -44,9 +44,6 @@ app.get('/realm', function(req, res){
     res.sendFile(__dirname + '/realm/index.html');
 });
 
-app.get('/glacier', function(req, res){
-    res.sendFile(__dirname + '/glacier/index.html');
-});
 
 app.get('/check_model', function(req, res){
     res.sendFile(__dirname + '/check_model/index.html');
@@ -70,12 +67,17 @@ app.get('/couple_recognition_tundra', function(req, res, next){
     res.sendFile(__dirname + '/couple_recognition_tundra/index.html');
 });
 
+app.get('/trans_influencer_glacier', function(req, res){
+    res.sendFile(__dirname + '/trans_influencer_glacier/index.html');
+});
+
+
 app.get('/text_caption', function(req, res){
     var env = req.query.env
-    console.log( "-----Server side---text_caption--  env --------- ", env);
+    // console.log( "-----Server side---text_caption--  env --------- ", env);
     var pamphlet = utterances.generateCaption(env);
     pamphlet.then(function(data){
-      console.log("00000 text_caption, returned pamphlets ::: ", data, typeof data);
+      // console.log("00000 text_caption, returned pamphlets ::: ", data, typeof data);
       // database.addNewEntry(data) // TODO: // update Firebase structure
 
       var predictedText = data.toString();
@@ -87,10 +89,10 @@ app.get('/text_caption', function(req, res){
 
 app.get('/text_subtitle', function(req, res){
     var agent = req.query.agent
-    console.log( "-----Server side---text_subtitle-- agent --------- ", agent);
+    // console.log( "-----Server side---text_subtitle-- agent --------- ", agent);
     var pamphlet = utterances.generateSubtitle(agent);
     pamphlet.then(function(data){
-      console.log("00000 text_subtitle, returned pamphlets ::: ", data, typeof data);
+      // console.log("00000 text_subtitle, returned pamphlets ::: ", data, typeof data);
       // database.addNewEntry(data) // TODO: // update Firebase structure
 
       var predictedText = data.toString();

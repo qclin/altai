@@ -1,3 +1,8 @@
+# coding: utf-8
+#if doesn't work in terminal, type following commands
+#export LC_ALL=en_US.UTF-8
+#export LANG=en_US.UTF-8
+
 import datetime
 import random
 from random import choice
@@ -7,12 +12,12 @@ from nltk.corpus import wordnet as wn
 from nltk.corpus import framenet as fn
 from pattern.en import comparative, superlative
 
-sentences_data = json.loads(open("harvard_sentences.json").read())
-descriptions_data = json.loads(open("descriptions.json").read())
-scientists_data = json.loads(open("scientists.json").read())
-occupations_data = json.loads(open("occupations.json").read())
-exoplanets_data = json.loads(open("exoplanets.json").read())
-animal_data = json.loads(open("animals.json").read())
+sentences_data = json.loads(open("./nlpSlam/agent_story/harvard_sentences.json").read())
+descriptions_data = json.loads(open("./nlpSlam/agent_story/descriptions.json").read())
+scientists_data = json.loads(open("./nlpSlam/agent_story/scientists.json").read())
+occupations_data = json.loads(open("./nlpSlam/agent_story/occupations.json").read())
+exoplanets_data = json.loads(open("./nlpSlam/agent_story/exoplanets.json").read())
+animal_data = json.loads(open("./nlpSlam/agent_story/animals.json").read())
 
 exoplanet = random.choice([item for item in exoplanets_data])
 host_star_name = exoplanet['pl_hostname']
@@ -29,7 +34,7 @@ animals = animal_data['animals']
 occupation = [item for item in occupations]
 animal = choice([item for item in animals])
 
-with open('./parsed_altai_stories_brodsky/data.txt') as json_file:
+with open('./nlpSlam/agent_story/parsed_altai_stories_brodsky/data.txt') as json_file:
     data = json.load(json_file)
 
 adjective_base = data['adjective_base']

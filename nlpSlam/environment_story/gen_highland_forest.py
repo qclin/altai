@@ -10,7 +10,7 @@ from random import choice, shuffle
 import os.path
 import json
 
-with open('./parsed_altai_stories_brodsky/data.txt') as json_file:
+with open('./nlpSlam/environment_story/parsed_altai_stories_brodsky/data.txt') as json_file:
     data = json.load(json_file)
 
 adverbs = data['adverbs']

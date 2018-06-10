@@ -1471,10 +1471,9 @@ THREE.ColladaLoader.prototype = {
 
 				var sampler = effect.profile.samplers[ textureObject.id ];
 				var image = null;
-
-				// get image
-
-				if ( sampler !== undefined ) {
+				console.log(sampler)
+				
+				if ( sampler.length !== undefined  ) {
 
 					var surface = effect.profile.surfaces[ sampler.source ];
 					image = getImage( surface.init_from );

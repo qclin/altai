@@ -6,12 +6,18 @@ import { Detector } from '../public/Detector'
 import { OBJLoader } from '../public/Loaders/OBJLoader';
 import { MTLLoader } from '../public/Loaders/MTLLoader';
 import { DDSLoader } from '../public/Loaders/DDSLoader';
+import { FBXLoader } from '../public/Loaders/FBXLoader';
+
+
 
 // if ( ! Detector.webgl ) Detector.addGetWebGLMessage();
 var camera, controls, scene, renderer;
 var mouseX = 0, mouseY = 0;
 var windowHalfX = window.innerWidth / 2;
 var windowHalfY = window.innerHeight / 2;
+
+var clock = new THREE.Clock();
+var mixers = [];
 
 init();
 //render(); // remove when using next line for animation loop (requestAnimationFrame)
@@ -31,6 +37,9 @@ function init() {
   loadControl();
   loadLights();
   loadTerrain();
+
+	// loadAgent();
+	loadFbxAgnet();
 
 	window.addEventListener( 'resize', onWindowResize, false );
 	document.addEventListener( 'mousemove', onDocumentMouseMove, false );
@@ -73,18 +82,52 @@ function loadTerrain(){
   var onError = function ( xhr ) { };
   THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
   new THREE.MTLLoader()
-  .setPath('/OBJ/Tundra/')
-  .load('Tundra_5.mtl', function ( materials ) {
+  .setPath('/OBJ/Agents/Recognition/')
+  .load('Recognition.mtl', function ( materials ) {
     materials.preload();
     new THREE.OBJLoader()
       .setMaterials( materials )
-      .setPath('/OBJ/Tundra/')
-      .load('Tundra_5.obj', function ( object ) {
+      .setPath('/OBJ/Agents/Recognition/')
+      .load('Recognition.obj', function ( object ) {
         object.position.y = - 95;
         scene.add( object );
       }, onProgress, onError );
   });
 }
+
+
+var agent;
+function loadAgent(){
+
+	var loadingManager = new THREE.LoadingManager( function() {
+		scene.add( agent );
+	});
+
+	var loader = new THREE.ColladaLoader( loadingManager );
+		loader.load( '/OBJ/Agents/Sensor/Sensor_Blender.dae', function ( collada ) {
+			agent = collada.scene;
+		});
+}
+
+
+function loadFbxAgnet(){
+	// model
+	var loader = new THREE.FBXLoader();
+	loader.load( '/OBJ/Agents/Sensor/sensor_local.fbx', function ( object ) {
+		object.mixer = new THREE.AnimationMixer( object );
+		mixers.push( object.mixer );
+		var action = object.mixer.clipAction( object.animations[ 0 ] );
+		action.play();
+		object.traverse( function ( child ) {
+			if ( child.isMesh ) {
+				child.castShadow = true;
+				child.receiveShadow = true;
+			}
+		} );
+		scene.add( object );
+	} );
+}
+
 
 function onWindowResize() {
 	camera.aspect = window.innerWidth / window.innerHeight;
@@ -98,6 +141,13 @@ function onDocumentMouseMove( event ) {
 }
 function animate() {
 	requestAnimationFrame( animate );
+
+	if ( mixers.length > 0 ) {
+		for ( var i = 0; i < mixers.length; i ++ ) {
+			mixers[ i ].update( clock.getDelta() );
+		}
+	}
+
 	controls.update(); // only required if controls.enableDamping = true, or if controls.autoRotate = true
 	render();
 }

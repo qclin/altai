@@ -3,7 +3,7 @@ import json
 import os.path
 import datetime
 
-text = open("altai_stories.txt").read().decode('utf-8').split()
+text = open("./nlpSlam/environment_story/altai_stories.txt").read().decode('utf-8').split()
 
 def add_to_model(model, n, seq):
     # make a copy of seq and append None to the end
@@ -36,12 +36,12 @@ def gen_from_model (n, model, start=None, max_gen=100):
 
 altai_word_model = markov_model(2, text)
 
-starts_data = json.loads(open('starts.json').read())
+starts_data = json.loads(open('./nlpSlam/environment_story/starts.json').read())
 #opening json with list of potential starting 2grams
 starts = starts_data['starts']
 start = random.choice([item for item in starts])
 
-story = gen_from_model(2, altai_word_model, start, 200)
+story = gen_from_model(2, altai_word_model, start, 50)
 
 save_path = "./output_tundra_story"
 

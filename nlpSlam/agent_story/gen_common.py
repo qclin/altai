@@ -5,7 +5,7 @@ import datetime
 import os.path
 
 
-fillers_data = json.loads(open("fillers.json").read())
+fillers_data = json.loads(open("./nlpSlam/agent_story/fillers.json").read())
 
 filler = fillers_data['fillers']
 

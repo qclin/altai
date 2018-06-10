@@ -5,20 +5,72 @@
 		<meta charset="utf-8">
 		<meta name="viewport" content="width=device-width, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
 		<style>
+		@font-face {
+			font-family: 'Value-Serif';
+			src: url('/fonts/Value-Serif/Value-Serif.eot?#iefix') format('embedded-opentype'),  url('Value-Serif.svg#Value-Serif') format('svg');
+			font-weight: normal;
+			font-style: normal;
+		}
 		html {
-				width: 100%;
-				height: 100%;
-
+				width: 1920px;
+				height: 1080px;
 				background: #726cf8; /* Old browsers */ #DAD2F3
 				background: -moz-linear-gradient(top,  #726cf8 0%, #FBA8A4 30%); /* FF3.6-15 */
 				background: -webkit-linear-gradient(top,  #726cf8 0%,#FBA8A4 30%); /* Chrome10-25,Safari5.1-6 */
 				background: linear-gradient(to bottom,  #DAD2F3 0%,#FBA8A4 50%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 				filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#11e8bb', endColorstr='#8200c9',GradientType=0 ); /* IE6-9 */
-				}
+		}
+		body{
+			width: 1920px;
+			height: 1080px;
+			position: relative;
+		}
+		.expression{
+			font-family: 'Value-Serif' !important;
+			position: absolute;
+			margin: auto;
+			display: block;
+			text-align: center;
+		}
+		#hypotitle{
+			color: #ffff00;
+			/* top: .5em; */
+			left: 0;
+			right: 0;
+			bottom: 1em;
+			font-size: 2em;
+			text-align: center;
+			margin-left: 20%;
+			margin-right: 20%;
+		}
+		#subtitle{
+			color: #ff0000;
+			top: 30%;
+			font-size: 1.5em;
+			left: 1em;
+			text-align: left;
+			width: 15%;
+			min-width: 400px;
+		}
+		#subtitle2{
+			color: #0000ff;
+			top: 30%;
+			font-size: 1.5em;
+			right: 1em;
+			text-align: right;
+			width: 15%;
+			min-width: 400px;
+		}
 		</style>
 	</head>
 
 	<body>
-    <script type="text/javascript" src="couple_recognition_tundra_bundle.js"></script>
+		<p id="hypotitle" class="expression"> </p>
+    <p id="subtitle" class="expression"> </p>
+		<p id="subtitle2" class="expression"> </p>
+
+		<script src="https://code.jquery.com/jquery-3.3.1.min.js"  integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8=" crossorigin="anonymous"></script>
+
+		<script type="text/javascript" src="couple_recognition_tundra_bundle.js"></script>
 
   </body>

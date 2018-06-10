@@ -3,6 +3,7 @@ import { OBJLoader } from '../public/Loaders/OBJLoader';
 import { MTLLoader } from '../public/Loaders/MTLLoader';
 import { DDSLoader } from '../public/Loaders/DDSLoader';
 import { OrbitControls } from '../public/Controls/OrbitControls'
+import { FBXLoader } from '../public/Loaders/FBXLoader';
 
 
 import { EffectComposer } from '../public/postprocessing/EffectComposer';
@@ -20,27 +21,48 @@ import { BleachBypassShader } from '../public/shaders/BleachBypassShader';
 import '../public/lights/RectAreaLightUniformsLib.js'
 import Vector from './vector'
 import config from '../public/config/aws-s3-assets.json'
+import './subtitle';
+// import '../public/src/download';
+// import '../public/src/CCapture';
+// import './screen_grab';
 
 // webpack doesn't work with process.env
 // if (process.env.NODE_ENV == 'production') {
 	var assets = {
 		smoke: config.bucket + config.texture.smoke,
-		agent: config.bucket + config.agent.pineapple,
+		// agent: config.bucket + config.agent.couple,
+		agent: config.bucket + config.agent.recognition,
+		agent2: config.bucket + config.agent.couple,
 		terrain: config.bucket + config.terrain.tundra
 	}
 // }else{
 // 	var assets = {
 // 		smoke: '/textures/Smoke-Element.png',
-// 		agent: '/OBJ/Agents/pineapple/',
+// 		agent: '/OBJ/Agents/couple/',
 // 		terrain: '/OBJ/Tundra/'
 // 	}
 // }
+
+// var capturer = new CCapture( {
+//   verbose: true,
+//   framerate: 60,
+//   motionBlurFrames: 16,
+//   quality: 90,
+//   name: 'screen_grab_couple_recognition',
+//   format: "webm",
+//   // workersPath: 'js/',
+//   onProgress: function( p ) { progress.style.width = ( p * 100 ) + '%' }
+// } );
+
+
+
 
 
 var camera, scene, renderer, composer;
 var object, light, controls;
 
-var pineapple, pineapple2, depMat;
+var couple, couple2, depMat;
+var flower;
 // rect light
 var clock = new THREE.Clock();
 var origin = new THREE.Vector3();
@@ -52,6 +74,8 @@ var glitchPass;
 var effectFilmBW;
 
 var pointLight, pointLight2;
+
+var mixers = [];
 
 
 function updateOptions() {
@@ -94,13 +118,15 @@ function colorScale(n) {
 
 //// ----------------------------------------------------------
 
+var canvas;
+
 init();
 animate();
 function init() {
 
 	renderer = new THREE.WebGLRenderer({antialias:true, alpha:true});
 	renderer.setPixelRatio( window.devicePixelRatio );
-	renderer.setSize( window.innerWidth, window.innerHeight );
+	renderer.setSize( 1920, 1080 );
   // here for lights
   renderer.shadowMap.enabled = true;
 	renderer.shadowMap.type = THREE.PCFSoftShadowMap;
@@ -111,6 +137,8 @@ function init() {
   // renderer.setClearColor(0x000000, 0.0);
 
 	document.body.appendChild( renderer.domElement );
+
+	canvas = renderer.domElement;
 
 	//camera
 	camera = new THREE.PerspectiveCamera( 70, window.innerWidth / window.innerHeight, 1, 1000 );
@@ -164,14 +192,37 @@ function init() {
 	initLorenz();
 	loadPointLight();
   loadControl();
+	loadFlower();
+  loadAgent2();
 
-  loadAgent();
-
-	window.addEventListener( 'resize', onWindowResize, false );
+	// window.addEventListener( 'resize', onWindowResize, false );
   // document.addEventListener( 'mousemove', onDocumentMouseMove, false );
   // document.addEventListener( 'click', onDocumentMouseClick, false );
+	// loadFbxAgnet();
 
+	// capturer.start();
 }
+
+// function loadFbxAgnet(){
+// 	// model
+// 	var loader = new THREE.FBXLoader();
+// 	loader.load( '/OBJ/Agents/Sensor/sensor_txt.fbx', function ( object ) {
+// 		object.mixer = new THREE.AnimationMixer( object );
+// 		mixers.push( object.mixer );
+// 		var action = object.mixer.clipAction( object.animations[ 0 ] );
+// 		action.play();
+// 		console.log( " mixxeerrr----- ", object.mixer, object.animations, action);
+// 		object.traverse( function ( child ) {
+// 			if ( child.isMesh ) {
+// 				child.castShadow = true;
+// 				child.receiveShadow = true;
+// 			}
+// 		} );
+// 		scene.add( object );
+// 	} );
+// }
+
+
 
 var smokeParticles;
 
@@ -272,7 +323,7 @@ function generateTexture() {
 	return canvas;
 }
 
-function loadAgent(){
+function loadAgent2(){
   var onProgress = function ( xhr ) {
     if ( xhr.lengthComputable ) {
       var percentComplete = xhr.loaded / xhr.total * 100;
@@ -281,58 +332,75 @@ function loadAgent(){
   };
   var onError = function ( xhr ) { };
   THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
-	depMat = new THREE.MeshPhongMaterial( { ambient: 0xee0011, color: 0x708090} );
-	new THREE.MTLLoader().setPath(assets.agent).load('pineapple_grey.mtl', function ( materials ) {
+	new THREE.MTLLoader().setPath(assets.agent2).setCrossOrigin(true)
+	.load('Couple_1.mtl', function ( materials ) {
+	    materials.preload();
+  new THREE.OBJLoader().setPath(assets.agent2).setMaterials( materials )
+    .load('Couple_1.obj', function ( object ) {
+			//
+			// var s =  (Math.random() * 5) + 2;
+			var s = 1.2
+			object.scale.set( s, s, s );
+			object.castShadow = true;
+			object.receiveShadow = true;
+			couple = object.clone();
+      scene.add( couple );
+
+
+    }, onProgress, onError ); });
+
+		new THREE.MTLLoader().setPath(assets.agent2).setCrossOrigin(true)
+		.load('Couple_2.mtl', function ( materials ) {
+		    materials.preload();
+	  new THREE.OBJLoader().setPath(assets.agent2).setMaterials( materials )
+	    .load('Couple_2.obj', function ( object ) {
+				//
+				// var s =  (Math.random() * 5) + 2;
+				var s = 1.2
+				object.scale.set( s, s, s );
+				object.castShadow = true;
+				object.receiveShadow = true;
+				//
+
+				couple2 = object.clone();
+	      scene.add( couple2 );
+
+	    }, onProgress, onError ); });
+
+}
+
+
+
+function loadFlower(){
+  var onProgress = function ( xhr ) {
+    if ( xhr.lengthComputable ) {
+      var percentComplete = xhr.loaded / xhr.total * 100;
+      console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
+		}
+  };
+  var onError = function ( xhr ) { };
+  THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
+	new THREE.MTLLoader().setPath(assets.agent).setCrossOrigin(true)
+	.load('Recognition.mtl', function ( materials ) {
 	    materials.preload();
   new THREE.OBJLoader().setPath(assets.agent).setMaterials( materials )
-    .load('pineapple_grey.obj', function ( object ) {
+    .load('Recognition.obj', function ( object ) {
 
-			object.traverse( function ( node ) {
-		    if ( node.isMesh ) node.material = depMat;
-		  });
-			var s =  (Math.random() * 5) + 2;
+			var s =  2;
 			object.scale.set( s, s, s );
 			object.castShadow = true;
 			object.receiveShadow = true;
 
-			pineapple = object.clone();
-      scene.add( pineapple );
-
-			pineapple2 = object.clone();
-      scene.add( pineapple2 );
+			flower = object.clone();
+			flower.position.x -= 225;
+			flower.position.y -= 75;
+			flower.position.z -= 70;
+			flower.position.multiplyScalar( -1);
+      scene.add( flower );
 
     }, onProgress, onError ); });
 
 }
-
-// function loadAgent2(){
-//
-//   var onProgress = function ( xhr ) {
-//     if ( xhr.lengthComputable ) {
-//       var percentComplete = xhr.loaded / xhr.total * 100;
-//       console.log( Math.round( percentComplete, 2 ) + '% downloaded' );
-//     }
-//   };
-//   var onError = function ( xhr ) { };
-// 	THREE.Loader.Handlers.add( /\.dds$/i, new THREE.DDSLoader() );
-// 	depMat = new THREE.MeshPhongMaterial( { ambient: 0xee0011, color: 0x708090} );
-// 	new THREE.MTLLoader().setPath(assets.agent).load('pineapple_grey.mtl', function ( materials ) {
-// 	    materials.preload();
-//   new THREE.OBJLoader().setPath(assets.agent).setMaterials( materials )
-//     .load('pineapple_grey.obj', function ( object ) {
-//
-// 			object.traverse( function ( node ) {
-// 		    if ( node.isMesh ) node.material = depMat;
-// 		  });
-// 			pineapple2 = object
-// 			var s =  (Math.random() * 5) + 2;
-// 			pineapple2.scale.set( s, s, s );
-// 			pineapple2.castShadow = true;
-// 			pineapple2.receiveShadow = true;
-//       scene.add( pineapple2 );
-//     }, onProgress, onError ); });
-//
-// }
 
 function loadRectLight(){
 
@@ -432,12 +500,12 @@ function addEffects(){
   effect.renderToScreen = true;
   composer.addPass( effect );
 }
-function onWindowResize() {
-	camera.aspect = window.innerWidth / window.innerHeight;
-	camera.updateProjectionMatrix();
-	renderer.setSize( window.innerWidth, window.innerHeight );
-	composer.setSize( window.innerWidth, window.innerHeight );
-}
+// function onWindowResize() {
+// 	camera.aspect = window.innerWidth / window.innerHeight;
+// 	camera.updateProjectionMatrix();
+// 	renderer.setSize( window.innerWidth, window.innerHeight );
+// 	composer.setSize( window.innerWidth, window.innerHeight );
+// }
 // function onDocumentMouseMove( event ) {
 //   console.log(':::: CAMERA POSITON:::: ', camera.rotation, camera);
 // }
@@ -449,17 +517,33 @@ function animate() {
   moveRectLight();
 	drawLorenz();
 	movePointLights()
-
-	evolePineapple();
-
-
-
+	evolvecouple();
 	composer.render();
-
 	evolveSmoke();
+
+	if ( mixers.length > 0 ) {
+		for ( var i = 0; i < mixers.length; i ++ ) {
+			mixers[ i ].update( clock.getDelta() );
+		}
+	}
+	// capturer.capture( canvas );
+	var delta = clock.getDelta();
+	if(flower){
+
+		flower.rotation.y += 0.001;
+
+	}
+
 }
 
-
+//
+// function saveVideo(){
+// 	console.log(" SAVEVIDEO ---- ", capturer)
+// 	// capturer.stop();
+//
+// 	// default save, will download automatically a file called {name}.extension (webm/gif/tar)
+// 	capturer.save();
+// }
 
 function evolveSmoke() {
 	var delta = clock.getDelta();
@@ -523,31 +607,23 @@ function drawLorenz(){
 	scene.add(line);
 }
 
-function evolePineapple(){
-	if(pineapple){ /// lol so dirty overhere
-		pineapple.position.x = pos.x
-		pineapple.position.y = pos.y
-		pineapple.position.z = pos.z
+function evolvecouple(){
+	if(couple){ /// lol so dirty overhere
+		couple.position.x = pos.x
+		couple.position.y = pos.y
+		couple.position.z = pos.z
 
-		pineapple.rotation.x += 0.005;
-		pineapple.rotation.y += 0.01;
-
-		var grey = 10 + Math.abs(pos.x)
-		var col = new THREE.Color(`hsl(${grey}, 20%, 30%)`);
-		depMat.color = col
+		couple.rotation.x += 0.005;
+		couple.rotation.y += 0.01;
 	}
 		var t = ( Date.now() / 8000 );
-	if(pineapple2){ /// lol so dirty overhere
-		pineapple2.position.x = pos.x * Math.cos( t );
-		pineapple2.position.y = pos.y * Math.sin( t );
-		pineapple2.position.z = pos.z * 2
+	if(couple2){ /// lol so dirty overhere
+		couple2.position.x = pos.x * Math.cos( t );
+		couple2.position.y = pos.y * Math.sin( t );
+		couple2.position.z = pos.z * 2
 
-		pineapple2.rotation.x += 0.003;
-		pineapple2.rotation.y += 0.001;
-
-		var grey = 10 + Math.abs(pos.x)
-		var col = new THREE.Color(`hsl(${grey}, 50%, 30%)`);
-		depMat.color = col
+		couple2.rotation.x += 0.003;
+		couple2.rotation.y += 0.001;
 	}
 
 }

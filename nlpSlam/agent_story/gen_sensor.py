@@ -8,7 +8,7 @@ import os.path
 
 
 iss_data = requests.get("http://api.open-notify.org/iss-now.json").json()
-colour_data = json.loads(open("palettes.json").read())
+colour_data = json.loads(open("./nlpSlam/agent_story/palettes.json").read())
 
 iss_position = iss_data['iss_position']
 iss_timestamp = iss_data['timestamp']

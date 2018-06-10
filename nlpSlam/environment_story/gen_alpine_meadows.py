@@ -4,12 +4,12 @@ import requests
 import datetime
 import os.path
 
-with open('./parsed_altai_stories_brodsky/data.txt') as json_file:
+with open('./nlpSlam/environment_story/parsed_altai_stories_brodsky/data.txt') as json_file:
     data = json.load(json_file)
 
 entity = data['entity']
 
-chemicals_data = json.loads(open("PeriodicTableJSON.json").read())
+chemicals_data = json.loads(open("./nlpSlam/environment_story/PeriodicTableJSON.json").read())
 
 elements = chemicals_data['elements']
 element_summary = [item ['summary'] for item in elements]

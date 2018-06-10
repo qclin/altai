@@ -4,7 +4,14 @@
     "smoke": "textures/Smoke-Element.png"
   },
   "agent" : {
-    "pineapple": "OBJ/Agents/pineapple/",
+    "couple": "OBJ/Agents/Couple/",
+    "elemental": "OBJ/Agents/Elemental/",
+    "influencer": "OBJ/Agents/Influencer/",
+    "isolation": "OBJ/Agents/Isolation/",
+    "recognition": "OBJ/Agents/Recognition/",
+    "sensor": "OBJ/Agents/Sensor/",
+    "social": "OBJ/Agents/Social/",
+    "trans": "OBJ/Agents/Trans_2/",
     "fluffball": "OBJ/Agents/Isolation/",
     "turtle" : "OBJ/Agents/mascot.tjs.sea"
   },
