@@ -7,12 +7,12 @@ body {
  	 -moz-background-size: cover;
   	-o-background-size: cover;
   	background-size: cover;
-	background-color: #ffe9de;
+	/*background-color: #ffe9de;
 
 	background: #ffe9de; /* Old browsers */ #DAD2F3
-	background: -moz-linear-gradient(top,  #ffe9de 0%, #726cf8 50%, #FBA8A4 100%); /* FF3.6-15 */
-	background: -webkit-linear-gradient(top, #ffe9de 0%  #726cf8 50%, #FBA8A4 100%); /* Chrome10-25,Safari5.1-6 */
-	background: linear-gradient(to bottom,  #DAD2F3 0% ,#FBA8A4 50%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	/*background: -moz-linear-gradient(top,  #ffe9de 0%, #726cf8 50%, #FBA8A4 100%); /* FF3.6-15 */
+	/* background: -webkit-linear-gradient(top, #ffe9de 0%  #726cf8 50%, #FBA8A4 100%); /* Chrome10-25,Safari5.1-6 */
+	/*background: linear-gradient(to bottom,  #DAD2F3 0% ,#FBA8A4 50%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#11e8bb', endColorstr='#8200c9',GradientType=0 ); /* IE6-9 */
 }
 

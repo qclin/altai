@@ -40,6 +40,41 @@ app.get('/', function(req, res){
     res.sendFile(__dirname + '/index.html');
 });
 
+app.get('/cosmos', function(req, res){
+
+  res.sendFile(__dirname + '/cosmos/index.html');
+});
+
+app.get('/textures', function(req, res){
+  var agent_files = getFiles('assets/textures/agents');
+  var family_files = getFiles('assets/textures/family');
+  var environment_files = getFiles('assets/textures/environment');
+  var payload = {
+    agent: agent_files[Math.floor(Math.random(agent_files.length) * agent_files.length)],
+    family: family_files[Math.floor(Math.random(family_files.length) * family_files.length)],
+    agent1: agent_files[Math.floor(Math.random(agent_files.length) * agent_files.length)],
+    family1: family_files[Math.floor(Math.random(family_files.length) * family_files.length)],
+    environment: environment_files[Math.floor(Math.random(environment_files.length) * environment_files.length)]
+  }
+  console.log(payload)
+  res.json(payload);
+
+})
+
+function getFiles (dir, files_){
+    files_ = files_ || [];
+    var files = fs.readdirSync(dir);
+    for (var i in files){
+        var name = dir + '/' + files[i];
+        if (fs.statSync(name).isDirectory()){
+            getFiles(name, files_);
+        } else if (! /^\..*/.test(files[i])){
+            files_.push(name);
+        }
+    }
+    return files_;
+}
+
 
 app.get('/place', function(req, res){
   var dummy ="dummy dummy "
@@ -109,6 +144,6 @@ app.get('/text_subtitle', function(req, res){
 
 
 
-var listerner = app.listen(process.env.PORT || 80, function() {
+var listerner = app.listen(process.env.PORT || 3000, function() {
 	console.log("Listening on port %d", listerner.address().port);
 });

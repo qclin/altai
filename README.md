@@ -59,3 +59,7 @@ http://www.nltk.org/data.html
 
 
 update AJAX from localhost to Amazon
+
+
+FS recursive walk thru for the assets
+https://stackoverflow.com/questions/2727167/how-do-you-get-a-list-of-the-names-of-all-files-present-in-a-directory-in-node-j

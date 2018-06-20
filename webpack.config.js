@@ -10,6 +10,7 @@ module.exports = {
 		place_bundle: ['./place/main.js', hotMiddlewareScript],
     realm_bundle: ['./realm/main.js', hotMiddlewareScript],
     flat_bundle: ['./flat/main.js', hotMiddlewareScript],
+    cosmos_bundle: ['./cosmos/scripts/sketch.js', hotMiddlewareScript],
     check_model_bundle: ['./check_model/main.js', hotMiddlewareScript],
     couple_recognition_tundra_bundle: ['./couple_recognition_tundra/main.js', hotMiddlewareScript],
     predator_highland_forest_bundle: ['./predator_highland_forest/main.js', hotMiddlewareScript],
