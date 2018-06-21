@@ -13,7 +13,7 @@ import Gradient from "./gradient"
 /* TODO:
   -[] switch conditions for vectors
   -[] depending on vector, determine drawBackground refreshrate
-  -[] update canvas to window size
+  -[] update canvas to window size, thus update image load ratio
   -[] consider serving assets from S3 and remove hacks
   -[] *** agent material mask not working
 */
@@ -64,7 +64,9 @@ $(document).ready(function(){
 
 window.setup = function(){
   // here we extract some colors from environment
-  canvas = createCanvas(1280, 1280);
+  canvas = createCanvas(window.innerHeight, window.innerHeight);
+  print((window.innerWidth - window.innerHeight)/2)
+  canvas.position((window.innerWidth - window.innerHeight)/2 , 0);
   if(loading) return
   // (imgMode == 'land') ? image(envFig, 0, 280) : image(envFig, 0, 0)
     print(envFig, imgMode)

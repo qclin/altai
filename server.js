@@ -41,9 +41,13 @@ app.get('/', function(req, res){
 });
 
 app.get('/cosmos', function(req, res){
-
   res.sendFile(__dirname + '/cosmos/index.html');
 });
+
+app.get('/metagram', function(req, res){
+  res.sendFile(__dirname + '/metagram/index.html');
+});
+
 
 app.get('/textures', function(req, res){
   var agent_files = getFiles('assets/textures/agents');
