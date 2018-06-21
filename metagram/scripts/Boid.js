@@ -1,13 +1,13 @@
 "use strict";
 
 export default class Boid {
-  constructor(s, x, y, targetX, targetY, skipRate, colFrom, colTo, maxSpeed, traceLength, lineType) {
+  constructor(x, y, targetX, targetY, skipRate, colFrom, colTo, maxSpeed, traceLength, lineType) {
     this.targetX = targetX;
     this.targetY = targetY;
     this.skipRate = skipRate;
-    this.pos = s.createVector(x, y);
-    this.vel = s.createVector(s.random(-1, 1), s.random(-1, 1));
-    this.acc = s.createVector();
+    this.pos = createVector(x, y);
+    this.vel = createVector(random(-1, 1), random(-1, 1));
+    this.acc = createVector();
 
     this.history = [];
     this.traceLength = traceLength;
@@ -16,10 +16,10 @@ export default class Boid {
 
     this.separateDistance = 10;
     this.neighborDistance = 10;
-    this.scale = s.random(0.3, 0.98);
+    this.scale = random(0.3, 0.98);
     this.colFrom = colFrom
     this.colTo = colTo
-    this.sinAdj = s.random(0.1, 1.1);
+    this.sinAdj = random(0.1, 1.1);
     this.separateScalar = 1;
     this.cohesionScalar = 1;
     this.alignScalar = 1;
@@ -255,11 +255,11 @@ export default class Boid {
     //   scale(this.scale);
     //   ellipse(0, 0, 3, 3);
     //   push();
-      //   var freq = frameCount * 0.1 * this.sinAdj;
-      //   var amp = 1 * this.sinAdj;
-      //   var Adj = sin(freq) * amp;
-      //   scale(this.scale * 0.98);
-      //   // triangle(0, 0, -7, 5 * Adj, -27, -5 * Adj);
+    //   var freq = frameCount * 0.1 * this.sinAdj;
+    //   var amp = 1 * this.sinAdj;
+    //   var Adj = sin(freq) * amp;
+    //   scale(this.scale * 0.98);
+    //   // triangle(0, 0, -7, 5 * Adj, -27, -5 * Adj);
     //   pop();
     //
     // pop();

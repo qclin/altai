@@ -14,10 +14,10 @@ export default class Grid{
     this.strokealpha = [0, 0.2];
   }
 
-  setup(s){
-    for(var x = 0; x < this.w; x += this.xStep * Math.floor(s.random(1, 3))){
-      for(var y = 0; y < this.h; y += this.yStep * Math.floor(s.random(1, 3))){
-        var p = s.createVector(x, y);
+  setup(){
+    for(var x = 0; x < this.w; x += this.xStep * Math.floor(random(1, 3))){
+      for(var y = 0; y < this.h; y += this.yStep * Math.floor(random(1, 3))){
+        var p = createVector(x, y);
         this.positions.push(p);
       }
     }

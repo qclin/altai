@@ -2,13 +2,13 @@
 // reference https://www.openprocessing.org/sketch/445834
 export default class Blob {
 
-  constructor(s, x, y, dia, n, colFrom, colTo ){
+  constructor(x, y, dia, n, colFrom, colTo ){
     this.x=x;
     this.y=y;
-    this.offset1=s.random(10);
-    this.offset2=s.random(10);
-    this.vx=s.random(-1, 1);
-    this.vy=s.random(-1, 1);
+    this.offset1=random(10);
+    this.offset2=random(10);
+    this.vx=random(-1, 1);
+    this.vy=random(-1, 1);
 
     // this.vx=sin(this.angle);
     // this.vy=sin(this.angle);
@@ -20,9 +20,9 @@ export default class Blob {
     this.huFrom = colFrom
     this.huTo = colTo
 
-    this.angle= s.TWO_PI/n;
+    this.angle=TWO_PI/n;
     for (var i=0; i<n; i++) {
-      this.points[i]=s.createVector(this.dia*s.sin(i*this.angle), this.dia*s.cos(i*this.angle));
+      this.points[i]=createVector(this.dia*sin(i*this.angle), this.dia*cos(i*this.angle));
     }
 
     this.path = [];

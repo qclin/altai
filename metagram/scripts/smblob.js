@@ -3,14 +3,14 @@
 
 export default class smBlob {
 
-  constructor(s, x, y, dia, n, col){
+  constructor(x, y, dia, n, col){
 
     this.x=x;
     this.y=y;
     this.offset1=1
     this.offset2=10
-    this.vx= s.random(-1, 1);
-    this.vy= s.random(-1, 1);
+    this.vx=random(-1, 1);
+    this.vy=random(-1, 1);
 
     // this.vx=sin(this.angle);
     // this.vy=sin(this.angle);
@@ -19,17 +19,17 @@ export default class smBlob {
     this.points=[];
     this.Y_AXIS = 1;
     this.X_AXIS = 2;
-    this.fillColor = s.color(0, 0, 255, 155);
-    this.angle=s.TWO_PI/n;
+    this.fillColor = color(0, 0, 255, 155);
+    this.angle=TWO_PI/n;
     for (var i=0; i<n; i++) {
-      this.points[i]=s.createVector(this.dia*s.sin(i*this.angle), this.dia*s.cos(i*this.angle));
+      this.points[i]=createVector(this.dia*sin(i*this.angle), this.dia*cos(i*this.angle));
     }
     this.paused = false;
-    this.s = s
   }
 
   clicked(){
-    var d = dist(this.s.mouseX, this.s.mouseY, this.x, this.y);
+    console.log("sm -- clicked");
+    var d = dist(mouseX, mouseY, this.x, this.y);
     console.log(d, this.dia);
 
     ellipse(this.x, this.y, 10, 10);
@@ -51,8 +51,6 @@ export default class smBlob {
     this.x+=this.vx*0.001;
     this.y+=this.vy*0.01;
     var collide=false;
-    var noisescale = .001; //.001
-    var noisefactor = 2;
     beginShape();
     var i;
     for (var j=0; j<=this.n*2; j++) {
