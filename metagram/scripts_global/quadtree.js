@@ -42,8 +42,7 @@ class Rectangle {
 }
 
 class QuadTree {
-  constructor(p, boundary, n) {
-    this.p = p;
+  constructor(boundary, n) {
     this.boundary = boundary;
     this.capacity = n;
     this.points = [];
@@ -115,15 +114,14 @@ class QuadTree {
 
 
   show() {
-    var p = this.p;
-    p.stroke(255);
-    p.noFill();
-    p.strokeWeight(1);
-    p.rectMode(p.CENTER);
-    p.rect(this.boundary.x, this.boundary.y, this.boundary.w * 2, this.boundary.h * 2);
-    for (let pt of this.points) {
-      p.strokeWeight(2);
-      p.point(pt.x, pt.y);
+    stroke(255);
+    noFill();
+    strokeWeight(1);
+    rectMode(CENTER);
+    rect(this.boundary.x, this.boundary.y, this.boundary.w * 2, this.boundary.h * 2);
+    for (let p of this.points) {
+      strokeWeight(2);
+      point(p.x, p.y);
     }
 
     if (this.divided) {

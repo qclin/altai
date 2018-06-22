@@ -1,14 +1,13 @@
 "use strict";
 
 export default class Boid {
-  constructor(p, x, y, targetX, targetY, skipRate, colFrom, colTo, maxSpeed, traceLength, lineType) {
-    this.p = p
+  constructor(x, y, targetX, targetY, skipRate, colFrom, colTo, maxSpeed, traceLength, lineType) {
     this.targetX = targetX;
     this.targetY = targetY;
     this.skipRate = skipRate;
-    this.pos = p.createVector(x, y);
-    this.vel = p.createVector(p.random(-1, 1), p.random(-1, 1));
-    this.acc = p.createVector();
+    this.pos = createVector(x, y);
+    this.vel = createVector(random(-1, 1), random(-1, 1));
+    this.acc = createVector();
 
     this.history = [];
     this.traceLength = traceLength;
@@ -17,24 +16,23 @@ export default class Boid {
 
     this.separateDistance = 10;
     this.neighborDistance = 10;
-    this.scale = p.random(0.3, 0.98);
+    this.scale = random(0.3, 0.98);
     this.colFrom = colFrom
     this.colTo = colTo
-    this.sinAdj = p.random(0.1, 1.1);
+    this.sinAdj = random(0.1, 1.1);
     this.separateScalar = 1;
     this.cohesionScalar = 1;
     this.alignScalar = 1;
     this.lineType = lineType;
   }
   update() {
-    var p = this.p
     this.vel.add(this.acc);
     this.vel.limit(this.maxSpeed); //***
     this.pos.add(this.vel);
     this.acc.mult(0);
     this.angle = this.vel.heading();
 
-    var v = this.p.createVector(this.pos.x, this.pos.y)
+    var v = createVector(this.pos.x, this.pos.y)
     this.history.push(v);
     if (this.history.length > this.traceLength){
       this.history.splice(0, 1);
@@ -43,9 +41,10 @@ export default class Boid {
   }
   applyForce(force) {
     this.acc.add(force);
+
   }
   flock(others) {
-    var target = this.p.createVector(this.targetX, this.targetY);
+    var target = createVector(this.targetX, this.targetY);
     // var seekForce = this.seek(target);
     var sepaForce = this.separate(others);
     var coheForce = this.cohesion(others);
@@ -72,16 +71,17 @@ export default class Boid {
     this.applyForce(alignForce);
   }
   seek(target) {
-    var desired = this.p.p5.Vector.sub(target, this.pos);
+    var desired = p5.Vector.sub(target, this.pos);
     desired.setMag(this.maxSpeed);
-    var steer = this.p.p5.Vector.sub(desired, this.vel);
+    var steer = p5.Vector.sub(desired, this.vel);
     steer.limit(this.maxSteerForce);
     this.applyForce(steer);
     return steer;
   }
 
   separate(others) {
-    var vector = this.p.createVector();
+    //var
+    var vector = createVector();
     var count = 0;
     //sum
     for (var i = 0; i < others.length; i++) {
@@ -89,7 +89,7 @@ export default class Boid {
       var distance = this.pos.dist(other.pos);
 
       if (distance > 0 && distance < this.separateDistance) {
-        var diff = this.p.p5.Vector.sub(this.pos, other.pos);
+        var diff = p5.Vector.sub(this.pos, other.pos);
         diff.normalize();
         diff.div(distance);
         vector.add(diff); //sum
@@ -112,7 +112,7 @@ export default class Boid {
   }
 
   cohesion(others) {
-    var position = this.p.createVector();
+    var position = createVector();
     var count = 0;
     for (var i = 0; i < others.length; i++) {
       var other = others[i];
@@ -130,7 +130,7 @@ export default class Boid {
   }
 
   align(others) {
-    var velocity = this.p.createVector();
+    var velocity = createVector();
     var count = 0;
     for (var i = 0; i < others.length; i++) {
       var other = others[i];
@@ -183,24 +183,22 @@ export default class Boid {
 
 
   drawTraces(){
-    var p = this.p;
-
     switch(this.lineType) {
         case "dotted":
           for(var i = 0; i < this.history.length-1; i++){
             var pos = this.history[i];
             var next = this.history[i + 1];
-            p.noFill();
+            noFill();
 
             if (i % 4 == 1) {
-              p.line(pos.x, pos.y, next.x, next.y);
+              line(pos.x, pos.y, next.x, next.y);
             }
 
             // first few add concentric rings
             if( i % 10 > 8 && i > this.history.length/2){
-              p.fill(this.colTo)
-              p.strokeWeight(2)
-              p.ellipse( pos.x, pos.y, 5, 5);
+              fill(this.colTo)
+              strokeWeight(2)
+              ellipse( pos.x, pos.y, 5, 5);
             }
           }
 
@@ -208,9 +206,9 @@ export default class Boid {
         case "long":
             for(var i = 0; i < this.history.length-1; i++ ){
               var pos = this.history[i];
-              p.fill(0);
+              fill(0);
               if (i % 5 < 4) {
-                  p.line(this.history[i].x, this.history[i].y, this.history[i + 1].x, this.history[i + 1].y);
+                  line(this.history[i].x, this.history[i].y, this.history[i + 1].x, this.history[i + 1].y);
               }
               // first few add concentric rings
             }
@@ -221,15 +219,15 @@ export default class Boid {
               var next = this.history[i+2];
 
               // var diff = next.sub(pos);
-              var diff = p.p5.Vector.sub(next, pos);
+              var diff = p5.Vector.sub(next, pos);
 
               diff.normalize();
               diff.rotate(90);
               // diff.mult(map(noise(pos.x / 100, pos.y / 100), 0, 1, -1, 1));
-              diff.mult(p.map(p.noise(pos.x / 100, pos.y / 100), 0, 1, -20, 20));
+              diff.mult(map(noise(pos.x / 100, pos.y / 100), 0, 1, -20, 20));
               pos += diff;
               if (i % 15 < 4) {
-                p.line(pos.x, pos.y, next.x, next.y);
+                line(pos.x, pos.y, next.x, next.y);
                 // line(next.x+5, next.y+5, last.x, last.y);
               }
               // first few add concentric rings
@@ -244,7 +242,7 @@ export default class Boid {
 
   display() {
 
-    this.p.ellipse(this.pos.x, this.pos.y, 4, 4);
+    ellipse(this.pos.x, this.pos.y, 4, 4);
     // push();
     //   translate(this.pos.x, this.pos.y);
     //   rotate(this.angle);
@@ -269,9 +267,9 @@ export default class Boid {
 
 }
 
-function getNormalPoint(pt, a, b) {
+function getNormalPoint(p, a, b) {
   // Vector from a to p
-  let ap = p5.Vector.sub(pt, a);
+  let ap = p5.Vector.sub(p, a);
   // Vector from a to b
   let ab = p5.Vector.sub(b, a);
   ab.normalize(); // Normalize the line

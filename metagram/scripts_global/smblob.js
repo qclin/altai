@@ -3,14 +3,14 @@
 
 export default class smBlob {
 
-  constructor(p, x, y, dia, n, col){
-    this.p=p;
+  constructor(x, y, dia, n, col){
+
     this.x=x;
     this.y=y;
     this.offset1=1
     this.offset2=10
-    this.vx=p.random(-1, 1);
-    this.vy=p.random(-1, 1);
+    this.vx=random(-1, 1);
+    this.vy=random(-1, 1);
 
     // this.vx=sin(this.angle);
     // this.vy=sin(this.angle);
@@ -19,28 +19,27 @@ export default class smBlob {
     this.points=[];
     this.Y_AXIS = 1;
     this.X_AXIS = 2;
-    this.fillColor = p.color(0, 0, 255, 155);
-    this.angle=p.TWO_PI/n;
+    this.fillColor = color(0, 0, 255, 155);
+    this.angle=TWO_PI/n;
     for (var i=0; i<n; i++) {
-      this.points[i]=p.createVector(this.dia * p.sin(i*this.angle), this.dia * p.cos(i*this.angle));
+      this.points[i]=createVector(this.dia*sin(i*this.angle), this.dia*cos(i*this.angle));
     }
     this.paused = false;
   }
 
   clicked(){
-    var p = this.p
     console.log("sm -- clicked");
-    var d = p.dist(p.mouseX, p.mouseY, this.x, this.y);
+    var d = dist(mouseX, mouseY, this.x, this.y);
     console.log(d, this.dia);
 
-    p.ellipse(this.x, this.y, 10, 10);
+    ellipse(this.x, this.y, 10, 10);
     if(d < 100){
-      this.fillColor = p.color(255, 0, 0);
-      p.noLoop();
+      this.fillColor = color(255, 0, 0);
+      noLoop();
       this.paused = true /// TODO : pause logic
     }else{
       if(this.paused){
-        p.loop();
+        loop();
       }
     }
     // no need to check for proximity, should release if clicked
