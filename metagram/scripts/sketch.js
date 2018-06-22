@@ -4,7 +4,7 @@ import Boid from "./Boid";
 import Grid from "./grid";
 import { Point, Rectangle, QuadTree } from "./quadtree";
 
-
+import './sketch2'
 /*
 instantiate
 grid
@@ -31,6 +31,7 @@ var sketch = function(p){
   //     cosmos.push(loadImage(`assets/cosmoSVG/cosmo_${i+1}.svg`));
   //   }
   // }
+  var canvas;
   var canvasW = window.innerWidth;
   var canvasH = window.innerHeight;
   let boundary
@@ -55,8 +56,9 @@ var sketch = function(p){
       p.color("#A83315"), // "HighlandPrairie
       p.color("#FF9566") // "LowlandPrairie
     ]
-    p.createCanvas(canvasW, canvasH)
-      .mouseReleased(() => {isPressed = false;});
+    canvas = p.createCanvas(canvasW, canvasH)
+    canvas.mousePressed(cPressed)
+      // .mouseReleased(() => {isPressed = false;});
     // above prevents clicks from happening outside of the canvas.
 
     boundary = new Rectangle(0,0,canvasW, canvasH);
@@ -69,6 +71,12 @@ var sketch = function(p){
 
     setTimeout(setupBlob, 10000);
 
+  }
+  function cPressed(){
+    console.log("metagram, canvas pressed ")
+    for(var i = 0; i < repellers.length; i++){
+      repellers[i].clicked();
+    }
   }
   /// for each blob you create a quadtree
   function setupBlob(){
@@ -140,10 +148,8 @@ var sketch = function(p){
 
   }
   p.mousePressed = function(){
-    console.log("pressed")
-    for(var i = 0; i < repellers.length; i++){
-      repellers[i].clicked();
-    }
+    // console.log("pressed metagram")
+
   }
   p.draw = function() {
     p.background(255);
@@ -211,3 +217,6 @@ var sketch = function(p){
 }
 
 var metap5 = new p5(sketch, 'p5sketch');
+
+
+/// click blob, metagram creates a new html element, attach div

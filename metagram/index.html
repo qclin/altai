@@ -6,6 +6,19 @@
   <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.sound.js"></script>
   <script language="javascript" type="text/javascript" src="metagram_bundle.js"></script>
 </head>
+
+<style>
+  #cosmoSketch{
+    /* display: none; */
+    position: absolute;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    right: 0;
+
+  }
+
+</style>
 <script>
 
 function includeHTML() {
@@ -42,6 +55,8 @@ function includeHTML() {
 <body>
   <div id = "p5sketch">
     <!-- p5 instance will be created here -->
+  </div>
+  <div id ="cosmoSketch">
   </div>
 
   <p>Some other HTML</p>

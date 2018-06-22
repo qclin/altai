@@ -34,7 +34,7 @@ export default class smBlob {
     console.log(d, this.dia);
 
     p.ellipse(this.x, this.y, 10, 10);
-    if(d < 100){
+    if(d < 20){
       this.fillColor = p.color(255, 0, 0);
       p.noLoop();
       this.paused = true /// TODO : pause logic
