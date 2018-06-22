@@ -48,31 +48,32 @@ export default class smBlob {
   }
 
   display () {
-    var px, py;
+    var p = this.p
+    var posX, posY;
     this.x+=this.vx*0.001;
     this.y+=this.vy*0.01;
     var collide=false;
     var noisescale = .001; //.001
     var noisefactor = 2;
-    beginShape();
+    p.beginShape();
     var i;
     for (var j=0; j<=this.n*2; j++) {
-      fill(this.fillColor);
+      p.fill(this.fillColor);
 
       i=j%this.n;
-      px=this.x+this.points[i].x+this.dia*noisefactor*(1-2*noise(noisescale*(this.points[i].x+this.x+this.offset1), noisescale*(this.points[i].y+this.y+this.offset1)));
-      py=this.y+this.points[i].y+this.dia*noisefactor*(1-2*noise(noisescale*(this.points[i].x+this.x+this.offset2), noisescale*(this.points[i].y+this.y+this.offset2)));
-      vertex(px, py);
-      if (!collide&&(px+this.vx<0||px+this.vx>width)){
+      posX=this.x+this.points[i].x+this.dia*noisefactor*(1-2*p.noise(noisescale*(this.points[i].x+this.x+this.offset1), noisescale*(this.points[i].y+this.y+this.offset1)));
+      posY=this.y+this.points[i].y+this.dia*noisefactor*(1-2*p.noise(noisescale*(this.points[i].x+this.x+this.offset2), noisescale*(this.points[i].y+this.y+this.offset2)));
+      p.vertex(posX, posY);
+      if (!collide&&(posX+this.vx<0||posX+this.vx> p.width)){
         this.vx=-this.vx;
         collide=true;
       }
-      if (py+this.vy<0||py+this.vy>height){
+      if (posY+this.vy<0||posY+this.vy> p.height){
         this.vy=-this.vy;
         collide=true;
       }
     }
-    endShape();
+    p.endShape();
   }
 
 }

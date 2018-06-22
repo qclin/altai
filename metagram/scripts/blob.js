@@ -3,6 +3,7 @@
 export default class Blob {
 
   constructor(p, x, y, dia, n, colFrom, colTo ){
+    this.p=p;
     this.x=x;
     this.y=y;
     this.offset1=p.random(10);
@@ -31,7 +32,7 @@ export default class Blob {
 
 
   display () {
-    var p = this.p; 
+    var p = this.p;
     var posX, posY;
     this.x+=this.vx*0.1;
     this.y+=this.vy*0.1;
@@ -58,11 +59,11 @@ export default class Blob {
       let point = p.createVector(posX, posY);
       this.path.push(point);
 
-      if (!collide&&(posX+this.vx<0||posX+this.vx > width)){
+      if (!collide&&(posX+this.vx<0||posX+this.vx > p.width)){
         this.vx=-this.vx;
         collide=true;
       }
-      if (posY+this.vy<0||posY+this.vy > height){
+      if (posY+this.vy<0||posY+this.vy > p.height){
         this.vy=-this.vy;
         collide=true;
       }

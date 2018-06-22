@@ -186,12 +186,12 @@ var sketch = function(p){
   }
   function drawPopulation(oneflock, i){
     /// BOID TYPE 0
-    var center = createVector(zones[i].x, zones[i].y)
+    var center = p.createVector(zones[i].x, zones[i].y)
 
     for (var j = 0; j < oneflock.length; j++) {
       var b = oneflock[j];
-      if(minute()%2 == 1){
-        var edgePoint = zones[i].path[j + second()]
+      if(p.minute()%2 == 1){
+        var edgePoint = zones[i].path[j + p.second()]
         b.seek(edgePoint);
       }else{
         b.seek(center);

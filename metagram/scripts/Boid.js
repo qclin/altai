@@ -72,9 +72,9 @@ export default class Boid {
     this.applyForce(alignForce);
   }
   seek(target) {
-    var desired = this.p.p5.Vector.sub(target, this.pos);
+    var desired = p5.Vector.sub(target, this.pos);
     desired.setMag(this.maxSpeed);
-    var steer = this.p.p5.Vector.sub(desired, this.vel);
+    var steer = p5.Vector.sub(desired, this.vel);
     steer.limit(this.maxSteerForce);
     this.applyForce(steer);
     return steer;
@@ -89,7 +89,7 @@ export default class Boid {
       var distance = this.pos.dist(other.pos);
 
       if (distance > 0 && distance < this.separateDistance) {
-        var diff = this.p.p5.Vector.sub(this.pos, other.pos);
+        var diff = p5.Vector.sub(this.pos, other.pos);
         diff.normalize();
         diff.div(distance);
         vector.add(diff); //sum
@@ -151,16 +151,17 @@ export default class Boid {
   }
 
   checkEdges() {
+    var p = this.p;
     // x
     if (this.pos.x < 0) {
-      this.pos.x = width;
-    } else if (this.pos.x > width) {
+      this.pos.x = p.width;
+    } else if (this.pos.x > p.width) {
       this.pos.x = 0;
     }
     // y
     if (this.pos.y < 0) {
-      this.pos.y = height;
-    } else if (this.pos.y > height) {
+      this.pos.y = p.height;
+    } else if (this.pos.y > p.height) {
       this.pos.y = 0;
     }
   }
@@ -221,11 +222,9 @@ export default class Boid {
               var next = this.history[i+2];
 
               // var diff = next.sub(pos);
-              var diff = p.p5.Vector.sub(next, pos);
-
+              var diff = p5.Vector.sub(next, pos);
               diff.normalize();
               diff.rotate(90);
-              // diff.mult(map(noise(pos.x / 100, pos.y / 100), 0, 1, -1, 1));
               diff.mult(p.map(p.noise(pos.x / 100, pos.y / 100), 0, 1, -20, 20));
               pos += diff;
               if (i % 15 < 4) {

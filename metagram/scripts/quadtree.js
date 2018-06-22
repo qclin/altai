@@ -56,13 +56,13 @@ class QuadTree {
     let w = this.boundary.w;
     let h = this.boundary.h;
     let ne = new Rectangle(x + w / 2, y - h / 2, w / 2, h / 2);
-    this.northeast = new QuadTree(ne, this.capacity);
+    this.northeast = new QuadTree(this.p, ne, this.capacity);
     let nw = new Rectangle(x - w / 2, y - h / 2, w / 2, h / 2);
-    this.northwest = new QuadTree(nw, this.capacity);
+    this.northwest = new QuadTree(this.p, nw, this.capacity);
     let se = new Rectangle(x + w / 2, y + h / 2, w / 2, h / 2);
-    this.southeast = new QuadTree(se, this.capacity);
+    this.southeast = new QuadTree(this.p, se, this.capacity);
     let sw = new Rectangle(x - w / 2, y + h / 2, w / 2, h / 2);
-    this.southwest = new QuadTree(sw, this.capacity);
+    this.southwest = new QuadTree(this.p, sw, this.capacity);
     this.divided = true;
   }
 
