@@ -78,7 +78,7 @@ var sketch = function(p){
       repellers[i].clicked();
 
       if(repellers[i].paused){
-        cosmo5(); 
+        cosmo5();
       }
     }
   }
@@ -91,9 +91,6 @@ var sketch = function(p){
 
       addBlob(x, y, dia);
     }
-
-
-
   }
 
   function drawQTree(){
@@ -151,10 +148,6 @@ var sketch = function(p){
     }, 3000)
 
   }
-  p.mousePressed = function(){
-    // console.log("pressed metagram")
-
-  }
   p.draw = function() {
     p.background(255);
     // grid.display();
@@ -172,10 +165,18 @@ var sketch = function(p){
     for (var i=0; i<repellers.length; i++) {
       repellers[i].display();
     }
-
-
-
   }
+
+
+  p.mousePressed = function(){
+    console.log("mouse pressedd ------ ", modalOpened);
+    if(modalOpened == false ){
+      console.log("mouse pressedd ---p should loop--- ", modalOpened)
+
+      p.loop();
+    }
+  }
+
   function drawEnvironment(){
     for (var i=0; i<zones.length; i++) {
       zones[i].display();

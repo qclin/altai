@@ -1,6 +1,8 @@
 <html>
 <head>
   <meta charset="UTF-8">
+  <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+  crossorigin="anonymous"></script>
   <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
   <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.js"></script>
   <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.sound.js"></script>
@@ -8,64 +10,59 @@
 </head>
 
 <style>
+  body{
+    overflow: hidden;
+    position:fixed;
+  }
+  #closeModal{
+    right: 3em;
+    top: 2em;
+    position: absolute;
+    font-size: 3em;
+    font-family: sans-serif;
+  }
   #cosmoSketch{
-    /* display: none; */
+  }
+  .blurLayer{
+    width: 100vw;
+    height: 100vh;
+    background: #DDDDDD;
+    opacity: .4;
+  }
+  .canvasContainer{
     position: absolute;
     z-index: 100;
     top: 0;
     left: 0;
     right: 0;
+    /* -webkit-filter: blur(1px);
+    -moz-filter: blur(1px);
+    -o-filter: blur(1px);
+    -ms-filter: blur(1px);
+    filter: blur(1px); */
+  }
 
+
+  #hr {
+    width: 20%;
+    margin: 1% 0;
+    margin-top: 24%;
+    border-bottom: 13px solid;
   }
 
 </style>
+
 <script>
-
-function includeHTML() {
-  var z, i, elmnt, file, xhttp;
-  /*loop through a collection of all HTML elements:*/
-  z = document.getElementsByTagName("*");
-  for (i = 0; i < z.length; i++) {
-    elmnt = z[i];
-    /*search for elements with a certain atrribute:*/
-    file = elmnt.getAttribute("w3-include-html");
-    if (file) {
-      /*make an HTTP request using the attribute value as the file name:*/
-      xhttp = new XMLHttpRequest();
-      xhttp.onreadystatechange = function() {
-        if (this.readyState == 4) {
-          if (this.status == 200) {elmnt.innerHTML = this.responseText;}
-          if (this.status == 404) {elmnt.innerHTML = "Page not found.";}
-          /*remove the attribute, and call this function once more:*/
-          elmnt.removeAttribute("w3-include-html");
-          includeHTML();
-        }
-      }
-      xhttp.open("GET", file, true);
-      xhttp.send();
-      /*exit the function:*/
-      return;
-    }
+  var modalOpened;
+  function backToMeta(){
+    modalOpened = false;
+    console.log(" back to meta :::: ", modalOpened)
+    $('.canvasContainer').remove();
   }
-};
-
-
-
 </script>
 <body>
   <div id = "p5sketch">
-    <!-- p5 instance will be created here -->
   </div>
-  <!-- <div id ="cosmoSketch">
-  </div> -->
 
-  <p>Some other HTML</p>
-  <div w3-include-html="cosmos/index.html"></div>
 </body>
-
-
-<script>
-// includeHTML();
-</script>
-
 </html>

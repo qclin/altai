@@ -29,20 +29,21 @@ export default class smBlob {
 
   clicked(){
     var p = this.p
-    console.log("sm -- clicked");
     var d = p.dist(p.mouseX, p.mouseY, this.x, this.y);
-    console.log(d, this.dia);
-
     p.ellipse(this.x, this.y, 10, 10);
     if(d < 20){
       this.fillColor = p.color(255, 0, 0);
       p.noLoop();
       this.paused = true /// TODO : pause logic
-    }else{
-      if(this.paused){
-        p.loop();
-      }
     }
+    // else{
+    //
+    //   // this need to be call but the global return from metagram
+    //   if(this.paused){
+    //     p.loop();
+    //     this.paused = !this.paused;
+    //   }
+    // }
     // no need to check for proximity, should release if clicked
     /// here can transition into another scene
   }
