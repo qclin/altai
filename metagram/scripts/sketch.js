@@ -4,7 +4,7 @@ import Boid from "./Boid";
 import Grid from "./grid";
 import { Point, Rectangle, QuadTree } from "./quadtree";
 
-import './sketch2'
+import cosmo5 from './sketch2'
 /*
 instantiate
 grid
@@ -76,6 +76,10 @@ var sketch = function(p){
     console.log("metagram, canvas pressed ")
     for(var i = 0; i < repellers.length; i++){
       repellers[i].clicked();
+
+      if(repellers[i].paused){
+        cosmo5(); 
+      }
     }
   }
   /// for each blob you create a quadtree

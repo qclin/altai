@@ -1,3 +1,5 @@
+import $ from 'jquery'
+
 var sketch = function(p){
   var color = 0;
   var canvas;
@@ -21,6 +23,10 @@ var sketch = function(p){
 }
 
 
-var cosmo5 = new p5(sketch, 'cosmoSketch');
+// var cosmo5 = new p5(sketch, 'cosmoSketch');
 
-export default cosmo5
+export default function cosmo5(){
+  $("<div id='cosmoSketch'> </div> ").appendTo('body');
+
+  return new p5(sketch, 'cosmoSketch');
+}
