@@ -226,7 +226,7 @@ export default class Boid {
               diff.normalize();
               diff.rotate(90);
               diff.mult(p.map(p.noise(pos.x / 100, pos.y / 100), 0, 1, -20, 20));
-              pos += diff;
+              pos.add(diff);
               if (i % 15 < 4) {
                 p.line(pos.x, pos.y, next.x, next.y);
                 // line(next.x+5, next.y+5, last.x, last.y);

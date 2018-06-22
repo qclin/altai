@@ -56,7 +56,6 @@ var sketch = function(p){
       p.color("#FF9566") // "LowlandPrairie
     ]
     p.createCanvas(canvasW, canvasH)
-      .mousePressed(() => {isPressed = true;})
       .mouseReleased(() => {isPressed = false;});
     // above prevents clicks from happening outside of the canvas.
 
@@ -140,7 +139,12 @@ var sketch = function(p){
     }, 3000)
 
   }
-
+  p.mousePressed = function(){
+    console.log("pressed")
+    for(var i = 0; i < repellers.length; i++){
+      repellers[i].clicked();
+    }
+  }
   p.draw = function() {
     p.background(255);
     // grid.display();
@@ -160,11 +164,7 @@ var sketch = function(p){
     }
 
 
-    if(isPressed){
-      for(var i = 0; i < repellers.length; i++){
-        repellers[i].clicked();
-      }
-    }
+
   }
   function drawEnvironment(){
     for (var i=0; i<zones.length; i++) {
