@@ -3,52 +3,18 @@
   <meta charset="UTF-8">
   <script src="https://code.jquery.com/jquery-3.3.1.min.js" integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
   crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-scrollTo/2.1.2/jquery.scrollTo.js"></script>
   <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.js"></script>
   <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.dom.js"></script>
   <script language="javascript" src="https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/addons/p5.sound.js"></script>
+
   <script language="javascript" type="text/javascript" src="metagram_bundle.js"></script>
 </head>
+<link rel="stylesheet" href="/styles/skeleton.css">
+<link rel="stylesheet" href="/styles/main.css">
 
 <style>
-  body{
-    overflow: hidden;
-    position:fixed;
-  }
-  #closeModal{
-    right: 3em;
-    top: 2em;
-    position: absolute;
-    font-size: 3em;
-    font-family: sans-serif;
-  }
-  #cosmoSketch{
-  }
-  .blurLayer{
-    width: 100vw;
-    height: 100vh;
-    background: #DDDDDD;
-    opacity: .4;
-  }
-  .canvasContainer{
-    position: absolute;
-    z-index: 100;
-    top: 0;
-    left: 0;
-    right: 0;
-    /* -webkit-filter: blur(1px);
-    -moz-filter: blur(1px);
-    -o-filter: blur(1px);
-    -ms-filter: blur(1px);
-    filter: blur(1px); */
-  }
 
-
-  #hr {
-    width: 20%;
-    margin: 1% 0;
-    margin-top: 24%;
-    border-bottom: 13px solid;
-  }
 
 </style>
 
@@ -61,8 +27,70 @@
   }
 </script>
 <body>
+  <section id="about">
+
+    <div class="row description">
+      <h1> alt'ai </h1>
+
+      <div class="five columns text-chunk">
+        <div id="hr"></div>
+        <br/>
+        <p>alt’ai is an agent-based simulation inspired by aesthetics, culture and environmental conditions of Altai mountain region on borders between Russia, Kazakhstan, China and Mongolia. </p>
+
+        <p>It is set into scenario of remote automated landscape populated by AI-powered sentient machines, where biological species, technologies and environments interact to produce unforeseeable visual outputs. </p>
+
+        <p>alt’ai deals with a question of designing future machine-to-machine authentication protocols, that are based on use of images encoding agent behaviour.</p>
+      </div>
+
+      <div class="three columns media-links">
+      <div id="hr"></div><br/>
+      <div class="row whitepaper-container">
+        <a href="/white_paper/alt'ai whitepaper.pdf" target="_blank">
+          <img class="whitepaper_icon" src="/icons/whitepaper.png">
+          <figcaption> whitepaper </figcaption>
+        </a>
+      </div>
+      <div class="row whitepaper-container">
+        <a href="/showreel" target="_blank">
+          <img class="whitepaper_icon" src="/icons/showreel@2x.png">
+          <figcaption> showreel </figcaption>
+        </a>
+      </div>
+      </div>
+      <div class="one column"> one </div>
+      <div class="three columns">
+      <div id="hr"></div><br/>
+      <div class="row bio">
+        <div> Qiao Lin </div>
+        <div> Paul Heinicker </div>
+        <div> Daria Stupina </div>
+        <div> Lukáš Likavčan </div>
+        <div> Sound by mobilegirl</div>
+        <div> contact: tnn.altai@gmail.com </div>
+      </div>
+      <div class="row credit">
+        <p> © Strelka Institute for Media, Architecture and Design, 2018 </p>
+      </div>
+    </div>
+    </div>
+  </section>
+  
+  <div id="info-Icon-wrapper">
+    <span id="info-Icon">
+    </span>
+  </div>
   <div id = "p5sketch">
   </div>
 
+
+
+  <script>
+    $("#info-Icon").click( function () {
+      console.log(" 11111111 ------ ")
+      // debugger
+        $("#about").slideToggle(300);
+        $("#toggle").toggleClass("clicked");
+    });
+  </script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 import $ from 'jquery'
 
 var sketch = function(p){
-  var color = 0;
+  var color = 255;
   var canvas;
 
   p.setup = function(){
@@ -25,7 +25,7 @@ var sketch = function(p){
 // var cosmo5 = new p5(sketch, 'cosmoSketch');
 
 export default function cosmo5(){
-  $("<div class='canvasContainer'> <div class='blurLayer'></div> <span id='closeModal' onclick='backToMeta();'> x </span> <div id='cosmoSketch'> </div> </div> ").appendTo('body');
+  $("<div class='canvasContainer'> <div class='blurLayer'></div> <div id='cosmoSketch'> </div> <span id='closeModal' onclick='backToMeta();'> </span> </div> ").appendTo('body');
   modalOpened = true;
   return new p5(sketch, 'cosmoSketch');
 }

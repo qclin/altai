@@ -19,11 +19,18 @@ body {
 
 h1{
 	font-family: 'Lydia-BoldCondensed' !important;
+	font-size: 8rem;
 }
 
 
 body{
 	font-family: 'AtlasGrotesk-Regular' !important;
+	overflow: hidden;
+	position:fixed;
+	margin: 0;
+}
+figcaption{
+	font-weight: bold;
 }
 .cosmogram{
 	width: 100%;
@@ -42,13 +49,23 @@ body{
 .whitepaper_icon{
   width: 300px;
 }
+.media-links{
+	background: #fff;
+	padding: 2em;
+	top: -2em;
+	position: relative;
+}
 .title-container{
 	position: relative;
 	height: 100%;
 	text-align: center;
 }
 .whitepaper-container{
-  text-align: center;
+
+}
+.whitepaper-container a{
+	text-decoration: none;
+	color: black;
 }
 #title{
 	font-size: 15em;
@@ -73,12 +90,152 @@ body{
 }
 
 .description p{
-	font-size: 2em;
+	font-size: 1em;
 	line-height: 1.5em;
 	width: 100%;
-	margin-top: 2em;
+	margin-top: 1em;
 }
 
 .cosmos-container{
 	margin-top: 15em;
+}
+
+.text-chunk{
+	font-size: 20px;
+}
+#closeModal{
+	right: calc((100vw - 100vh)/4);
+	top: 2em;
+	position: absolute;
+	font-size: 3em;
+	width: 1.5em;
+	height: 1.5em;
+	background-size: contain;
+	cursor: pointer;
+}
+#cosmoSketch{
+}
+.blurLayer{
+	width: 100vw;
+	height: 100vh;
+	background: #DDDDDD;
+	opacity: .4;
+}
+.canvasContainer{
+	position: absolute;
+	z-index: 100;
+	top: 0;
+	left: 0;
+	right: 0;
+	/* -webkit-filter: blur(1px);
+	-moz-filter: blur(1px);
+	-o-filter: blur(1px);
+	-ms-filter: blur(1px);
+	filter: blur(1px); */
+}
+#info-Icon-wrapper:hover{
+	background-color: #DDDDDD;
+	width: 18vw;
+	height: 6vh;
+}
+#info-Icon-wrapper{
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	background: black;
+	width: 7vw;
+	height: 3vh;
+	min-height: 1em;
+	margin: 0 auto;
+	cursor: pointer;
+	transition: 0.3s;
+}
+#info-Icon{
+	display: block;
+	/* width: 2vh;
+	min-width: 1em; */
+	height: 100%;
+	min-height: 1em;
+	background-size: contain;
+	background-repeat: no-repeat;
+	background-position: center;
+
+	margin: 0 auto;
+
+}
+#hr {
+	width: 20%;
+	margin: 1% 0;
+	margin-top: 24%;
+	border-bottom: 13px solid;
+	float:left;
+}
+#about {
+	width: 100%;
+	left: 0;
+	display: none;
+	z-index: 200;
+	transition: all 1s ease-in-out
+	color: #000;
+	background: #DDDDDD;
+	padding: 1em;
+}
+
+#about div {
+		margin: 0px auto;
+}
+
+#about div p {
+		max-width:680px;
+}
+
+	/* Extra small devices (phones, 600px and down) */
+@media only screen and (max-width: 600px) {
+	#closeModal{
+		background-image: url("../symbols/x_small.png");
+	}
+	#info-Icon{
+		background-image: url("../symbols/plus_white_small@2x.png");
+	}
+}
+
+/* Small devices (portrait tablets and large phones, 600px and up) */
+@media only screen and (min-width: 600px) {
+	#closeModal{
+		background-image: url("../symbols/x_medium.png");
+	}
+	#info-Icon{
+		background-image: url("../symbols/plus_white_medium.png");
+	}
+}
+
+/* Medium devices (landscape tablets, 768px and up) */
+@media only screen and (min-width: 768px) {
+	#closeModal{
+		background-image: url("../symbols/x_medium@2x.png");
+	}
+	#info-Icon{
+		background-image: url("../symbols/plus_white_medium@2x.png");
+	}
+}
+
+/* Large devices (laptops/desktops, 992px and up) */
+@media only screen and (min-width: 992px) {
+	#closeModal{
+		background-image: url("../symbols/x_big.png");
+	}
+	#info-Icon{
+		background-image: url("../symbols/plus_white_big.png");
+	}
+}
+
+/* Extra large devices (large laptops and desktops, 1200px and up) */
+@media only screen and (min-width: 1200px) {
+	#closeModal{
+		background-image: url("../symbols/x_big@2x.png");
+	}
+	#info-Icon{
+		background-image: url("../symbols/plus_white_big@2x.png");
+	}
 }
