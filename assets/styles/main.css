@@ -45,9 +45,12 @@ figcaption{
 	background: #FFF; */
 	background: radial-gradient(rgba(255, 255, 255, 1), rgba(255, 255, 255, 0), transparent);
 }
-
+.scene-label{
+	font-family: 'AtlasGrotesk-Regular' !important;
+	font-size: 2em;
+}
 .whitepaper_icon{
-  width: 300px;
+  width: 100%;
 }
 .media-links{
 	background: #fff;
@@ -168,8 +171,12 @@ figcaption{
 	width: 20%;
 	margin: 1% 0;
 	margin-top: 24%;
-	border-bottom: 13px solid;
+	border-bottom: 8px solid;
 	float:left;
+}
+.divider-label{
+	width: 20%;
+	border-bottom: 8px solid;
 }
 #about {
 	width: 100%;
@@ -188,6 +195,9 @@ figcaption{
 
 #about div p {
 		max-width:680px;
+}
+.spacer span{
+	opacity: 0;
 }
 
 	/* Extra small devices (phones, 600px and down) */

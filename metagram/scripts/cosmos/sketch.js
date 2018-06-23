@@ -16,8 +16,11 @@ import Gradient from "./gradient"
   -[] update canvas to window size, thus update image load ratio
   -[] consider serving assets from S3 and remove hacks
   -[] *** agent material mask not working
+  -[] matching rituals to scenes .... more smoothly
 */
+var ritual_long = ["baptism", "hallucination", "gathering", "border crossing", "totemism", "alchemy", "skyburial", "attraction", "cleansing", "normalisation", "mutation", "dwelling", "scanning", "sensing", "food hunting", "pleasure hunting", "fusion"]
 
+var ritual_atm = ["baptism", "sensing", "pleasure hunting", "dwelling"];
 var sketch = function(p){
 
 
@@ -31,8 +34,9 @@ var sketch = function(p){
   var speed = 0.005;
   var step = 0;
   var t, agentX, agentY;
-
+  var label = {}
   var env_mode = ["land", "por"]
+  var h1;
   $(document).ready(function(){
     $.ajax({
       url: "http://localhost:3000/textures", // TODO: REPLACE with agent type request
@@ -45,6 +49,12 @@ var sketch = function(p){
         imgMode = temp[temp.length - 2]
         envFig = p.loadImage(data.environment); /// remove hack
         loading = false;
+        var aTemp = data.agent.split('/')
+        var a1Temp = data.agent1.split('/')
+        label.agent = aTemp[aTemp.length-2]
+        label.agent1 = a1Temp[a1Temp.length-2]
+        label.environment = temp[2]
+        console.log(label,data.agent, data.agent1, aTemp, a1Temp );
         p.setup();
       }
     });
@@ -55,9 +65,25 @@ var sketch = function(p){
     canvas = p.createCanvas(window.innerHeight, window.innerHeight);
     canvas.position((window.innerWidth - window.innerHeight)/2 , 0);
     canvas.mousePressed(cPressed);
-
     p.background(255);
     if(loading) return
+
+
+    var label_agent = p.createElement('span', `${label.agent} + ${label.agent1}`);
+    var label_agent_span = p.createElement('span', "agents")
+    var label_env = p.createElement('span', `${label.environment}`)
+    var label_env_span = p.createElement('span', "environment")
+    var label_ritual = p.createElement('h1', `${p.random(ritual_atm)}`)
+    var label_divider = p.createDiv('')
+    label_agent.class('scene-label')
+    label_env.class('scene-label')
+    label_divider.class('divider-label')
+    label_agent.position(0, window.innerHeight - 100)
+    label_agent_span.position(label_agent.width*2,  window.innerHeight - 100)
+    label_env.position(0, window.innerHeight - 50)
+    label_env_span.position(label_env.width*2, window.innerHeight - 50)
+    label_ritual.position(0, window.innerHeight - 200)
+    label_divider.position(0, window.innerHeight - 200 + label_ritual.height)
     // (imgMode == 'land') ? p.image(envFig, 0, 280) : p.image(envFig, 0, 0)
       // print(envFig, imgMode)
     if(imgMode == 'land'){
