@@ -4,7 +4,9 @@ import Boid from "./Boid";
 import Grid from "./grid";
 import { Point, Rectangle, QuadTree } from "./quadtree";
 
-import cosmo5 from './sketch2'
+// import cosmo5 from './sketch2'
+import cosmo5 from './cosmos/sketch'
+
 /*
 instantiate
 grid
@@ -13,9 +15,6 @@ smBlob
 */
 
 var sketch = function(p){
-
-
-
   let qtree;
   var zones = [], repellers = [], boids = [], flock, boidsHistory = []
   // Environment zones
@@ -67,8 +66,6 @@ var sketch = function(p){
     grid.setup();
 
     maxdia=canvasH/5;
-
-
     setTimeout(setupBlob, 10000);
 
   }

@@ -23,6 +23,7 @@
   function backToMeta(){
     modalOpened = false;
     console.log(" back to meta :::: ", modalOpened)
+    $('.canvasContainer').empty();
     $('.canvasContainer').remove();
   }
 </script>
@@ -74,16 +75,13 @@
     </div>
     </div>
   </section>
-  
+
   <div id="info-Icon-wrapper">
     <span id="info-Icon">
     </span>
   </div>
   <div id = "p5sketch">
   </div>
-
-
-
   <script>
     $("#info-Icon").click( function () {
       console.log(" 11111111 ------ ")

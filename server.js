@@ -73,7 +73,8 @@ function getFiles (dir, files_){
         if (fs.statSync(name).isDirectory()){
             getFiles(name, files_);
         } else if (! /^\..*/.test(files[i])){
-            files_.push(name);
+            var nname = name.replace('assets/',''); // avoid frontend splicing 
+            files_.push(nname);
         }
     }
     return files_;
