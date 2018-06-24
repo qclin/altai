@@ -1,9 +1,19 @@
-@font-face {
+/* @font-face {
   font-family: 'Lydia-BoldCondensed';
   src: url('../fonts/Lydia/Lydia-BoldCondensed.otf') format('embedded-opentype');
   font-weight: normal;
   font-style: normal;
+} */
+
+@font-face {
+  font-family: 'Lydia-BoldCondensed';
+  src: url('../fonts/Lydia-BoldCondensed/Lydia-BoldCondensed.eot?#iefix') format('embedded-opentype'),  url('../fonts/Lydia-BoldCondensed/Lydia-BoldCondensed.otf')  format('opentype'),
+	     url('../fonts/Lydia-BoldCondensed/Lydia-BoldCondensed.woff') format('woff'), url('../fonts/Lydia-BoldCondensed/Lydia-BoldCondensed.ttf')  format('truetype'), url('../fonts/Lydia-BoldCondensed/Lydia-BoldCondensed.svg#Lydia-BoldCondensed') format('svg');
+  font-weight: normal;
+  font-style: normal;
 }
+
+
 
 @font-face {
   font-family: 'AtlasGrotesk-Regular';

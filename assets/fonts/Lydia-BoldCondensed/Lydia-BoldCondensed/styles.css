@@ -1,0 +1,8 @@
+
+@font-face {
+  font-family: 'Lydia-BoldCondensed';
+  src: url('Lydia-BoldCondensed.eot?#iefix') format('embedded-opentype'),  url('Lydia-BoldCondensed.otf')  format('opentype'),
+	     url('Lydia-BoldCondensed.woff') format('woff'), url('Lydia-BoldCondensed.ttf')  format('truetype'), url('Lydia-BoldCondensed.svg#Lydia-BoldCondensed') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
