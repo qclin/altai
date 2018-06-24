@@ -158,7 +158,7 @@ var sketch = function(p){
 
   function cPressed(){
     console.info("pressed on sketch cosmos  ")
-    p.saveCanvas(`altai_${choose_ritual}_${label.agent}+${label.agent1}_agents_${p.millis()}`, 'jpg');
+    // p.saveCanvas(`altai_${choose_ritual}_${label.agent}+${label.agent1}_agents_${p.millis()}`, 'jpg');
 
     saveScreen();
   }

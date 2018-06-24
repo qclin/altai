@@ -249,6 +249,9 @@ figcaption{
 	#about{
 		padding: 0;
 	}
+	.linkToScene{
+		font-size: 2em;
+	}
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
