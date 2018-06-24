@@ -269,7 +269,7 @@ figcaption{
 	#info-Icon{
 		background-image: url("../symbols/plus_white_big.png");
 	}
-	body{
+	body#metagram{
 		overflow: hidden;
 		position:fixed;
 	}
