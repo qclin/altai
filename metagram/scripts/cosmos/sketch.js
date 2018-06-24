@@ -36,11 +36,12 @@ var sketch = function(p){
   var t, agentX, agentY;
   var label = {}
   var env_mode = ["land", "por"]
-  var h1, routeTo;
+  var h1, routeTo, choose_ritual;
   $(document).ready(function(){
     $.ajax({
       url: "http://34.200.52.167/textures", // TODO: REPLACE with agent type request
       success: function(data) {
+        console.log("get from aws server ------ ", data)
         agent = p.loadImage(data.agent); /// remove hack
         agentMask = p.loadImage(data.family); /// remove hack
         agent2 = p.loadImage(data.agent1); /// remove hack
@@ -48,13 +49,14 @@ var sketch = function(p){
         var temp = data.environment.split('/')
         imgMode = temp[temp.length - 2]
         envFig = p.loadImage(data.environment); /// remove hack
+
         loading = false;
         var aTemp = data.agent.split('/')
         var a1Temp = data.agent1.split('/')
         label.agent = aTemp[aTemp.length-2]
         label.agent1 = a1Temp[a1Temp.length-2]
         label.environment = temp[2]
-        console.log(envFig );
+
         p.setup();
       }
     });
@@ -69,7 +71,7 @@ var sketch = function(p){
     p.background(255);
 
     if(loading) return
-
+    console.log("we are here in setup ", agent, agent2, envFig)
 
     var label_agent = p.createElement('span', `${label.agent} + ${label.agent1}`);
     var label_agent_span = p.createElement('span', "agents")
@@ -78,7 +80,7 @@ var sketch = function(p){
     // var choose_ritual = p.random(ritual_atm)
     // here's a cheat to avoid repeating rituals
     var choose_ritual_index = Math.floor(Math.random(ritual_atm.length))
-    var choose_ritual = ritual_atm[choose_ritual_index]
+    choose_ritual = ritual_atm[choose_ritual_index]
     ritual_atm.splice(choose_ritual_index, 1);
     var label_ritual = p.createElement('h1', `${choose_ritual}`)
     var label_divider = p.createDiv('')
@@ -156,6 +158,8 @@ var sketch = function(p){
 
   function cPressed(){
     console.info("pressed on sketch cosmos  ")
+    p.saveCanvas(`altai_${choose_ritual}_${label.agent}+${label.agent1}_agents_${p.millis()}`, 'jpg');
+
     saveScreen();
   }
 
