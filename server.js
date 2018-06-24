@@ -168,6 +168,6 @@ app.post('/screencap', upload.array(), function(req,res) {
  });
 
 
-var listerner = app.listen(process.env.PORT || 80, function() {
+var listerner = app.listen(process.env.PORT || 3000, function() {
 	console.log("Listening on port %d", listerner.address().port);
 });
