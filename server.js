@@ -73,7 +73,7 @@ function getFiles (dir, files_){
         if (fs.statSync(name).isDirectory()){
             getFiles(name, files_);
         } else if (! /^\..*/.test(files[i])){
-            var nname = name.replace('assets/',''); // avoid frontend splicing 
+            var nname = name.replace('assets/',''); // avoid frontend splicing
             files_.push(nname);
         }
     }
@@ -88,6 +88,10 @@ app.get('/place', function(req, res){
 
 app.get('/realm', function(req, res){
     res.sendFile(__dirname + '/realm/index.html');
+});
+
+app.get('/showreel', function(req, res){
+    res.sendFile(__dirname + '/showreel/index.html');
 });
 
 

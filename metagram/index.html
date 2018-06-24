@@ -24,7 +24,7 @@
     modalOpened = false;
     console.log(" back to meta :::: ", modalOpened)
     $('.canvasContainer').empty();
-    // TODO: this remove is not clean 
+    // TODO: this remove is not clean
     $('.canvasContainer').remove();
   }
 </script>
@@ -34,7 +34,7 @@
     <div class="row description">
       <h1> alt'ai </h1>
 
-      <div class="five columns text-chunk">
+      <div class="five columns column text-chunk">
         <div id="hr"></div>
         <br/>
         <p>alt’ai is an agent-based simulation inspired by aesthetics, culture and environmental conditions of Altai mountain region on borders between Russia, Kazakhstan, China and Mongolia. </p>
@@ -44,7 +44,7 @@
         <p>alt’ai deals with a question of designing future machine-to-machine authentication protocols, that are based on use of images encoding agent behaviour.</p>
       </div>
       <div class="one column spacer"><span>one</span></div>
-      <div class="three columns media-links">
+      <div class="three columns column media-links">
       <div id="hr"></div><br/>
       <div class="row whitepaper-container">
         <a href="/white_paper/alt'ai whitepaper.pdf" target="_blank">
@@ -60,7 +60,7 @@
       </div>
       </div>
       <div class="one column spacer"><span>one</span></div>
-      <div class="two columns">
+      <div class="two columns column">
       <div id="hr"></div><br/>
       <div class="row bio">
         <div> Qiao Lin </div>
@@ -89,6 +89,8 @@
       // debugger
         $("#about").slideToggle(300);
         $("#toggle").toggleClass("clicked");
+        $("#info-Icon-wrapper").toggleClass('info-wrapper-open')
+        $("#info-Icon").toggleClass('info-open');
     });
   </script>
 </body>

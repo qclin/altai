@@ -25,8 +25,6 @@ h1{
 
 body{
 	font-family: 'AtlasGrotesk-Regular' !important;
-	overflow: hidden;
-	position:fixed;
 	margin: 0;
 }
 figcaption{
@@ -163,9 +161,18 @@ figcaption{
 	background-size: contain;
 	background-repeat: no-repeat;
 	background-position: center;
-
 	margin: 0 auto;
+}
+.info-wrapper-open{
+	width: 18vw !important;
+	height: 6vh !important;
+	position:fixed !important;
+	background: none !important; 
+}
 
+.info-open{
+	-webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
 }
 #hr {
 	width: 20%;
@@ -218,6 +225,9 @@ figcaption{
 	#info-Icon{
 		background-image: url("../symbols/plus_white_medium.png");
 	}
+	#about{
+		padding: 0;
+	}
 }
 
 /* Medium devices (landscape tablets, 768px and up) */
@@ -237,6 +247,10 @@ figcaption{
 	}
 	#info-Icon{
 		background-image: url("../symbols/plus_white_big.png");
+	}
+	body{
+		overflow: hidden;
+		position:fixed;
 	}
 }
 
