@@ -39,7 +39,7 @@ var sketch = function(p){
   var h1, routeTo;
   $(document).ready(function(){
     $.ajax({
-      url: "http://localhost:3000/textures", // TODO: REPLACE with agent type request
+      url: "http://34.200.52.167/textures", // TODO: REPLACE with agent type request
       success: function(data) {
         agent = p.loadImage(data.agent); /// remove hack
         agentMask = p.loadImage(data.family); /// remove hack
@@ -177,7 +177,7 @@ var sketch = function(p){
   p.windowResized = function() {
     p.resizeCanvas(window.innerHeight, window.innerHeight);
     canvas.position((window.innerWidth - window.innerHeight)/2 , 0);
-    // TODO: consider preserving the background 
+    // TODO: consider preserving the background
   }
 
   p.draw = function(){
@@ -317,7 +317,7 @@ function saveScreen(){
 
   $.ajax({
     type: "POST",
-    url: 'http://localhost:3000/screencap',
+    url: 'http://34.200.52.167/screencap',
     data: new FormData(dataUrl),
     processData: false,
     contentType: false,
