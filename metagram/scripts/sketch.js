@@ -66,7 +66,7 @@ var sketch = function(p){
     grid.setup();
 
     maxdia=canvasH/5;
-    setTimeout(setupBlob, 10000);
+    setInterval(setupBlob, 10000);
 
   }
   function cPressed(){
@@ -81,13 +81,10 @@ var sketch = function(p){
   }
   /// for each blob you create a quadtree
   function setupBlob(){
-    for (var i = 0 ; i < 4; i ++){
-      var x = p.random(p.width/2-maxdia,p.width/2+maxdia);
-      var y = p.random(p.height/2-maxdia,p.height/2+maxdia);
-      var dia=maxdia*p.random(.8, 1.2);
-
-      addBlob(x, y, dia);
-    }
+    var x = p.random(p.width/2-maxdia,p.width/2+maxdia);
+    var y = p.random(p.height/2-maxdia,p.height/2+maxdia);
+    var dia=maxdia*p.random(.8, 1.2);
+    addBlob(x, y, dia);
   }
 
   function drawQTree(){
@@ -118,6 +115,12 @@ var sketch = function(p){
     altaiColorTo.splice(colorIndex, 1);
 
     var one = new Blob(p, x, y, dia, p.int(dia/2), colFrom, colTo);
+
+    if(zones.length > 4){ // NOTE: not sure about here, correlation to nations versus environments
+      zones.splice(0,1);
+      boids.splice(0,1);
+    }
+
     zones.push(one);
 
     var population = p.random(1, 50);
@@ -137,14 +140,20 @@ var sketch = function(p){
 
       boids[boids.length - 1].push(new Boid(p, posX, posY, x, y, skipRate, colFrom, colTo, maxSpeed, traceLength, lt));
     }
-
+    var timeRange = Math.floor(Math.random(3000, 10000))
     // blue nodes
     setTimeout(function(){
       var repel = new smBlob(p, x, y, 20, 200, col); /// these could appear much later as clickacle into the cosmograms
       repellers.push(repel);
-    }, 3000)
+    }, timeRange);
 
   }
+
+  p.windowResized = function() {
+    p.resizeCanvas(window.innerWidth, window.innerHeight);
+    // TODO: consider preserving the background
+  }
+
   p.draw = function() {
     p.background(255);
     // grid.display();

@@ -22,7 +22,19 @@ h1{
 	font-size: 8rem;
 }
 
-
+#p5_loading{
+	color: white;
+	position: absolute;
+	margin: 0 auto;
+	text-align: center;
+	width: 100%;
+	top: calc(50% - 20rem);
+	/* transition: 0.3s; */
+	display: none;
+}
+#p5_loading h1{
+	font-size: 32rem;
+}
 body{
 	font-family: 'AtlasGrotesk-Regular' !important;
 	margin: 0;
@@ -167,7 +179,7 @@ figcaption{
 	width: 18vw !important;
 	height: 6vh !important;
 	position:fixed !important;
-	background: none !important; 
+	background: none !important;
 }
 
 .info-open{
@@ -195,7 +207,16 @@ figcaption{
 	background: #DDDDDD;
 	padding: 1em;
 }
+.linkToScene{
+	text-decoration: none;
+	color: black;
+}
 
+.linkToScene:hover{
+	text-decoration: none;
+	color: black;
+	font-style: italic;
+}
 #about div {
 		margin: 0px auto;
 }

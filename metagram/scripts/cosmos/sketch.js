@@ -20,7 +20,7 @@ import Gradient from "./gradient"
 */
 var ritual_long = ["baptism", "hallucination", "gathering", "border crossing", "totemism", "alchemy", "skyburial", "attraction", "cleansing", "normalisation", "mutation", "dwelling", "scanning", "sensing", "food hunting", "pleasure hunting", "fusion"]
 
-var ritual_atm = ["baptism", "sensing", "pleasure hunting", "dwelling"];
+var ritual_atm = ["baptism", "sensing", "pleasure_hunting", "dwelling"];
 var sketch = function(p){
 
 
@@ -36,7 +36,7 @@ var sketch = function(p){
   var t, agentX, agentY;
   var label = {}
   var env_mode = ["land", "por"]
-  var h1;
+  var h1, routeTo;
   $(document).ready(function(){
     $.ajax({
       url: "http://localhost:3000/textures", // TODO: REPLACE with agent type request
@@ -54,7 +54,7 @@ var sketch = function(p){
         label.agent = aTemp[aTemp.length-2]
         label.agent1 = a1Temp[a1Temp.length-2]
         label.environment = temp[2]
-        console.log(label,data.agent, data.agent1, aTemp, a1Temp );
+        console.log(envFig );
         p.setup();
       }
     });
@@ -65,7 +65,9 @@ var sketch = function(p){
     canvas = p.createCanvas(window.innerHeight, window.innerHeight);
     canvas.position((window.innerWidth - window.innerHeight)/2 , 0);
     canvas.mousePressed(cPressed);
+
     p.background(255);
+
     if(loading) return
 
 
@@ -73,7 +75,12 @@ var sketch = function(p){
     var label_agent_span = p.createElement('span', "agents")
     var label_env = p.createElement('span', `${label.environment}`)
     var label_env_span = p.createElement('span', "environment")
-    var label_ritual = p.createElement('h1', `${p.random(ritual_atm)}`)
+    // var choose_ritual = p.random(ritual_atm)
+    // here's a cheat to avoid repeating rituals
+    var choose_ritual_index = Math.floor(Math.random(ritual_atm.length))
+    var choose_ritual = ritual_atm[choose_ritual_index]
+    ritual_atm.splice(choose_ritual_index, 1);
+    var label_ritual = p.createElement('h1', `${choose_ritual}`)
     var label_divider = p.createDiv('')
     label_agent.class('scene-label')
     label_env.class('scene-label')
@@ -84,6 +91,11 @@ var sketch = function(p){
     label_env_span.position(label_env.width*2, window.innerHeight - 50)
     label_ritual.position(0, window.innerHeight - 200)
     label_divider.position(0, window.innerHeight - 200 + label_ritual.height)
+
+    routeTo = p.createA(`/${choose_ritual}`, 'click to start')
+    routeTo.class('linkToScene')
+    routeTo.position(window.innerWidth/2 - routeTo.width/2, window.innerHeight - 50)
+
     // (imgMode == 'land') ? p.image(envFig, 0, 280) : p.image(envFig, 0, 0)
       // print(envFig, imgMode)
     if(imgMode == 'land'){
@@ -144,6 +156,7 @@ var sketch = function(p){
 
   function cPressed(){
     console.info("pressed on sketch cosmos  ")
+    saveScreen();
   }
 
   function addDialog(){
@@ -161,6 +174,11 @@ var sketch = function(p){
     // }
   }
 
+  p.windowResized = function() {
+    p.resizeCanvas(window.innerHeight, window.innerHeight);
+    canvas.position((window.innerWidth - window.innerHeight)/2 , 0);
+    // TODO: consider preserving the background 
+  }
 
   p.draw = function(){
     if(loading) return
@@ -290,6 +308,24 @@ var sketch = function(p){
     }
     p.endShape(p.CLOSE);
   }
+}
+
+
+function saveScreen(){
+  var dataUrl = $('#cosmoSketch canvas')[0].toDataURL();
+  console.log(dataUrl)
+
+  $.ajax({
+    type: "POST",
+    url: 'http://localhost:3000/screencap',
+    data: new FormData(dataUrl),
+    processData: false,
+    contentType: false,
+    success: function (data) {
+        console.log("saved");
+    }
+  });
+
 }
 
 export default function cosmo5(){

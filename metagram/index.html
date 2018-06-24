@@ -27,6 +27,7 @@
     // TODO: this remove is not clean
     $('.canvasContainer').remove();
   }
+
 </script>
 <body>
   <section id="about">
@@ -81,6 +82,11 @@
     <span id="info-Icon">
     </span>
   </div>
+
+  <div id="p5_loading" class="loadingclass">
+    <h1> alt'ai </h1>
+  </div>
+
   <div id = "p5sketch">
   </div>
   <script>
@@ -92,6 +98,12 @@
         $("#info-Icon-wrapper").toggleClass('info-wrapper-open')
         $("#info-Icon").toggleClass('info-open');
     });
+    $('#p5_loading').fadeIn("slow", function(){
+      setTimeout(function(){
+        $('#p5_loading').fadeOut('slow');
+      }, 2000)
+    });
+
   </script>
 </body>
 </html>

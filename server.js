@@ -3,7 +3,7 @@ var fs = require('fs');
 var cors = require('cors');
 var bodyParser = require('body-parser');
 var pug = require('pug');
-
+var multer = require('multer');
 var webpack = require('webpack');
 var webpackConfig = require('./webpack.config');
 var compiler = webpack(webpackConfig);
@@ -60,9 +60,7 @@ app.get('/textures', function(req, res){
     family1: family_files[Math.floor(Math.random(family_files.length) * family_files.length)],
     environment: environment_files[Math.floor(Math.random(environment_files.length) * environment_files.length)]
   }
-  console.log(payload)
   res.json(payload);
-
 })
 
 function getFiles (dir, files_){
@@ -109,7 +107,7 @@ app.get('/dwelling', function(req, res){
     res.sendFile(__dirname + '/isolation_highland_prairie/index.html');
 });
 
-app.get('/pleasure-hunting', function(req, res){
+app.get('/pleasure_hunting', function(req, res){
     res.sendFile(__dirname + '/predator_highland_forest/index.html');
 });
 
@@ -151,6 +149,23 @@ app.get('/text_subtitle', function(req, res){
     });
 });
 
+var upload = multer({ dest: '/tmp/'});
+app.post('/screencap', upload.array(), function(req,res) {
+  console.log("---screencap----------multer-", req.files[0], req.body.data)
+  // var file = __dirname + '/' + req.file.filename;
+  // fs.rename(req.file.path, file, function(err) {
+  //   if (err) {
+  //     console.log(err);
+  //     res.send(500);
+  //   } else {
+  //     res.json({
+  //       message: 'File uploaded successfully',
+  //       filename: req.file.filename
+  //     });
+  //   }
+  // });
+
+ });
 
 
 var listerner = app.listen(process.env.PORT || 3000, function() {
