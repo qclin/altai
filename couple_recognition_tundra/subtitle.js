@@ -8,6 +8,7 @@ var sub2Interval;
 
 var capLine;
 var captionInterval;
+var apiUrl = "http://18.207.83.80/";
 
 getCaption();
 getSubtitle(); /// call this inside model loader, after terrain is loaded
@@ -15,8 +16,9 @@ getSubtitle(); /// call this inside model loader, after terrain is loaded
 // getSubtitle2();
 
 function getCaption(){
+  var path = apiUrl + "text_caption";
   $.ajax({
-    url: "http://34.200.52.167/text_caption", // TODO: REPLACE HOST
+    url: path, // TODO: REPLACE HOST
     data: {env: "tundra"},
     success: function(data) {
       console.log( "tundra --- ", data)
@@ -29,8 +31,9 @@ function getCaption(){
 
 
 function getSubtitle(){
+  var path = apiUrl + "text_subtitle";
   $.ajax({
-    url: "http://34.200.52.167/text_subtitle", // TODO: REPLACE HOST
+    url: path, // TODO: REPLACE HOST
     data: {agent: "recognition"},
     success: function(data) {
       subLines = data.split(',');
@@ -62,7 +65,7 @@ function clearSub(){
 /// dialog scene;
 function getSubtitle2(){
   $.ajax({
-    url: "http://34.200.52.167/text_subtitle", // TODO: REPLACE HOST
+    url: "http://18.207.83.80/text_subtitle", // TODO: REPLACE HOST
     data: {agent: "couple"},
     success: function(data) {
       console.log("subtitle ----- ", data)

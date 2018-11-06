@@ -6,15 +6,16 @@ var subInterval;
 var capLine;
 var captionInterval;
 
-
+var apiUrl = "http://18.207.83.80/"; 
 
 getCaption();
 // getSubtitle(); /// call this inside model loader, after terrain is loaded
 // setTimeout(	getSubtitle, 15000);
 
 function getCaption(){
+  var path = apiUrl + "text_caption"
   $.ajax({
-    url: "http://34.200.52.167/text_caption", // TODO: REPLACE HOST
+    url: path, // TODO: REPLACE HOST
     data: {env: "highland_pairie"},
     success: function(data) {
       console.log( "highland_pairie --- ", data)
@@ -27,8 +28,9 @@ function getCaption(){
 
 
 function getSubtitle(){
+  var path = apiUrl + "text_subtitle"
   $.ajax({
-    url: "http://34.200.52.167/text_subtitle", // TODO: REPLACE HOST
+    url: path, // TODO: REPLACE HOST
     data: {agent: "isolation"},
     success: function(data) {
       console.log("subtitle ----- ", data)

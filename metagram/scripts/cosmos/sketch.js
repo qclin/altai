@@ -39,7 +39,7 @@ var sketch = function(p){
   var h1, routeTo, choose_ritual;
   $(document).ready(function(){
     $.ajax({
-      url: "http://34.200.52.167/textures", // TODO: REPLACE with agent type request
+      url: "http://18.207.83.80/textures", // TODO: REPLACE with agent type request
       success: function(data) {
         console.log("get from aws server ------ ", data)
         agent = p.loadImage(data.agent); /// remove hack
@@ -321,7 +321,7 @@ function saveScreen(){
 
   $.ajax({
     type: "POST",
-    url: 'http://34.200.52.167/screencap',
+    url: 'http://18.207.83.80/screencap',
     data: new FormData(dataUrl),
     processData: false,
     contentType: false,

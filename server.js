@@ -127,10 +127,8 @@ app.get('/text_caption', function(req, res){
     pamphlet.then(function(data){
       // console.log("00000 text_caption, returned pamphlets ::: ", data, typeof data);
       // database.addNewEntry(data) // TODO: // update Firebase structure
-
       var predictedText = data.toString();
       res.json(predictedText);
-
     });
 });
 

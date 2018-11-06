@@ -47,7 +47,7 @@ function loadAgent(){
 
 $(document).ready(function(){
   $.ajax({
-    url: "http://34.200.52.167/textures", // TODO: REPLACE with agent type request
+    url: "http://18.207.83.80/textures", // TODO: REPLACE with agent type request
     success: function(data) {
       agent = loadImage(data.agent.replace('assets/','')); /// remove hack
       agentMask = loadImage(data.family.replace('assets/','')); /// remove hack
