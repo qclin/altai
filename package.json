@@ -16,7 +16,7 @@
     "ccapture.js": "^1.1.0",
     "cors": "^2.8.4",
     "express": "^4.16.3",
-    "firebase-admin": "^5.12.1",
+    "firebase-admin": "^11.4.1",
     "fs": "0.0.1-security",
     "grpc": "^1.12.2",
     "jquery": "^3.3.1",
